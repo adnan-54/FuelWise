@@ -1,8 +1,8 @@
 package mono;
 public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
-		/* We need to ensure that "TG2.dll" comes first in this list. */
-		"TG2.dll",
+		/* We need to ensure that "FuelWise.dll" comes first in this list. */
+		"FuelWise.dll",
 		"Microsoft.Maui.dll",
 		"Microsoft.Maui.Controls.Compatibility.dll",
 		"Microsoft.Maui.Controls.Xaml.dll",

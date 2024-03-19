@@ -17,6 +17,12 @@ public interface IVehicleProvider
 
 internal class VehicleProvider : IVehicleProvider
 {
+    public VehicleProvider()
+    {
+        //todo: this is bad, fix this
+        Vehicle = FetchCurrentVehicle().GetAwaiter().GetResult();
+    }
+
     public Vehicle Vehicle { get; set; }
 
     public Engine Engine => Vehicle.Engine;
@@ -27,7 +33,7 @@ internal class VehicleProvider : IVehicleProvider
 
     public async Task<Vehicle> UpdateVehicle()
     {
-        return Vehicle ??= await VehicleProvider.FetchCurrentVehicle();
+        return Vehicle ??= await FetchCurrentVehicle();
     }
 
     private static Task<Vehicle> FetchCurrentVehicle()

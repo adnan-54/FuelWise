@@ -1,43 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Plugin.BLE.Abstractions.Contracts;
-using FuelWise.Services;
 
 namespace FuelWise.ViewModels;
 
 public partial class MainPageViewModel : ObservableObject
 {
-    private readonly IBluetoothService bluetoothService;
-
-    [ObservableProperty]
-    private bool isSearchingForDevices;
-
-    [ObservableProperty]
-    private List<IDevice> availableDevices;
-
-    public MainPageViewModel(IBluetoothService bluetoothService)
+    public MainPageViewModel(MainViewViewModel mainViewModel, DataViewModel dataViewModel, ConnectionViewModel connectionViewModel)
     {
-        this.bluetoothService = bluetoothService;
-
-        availableDevices = new();
+        MainViewModel = mainViewModel;
+        DataViewModel = dataViewModel;
+        ConnectionViewModel = connectionViewModel;
     }
 
-    [RelayCommand]
-    public async Task FindDevices()
-    {
-        try
-        {
-            IsSearchingForDevices = true;
-            var foundDevices = await bluetoothService.ScanDevices();
-            AvailableDevices = new(foundDevices);
-        }
-        catch
-        {
+    public MainViewViewModel MainViewModel { get; }
 
-        }
-        finally
-        {
-            IsSearchingForDevices = false;
-        }
-    }
+    public DataViewModel DataViewModel { get; }
+
+    public ConnectionViewModel ConnectionViewModel { get; }
 }

@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FuelWise.MainPage"
-             xmlns:local="clr-namespace:FuelWise.ViewModels"
-             x:DataType="local:MainPageViewModel">
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:views="clr-namespace:FuelWise.Views"
+            xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
+            x:Class="FuelWise.MainPage"
+            x:DataType="viewModels:MainPageViewModel">
 
-    <StackLayout>
-        <ListView ItemsSource="{Binding AvailableDevices}">
+    <views:MainView BindingContext="{Binding MainViewModel}" />
 
-        </ListView>
+    <views:DataView BindingContext="{Binding DataViewModel}" />
 
-        <Button Text="Search Devices" Command="{Binding FindDevicesCommand}" />
-    </StackLayout>
-
-</ContentPage>
+    <views:ConnectionView BindingContext="{Binding ConnectionViewModel}"/>
+</TabbedPage>

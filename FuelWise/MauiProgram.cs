@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using Plugin.BLE;
+﻿using FuelWise.Platforms.Android;
 using FuelWise.Services;
 using FuelWise.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace FuelWise;
 
@@ -22,8 +22,9 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton(CrossBluetoothLE.Current);
-        builder.Services.AddSingleton(CrossBluetoothLE.Current.Adapter);
+#if ANDROID
+        builder.Services.AddSingleton<IBluetoothConnector, AndroidBluetoothConnector>();
+#endif
 
         builder.Services.AddSingleton<IConsumptionCalculator, ConsumptionCalculator>();
         builder.Services.AddSingleton<IVehicleProvider, VehicleProvider>();
@@ -32,7 +33,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<IBluetoothService, BluetoothService>();
 
         builder.Services.AddTransient<MainPage>();
+
         builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<MainViewViewModel>();
+        builder.Services.AddTransient<DataViewModel>();
+        builder.Services.AddTransient<ConnectionViewModel>();
 
         return builder.Build();
     }

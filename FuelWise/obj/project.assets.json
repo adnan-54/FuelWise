@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net7.0-android33.0": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -200,7 +200,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -213,17 +213,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -1956,7 +1955,7 @@
       }
     },
     "net7.0-android33.0/android-arm": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -2154,7 +2153,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -2167,17 +2166,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -3910,7 +3908,7 @@
       }
     },
     "net7.0-android33.0/android-arm64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -4108,7 +4106,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -4121,17 +4119,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -5864,7 +5861,7 @@
       }
     },
     "net7.0-android33.0/android-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -6062,7 +6059,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -6075,17 +6072,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -7818,7 +7814,7 @@
       }
     },
     "net7.0-android33.0/android-x86": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -8016,7 +8012,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -8029,17 +8025,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -9771,8 +9766,8 @@
         }
       }
     },
-    "net7.0-android33.0/iossimulator-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+    "net7.0-android33.0/ios-arm64": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -9970,7 +9965,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -9983,17 +9978,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -11726,7 +11720,7 @@
       }
     },
     "net7.0-android33.0/maccatalyst-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -11924,7 +11918,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -11937,17 +11931,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -13680,7 +13673,7 @@
       }
     },
     "net7.0-android33.0/win10-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -13878,7 +13871,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-android33.0/Microsoft.Maui.Graphics.dll": {
@@ -13891,17 +13884,16 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-android33.0/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Xamarin.Android.Glide/4.13.2.2": {
@@ -15634,7 +15626,7 @@
       }
     },
     "net7.0-ios16.1": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -15819,7 +15811,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -15832,22 +15824,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/android-arm": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -16032,7 +16023,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -16045,22 +16036,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/android-arm64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -16245,7 +16235,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -16258,22 +16248,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/android-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -16458,7 +16447,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -16471,22 +16460,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/android-x86": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -16671,7 +16659,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -16684,22 +16672,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
-    "net7.0-ios16.1/iossimulator-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+    "net7.0-ios16.1/ios-arm64": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -16884,7 +16871,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -16897,22 +16884,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/maccatalyst-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -17097,7 +17083,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -17110,22 +17096,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-ios16.1/win10-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -17310,7 +17295,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-ios16.1/Microsoft.Maui.Graphics.dll": {
@@ -17323,22 +17308,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-ios16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -17523,7 +17507,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -17536,22 +17520,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/android-arm": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -17736,7 +17719,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -17749,22 +17732,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/android-arm64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -17949,7 +17931,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -17962,22 +17944,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/android-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -18162,7 +18143,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -18175,22 +18156,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/android-x86": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -18375,7 +18355,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -18388,22 +18368,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
-    "net7.0-maccatalyst16.1/iossimulator-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+    "net7.0-maccatalyst16.1/ios-arm64": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -18588,7 +18567,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -18601,22 +18580,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/maccatalyst-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -18801,7 +18779,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -18814,22 +18792,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-maccatalyst16.1/win10-x64": {
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -19014,7 +18991,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-maccatalyst16.1/Microsoft.Maui.Graphics.dll": {
@@ -19027,35 +19004,21 @@
           }
         }
       },
-      "Plugin.BLE/3.0.0-beta.3": {
+      "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
         "type": "package",
-        "compile": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
+        "build": {
+          "build/Microsoft.NET.ILLink.Analyzers.props": {}
+        }
+      },
+      "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       }
     },
     "net7.0-windows10.0.19041": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -19069,40 +19032,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -19274,7 +19203,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -19303,7 +19232,7 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -19316,11 +19245,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -19334,11 +19264,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -19424,39 +19354,10 @@
             "rid": "win10-x86"
           }
         }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
       }
     },
     "net7.0-windows10.0.19041/android-arm": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -19470,40 +19371,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -19675,7 +19542,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -19690,7 +19557,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -19703,11 +19570,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -19721,11 +19589,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -19796,40 +19664,11 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       }
     },
     "net7.0-windows10.0.19041/android-arm64": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -19843,40 +19682,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -20048,7 +19853,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -20063,7 +19868,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -20076,11 +19881,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -20094,11 +19900,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -20169,40 +19975,11 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       }
     },
     "net7.0-windows10.0.19041/android-x64": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -20216,40 +19993,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -20421,7 +20164,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -20436,7 +20179,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -20449,11 +20192,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -20467,11 +20211,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -20542,40 +20286,11 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       }
     },
     "net7.0-windows10.0.19041/android-x86": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -20589,40 +20304,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -20794,7 +20475,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -20809,7 +20490,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -20822,11 +20503,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -20840,11 +20522,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -20915,40 +20597,11 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       }
     },
-    "net7.0-windows10.0.19041/iossimulator-x64": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+    "net7.0-windows10.0.19041/ios-arm64": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -20962,40 +20615,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -21167,7 +20786,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -21182,7 +20801,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -21195,11 +20814,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -21213,11 +20833,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -21288,40 +20908,11 @@
         "build": {
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
-        }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
         }
       }
     },
     "net7.0-windows10.0.19041/maccatalyst-x64": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -21335,40 +20926,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -21540,7 +21097,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -21555,7 +21112,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -21568,11 +21125,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -21586,11 +21144,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -21662,39 +21220,10 @@
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
       }
     },
     "net7.0-windows10.0.19041/win10-x64": {
-      "CommunityToolkit.Common/7.1.2": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0/CommunityToolkit.Common.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.Mvvm/8.2.0": {
+      "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/CommunityToolkit.Mvvm.dll": {
@@ -21708,40 +21237,6 @@
         },
         "build": {
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
-        }
-      },
-      "CommunityToolkit.WinUI/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.Common": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        }
-      },
-      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI": "7.1.2",
-          "Microsoft.WindowsAppSDK": "1.0.0"
-        },
-        "compile": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
-            "related": ".pdb;.pri;.xml"
-          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -21913,7 +21408,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Graphics.Win2D/1.0.4": {
+      "Microsoft.Graphics.Win2D/1.0.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.0.4"
@@ -21931,7 +21426,7 @@
           "build/net5.0-windows10.0.17763.0/_._": {}
         }
       },
-      "Microsoft.Maui.Graphics/7.0.59": {
+      "Microsoft.Maui.Graphics/7.0.101": {
         "type": "package",
         "compile": {
           "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.dll": {
@@ -21944,11 +21439,12 @@
           }
         }
       },
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Graphics.Win2D": "1.0.4",
-          "Microsoft.Maui.Graphics": "7.0.59",
+          "Microsoft.Graphics.Win2D": "1.0.5.1",
+          "Microsoft.Maui.Graphics": "7.0.101",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756",
           "Microsoft.WindowsAppSDK": "1.2.221209.1"
         },
         "compile": {
@@ -21962,11 +21458,11 @@
           }
         }
       },
-      "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
         "type": "package",
         "build": {
-          "build/Microsoft.Windows.SDK.BuildTools.props": {},
-          "build/Microsoft.Windows.SDK.BuildTools.targets": {}
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
         }
       },
       "Microsoft.WindowsAppSDK/1.2.221209.1": {
@@ -22041,56 +21537,14 @@
           "buildTransitive/Microsoft.WindowsAppSDK.props": {},
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
-      },
-      "Plugin.BLE/3.0.0-beta.3": {
-        "type": "package",
-        "dependencies": {
-          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
-        },
-        "compile": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
       }
     }
   },
   "libraries": {
-    "CommunityToolkit.Common/7.1.2": {
-      "sha512": "KnHnukN+Sc26YT98OWYTp8mvaYlLc61lzDh0RrVRNQXm01hZ+iXAjCgKM59vAojqxNVrlbcXj22LYOyXWDItgg==",
+    "CommunityToolkit.Mvvm/8.2.2": {
+      "sha512": "r0g0k9tGYdrnz8R7T3x5UiokDffeevzK/2P/9SBL6fqLgN8B157MIi/bVUWI1KAz6ZorZrK9AdABCWUeXZZsvA==",
       "type": "package",
-      "path": "communitytoolkit.common/7.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "License.md",
-        "ThirdPartyNotices.txt",
-        "communitytoolkit.common.7.1.2.nupkg.sha512",
-        "communitytoolkit.common.nuspec",
-        "lib/net5.0/CommunityToolkit.Common.dll",
-        "lib/net5.0/CommunityToolkit.Common.pdb",
-        "lib/net5.0/CommunityToolkit.Common.xml",
-        "lib/netstandard1.4/CommunityToolkit.Common.dll",
-        "lib/netstandard1.4/CommunityToolkit.Common.pdb",
-        "lib/netstandard1.4/CommunityToolkit.Common.xml",
-        "lib/netstandard2.0/CommunityToolkit.Common.dll",
-        "lib/netstandard2.0/CommunityToolkit.Common.pdb",
-        "lib/netstandard2.0/CommunityToolkit.Common.xml",
-        "lib/netstandard2.1/CommunityToolkit.Common.dll",
-        "lib/netstandard2.1/CommunityToolkit.Common.pdb",
-        "lib/netstandard2.1/CommunityToolkit.Common.xml"
-      ]
-    },
-    "CommunityToolkit.Mvvm/8.2.0": {
-      "sha512": "F883u+B0AVUkRZS+VQBiZEJiqlGiiQhGA8Ejy1/Y8fl4ecBmSd+HYuDso0iiUhh+UxRDjp2aTQ7jGkuL2S4NrA==",
-      "type": "package",
-      "path": "communitytoolkit.mvvm/8.2.0",
+      "path": "communitytoolkit.mvvm/8.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -22105,7 +21559,7 @@
         "build/netstandard2.1/CommunityToolkit.Mvvm.targets",
         "buildTransitive/netstandard2.0/CommunityToolkit.Mvvm.targets",
         "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets",
-        "communitytoolkit.mvvm.8.2.0.nupkg.sha512",
+        "communitytoolkit.mvvm.8.2.2.nupkg.sha512",
         "communitytoolkit.mvvm.nuspec",
         "lib/net6.0/CommunityToolkit.Mvvm.dll",
         "lib/net6.0/CommunityToolkit.Mvvm.pdb",
@@ -22116,42 +21570,6 @@
         "lib/netstandard2.1/CommunityToolkit.Mvvm.dll",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.pdb",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.xml"
-      ]
-    },
-    "CommunityToolkit.WinUI/7.1.2": {
-      "sha512": "0O6hCHy+/adJygcROD3r3yA41gRq972i/r6uGUfo8lfEbr/I1YGePTClAh1P9JYT7DdoI2IqeUhX05lq+rwrHg==",
-      "type": "package",
-      "path": "communitytoolkit.winui/7.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "License.md",
-        "ThirdPartyNotices.txt",
-        "communitytoolkit.winui.7.1.2.nupkg.sha512",
-        "communitytoolkit.winui.nuspec",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.pdb",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.pri",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.xml"
-      ]
-    },
-    "CommunityToolkit.WinUI.Connectivity/7.1.2": {
-      "sha512": "50/Ug/0pp2o2IUMxulMf3mGliFZC9qi4eulQSoVHfyFCibzMuj3k+9QSPF54GLAsXfYdwOVBerT/Zau9SON7ZQ==",
-      "type": "package",
-      "path": "communitytoolkit.winui.connectivity/7.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "License.md",
-        "ThirdPartyNotices.txt",
-        "communitytoolkit.winui.connectivity.7.1.2.nupkg.sha512",
-        "communitytoolkit.winui.connectivity.nuspec",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.pdb",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.pri",
-        "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.xml"
       ]
     },
     "GoogleGson/2.9.1.1": {
@@ -22466,10 +21884,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Graphics.Win2D/1.0.4": {
-      "sha512": "PmUO0B+gLdbxy1XCmX6pS57SL08roPKZC3sXKSRH4Qa1nX5RKwIdmmIxSvmV9irN57ABSMtDtWa+qNYnyzB/nw==",
+    "Microsoft.Graphics.Win2D/1.0.5.1": {
+      "sha512": "9DVEVvyQWWz8kqhsFBAx9Zv4KRIAcmxuT7kFpK1Fgh6czSiMB+CQW0DlhZXT44Mtv41FRXG47lhEv+7a2YyiLA==",
       "type": "package",
-      "path": "microsoft.graphics.win2d/1.0.4",
+      "path": "microsoft.graphics.win2d/1.0.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -22489,17 +21907,17 @@
         "lib/net5.0-windows10.0.17763.0/Microsoft.Graphics.Canvas.Interop.dll",
         "lib/netcoreapp3.0/Microsoft.Graphics.Canvas.winmd",
         "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
-        "microsoft.graphics.win2d.1.0.4.nupkg.sha512",
+        "microsoft.graphics.win2d.1.0.5.1.nupkg.sha512",
         "microsoft.graphics.win2d.nuspec",
         "runtimes/win10-arm64/native/Microsoft.Graphics.Canvas.dll",
         "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
         "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
       ]
     },
-    "Microsoft.Maui.Graphics/7.0.59": {
-      "sha512": "a5eOfzqeHeERBmQ6g3uU+p4GEwHtBXxQ1s58XIiHCMf/WGCn5HX9z17VLUz6qr2ELVf/BbZ9bFUzVef+kbxkvQ==",
+    "Microsoft.Maui.Graphics/7.0.101": {
+      "sha512": "2+dHQpufctgN66Y+otNnBu9o+ODYlHvc2ufQ185wB2GqhklQeeko4xFsZSj3weDif4Idg0cgAY84qU3cQ0OcTw==",
       "type": "package",
-      "path": "microsoft.maui.graphics/7.0.59",
+      "path": "microsoft.maui.graphics/7.0.101",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -22535,14 +21953,14 @@
         "lib/netstandard2.1/Microsoft.Maui.Graphics.dll",
         "lib/netstandard2.1/Microsoft.Maui.Graphics.pdb",
         "lib/netstandard2.1/Microsoft.Maui.Graphics.xml",
-        "microsoft.maui.graphics.7.0.59.nupkg.sha512",
+        "microsoft.maui.graphics.7.0.101.nupkg.sha512",
         "microsoft.maui.graphics.nuspec"
       ]
     },
-    "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.59": {
-      "sha512": "ExNm2DreudUpAESDCpmFqruINxrjgpNOl+80GjCp/yoFv6QX3exYBmrFZ2zWSb7RrvWJnBPN9SaOHbkpT2+x2A==",
+    "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop/7.0.101": {
+      "sha512": "P6uBnryY3b3rpLiKj173UIf4z/dWJqntEabUiPBlJgXIcR4+u8IQg00cADNw+OsSD1yZwSwL+4pEFp5YyiOf/A==",
       "type": "package",
-      "path": "microsoft.maui.graphics.win2d.winui.desktop/7.0.59",
+      "path": "microsoft.maui.graphics.win2d.winui.desktop/7.0.101",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -22552,14 +21970,61 @@
         "lib/net7.0-windows10.0.19041/Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.pdb",
         "lib/net7.0-windows10.0.20348/Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll",
         "lib/net7.0-windows10.0.20348/Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.pdb",
-        "microsoft.maui.graphics.win2d.winui.desktop.7.0.59.nupkg.sha512",
+        "microsoft.maui.graphics.win2d.winui.desktop.7.0.101.nupkg.sha512",
         "microsoft.maui.graphics.win2d.winui.desktop.nuspec"
       ]
     },
-    "Microsoft.Windows.SDK.BuildTools/10.0.22621.755": {
-      "sha512": "zGXDCZc2/slVjpNtopNETCjnOqH9KiEdo9dPCcjtNWwK5W+EmOcEn7X5Ftj3tOE9kLvroga1s7WwLh2a5jQEEg==",
+    "Microsoft.NET.ILLink.Analyzers/7.0.100-1.23211.1": {
+      "sha512": "0GvbEgDGcUQA9KuWcQU1WwYHXt1tBzNr1Nls/M57rM7NA/AndFwCaCEoJpJkmxRY7xLlPDBnmGp8h5+FNqUngg==",
       "type": "package",
-      "path": "microsoft.windows.sdk.buildtools/10.0.22621.755",
+      "path": "microsoft.net.illink.analyzers/7.0.100-1.23211.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "analyzers/dotnet/cs/ILLink.CodeFixProvider.dll",
+        "analyzers/dotnet/cs/ILLink.RoslynAnalyzer.dll",
+        "build/Microsoft.NET.ILLink.Analyzers.props",
+        "microsoft.net.illink.analyzers.7.0.100-1.23211.1.nupkg.sha512",
+        "microsoft.net.illink.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.NET.ILLink.Tasks/7.0.100-1.23211.1": {
+      "sha512": "tvG8XZYLjT0o3WicCyKBZysVWo1jC9HdCFmNRmddx3WbAz0UCsd0qKZqpiEo99VLA8Re+FzWK51OcRldQPbt2Q==",
+      "type": "package",
+      "path": "microsoft.net.illink.tasks/7.0.100-1.23211.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "Sdk/Sdk.props",
+        "build/6.0_suppressions.xml",
+        "build/Microsoft.NET.ILLink.Tasks.props",
+        "build/Microsoft.NET.ILLink.targets",
+        "microsoft.net.illink.tasks.7.0.100-1.23211.1.nupkg.sha512",
+        "microsoft.net.illink.tasks.nuspec",
+        "tools/net472/ILLink.Tasks.dll",
+        "tools/net472/Mono.Cecil.dll",
+        "tools/net472/System.Buffers.dll",
+        "tools/net472/System.Collections.Immutable.dll",
+        "tools/net472/System.Memory.dll",
+        "tools/net472/System.Numerics.Vectors.dll",
+        "tools/net472/System.Reflection.Metadata.dll",
+        "tools/net472/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net7.0/ILLink.Tasks.deps.json",
+        "tools/net7.0/ILLink.Tasks.dll",
+        "tools/net7.0/Mono.Cecil.Pdb.dll",
+        "tools/net7.0/Mono.Cecil.dll",
+        "tools/net7.0/illink.deps.json",
+        "tools/net7.0/illink.dll",
+        "tools/net7.0/illink.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
+      "sha512": "7ZL2sFSioYm1Ry067Kw1hg0SCcW5kuVezC2SwjGbcPE61Nn+gTbH86T73G3LcEOVj0S3IZzNuE/29gZvOLS7VA==",
+      "type": "package",
+      "path": "microsoft.windows.sdk.buildtools/10.0.22621.756",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -22726,7 +22191,9 @@
         "bin/10.0.22621.0/x86/wintrust.dll.ini",
         "build/Microsoft.Windows.SDK.BuildTools.props",
         "build/Microsoft.Windows.SDK.BuildTools.targets",
-        "microsoft.windows.sdk.buildtools.10.0.22621.755.nupkg.sha512",
+        "buildTransitive/Microsoft.Windows.SDK.BuildTools.props",
+        "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets",
+        "microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
         "microsoft.windows.sdk.buildtools.nuspec",
         "schemas/10.0.22621.0/winrt/AppxManifestSchema.xsd",
         "schemas/10.0.22621.0/winrt/AppxManifestSchema2010_v2.xsd",
@@ -23385,59 +22852,6 @@
         "tools/net5.0/zh-TW/Microsoft.Build.Msix.resources.dll",
         "tools/x64/GenXbf.dll",
         "tools/x86/GenXbf.dll"
-      ]
-    },
-    "Plugin.BLE/3.0.0-beta.3": {
-      "sha512": "uYnMpB8UDopXaLN8GKoq19UcGaY7h+96+iCMfCGzl80W1LZnLutgZKQkEOrAe1Li6HWhiBT77XYNBxPBTECA/w==",
-      "type": "package",
-      "path": "plugin.ble/3.0.0-beta.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "icon_small.png",
-        "lib/monoandroid10.0/Plugin.BLE.dll",
-        "lib/monoandroid10.0/Plugin.BLE.pdb",
-        "lib/monoandroid10.0/Plugin.BLE.xml",
-        "lib/net6.0-android31.0/Plugin.BLE.dll",
-        "lib/net6.0-android31.0/Plugin.BLE.pdb",
-        "lib/net6.0-android31.0/Plugin.BLE.xml",
-        "lib/net6.0-ios16.1/Plugin.BLE.dll",
-        "lib/net6.0-ios16.1/Plugin.BLE.pdb",
-        "lib/net6.0-ios16.1/Plugin.BLE.xml",
-        "lib/net6.0-maccatalyst16.1/Plugin.BLE.dll",
-        "lib/net6.0-maccatalyst16.1/Plugin.BLE.pdb",
-        "lib/net6.0-maccatalyst16.1/Plugin.BLE.xml",
-        "lib/net6.0-windows10.0.19041/Plugin.BLE.dll",
-        "lib/net6.0-windows10.0.19041/Plugin.BLE.pdb",
-        "lib/net6.0-windows10.0.19041/Plugin.BLE.xml",
-        "lib/net7.0-android33.0/Plugin.BLE.dll",
-        "lib/net7.0-android33.0/Plugin.BLE.pdb",
-        "lib/net7.0-android33.0/Plugin.BLE.xml",
-        "lib/net7.0-ios16.1/Plugin.BLE.dll",
-        "lib/net7.0-ios16.1/Plugin.BLE.pdb",
-        "lib/net7.0-ios16.1/Plugin.BLE.xml",
-        "lib/net7.0-maccatalyst16.1/Plugin.BLE.dll",
-        "lib/net7.0-maccatalyst16.1/Plugin.BLE.pdb",
-        "lib/net7.0-maccatalyst16.1/Plugin.BLE.xml",
-        "lib/net7.0-windows10.0.19041/Plugin.BLE.dll",
-        "lib/net7.0-windows10.0.19041/Plugin.BLE.pdb",
-        "lib/net7.0-windows10.0.19041/Plugin.BLE.xml",
-        "lib/netstandard2.0/Plugin.BLE.dll",
-        "lib/netstandard2.0/Plugin.BLE.pdb",
-        "lib/netstandard2.0/Plugin.BLE.xml",
-        "lib/uap10.0.17763/Plugin.BLE.dll",
-        "lib/uap10.0.17763/Plugin.BLE.pdb",
-        "lib/uap10.0.17763/Plugin.BLE.pri",
-        "lib/uap10.0.17763/Plugin.BLE.xml",
-        "lib/xamarinios10/Plugin.BLE.dll",
-        "lib/xamarinios10/Plugin.BLE.pdb",
-        "lib/xamarinios10/Plugin.BLE.xml",
-        "lib/xamarinmac20/Plugin.BLE.dll",
-        "lib/xamarinmac20/Plugin.BLE.pdb",
-        "lib/xamarinmac20/Plugin.BLE.xml",
-        "plugin.ble.3.0.0-beta.3.nupkg.sha512",
-        "plugin.ble.nuspec"
       ]
     },
     "Xamarin.Android.Glide/4.13.2.2": {
@@ -25440,14 +24854,14 @@
   },
   "projectFileDependencyGroups": {
     "net7.0-android33.0": [
-      "CommunityToolkit.Mvvm >= 8.2.0",
+      "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "Microsoft.Extensions.Logging >= 7.0.0",
-      "Microsoft.Extensions.Logging.Abstractions >= 7.0.0",
       "Microsoft.Extensions.Logging.Debug >= 7.0.0",
-      "Microsoft.Maui.Graphics >= 7.0.59",
-      "Plugin.BLE >= 3.0.0-beta.3",
+      "Microsoft.Maui.Graphics >= 7.0.101",
+      "Microsoft.NET.ILLink.Analyzers >= 7.0.100-1.23211.1",
+      "Microsoft.NET.ILLink.Tasks >= 7.0.100-1.23211.1",
       "Xamarin.Android.Glide >= 4.13.2.2",
       "Xamarin.AndroidX.Browser >= 1.4.0.3",
       "Xamarin.AndroidX.Legacy.Support.V4 >= 1.0.0.15",
@@ -25461,58 +24875,55 @@
       "Xamarin.Google.Crypto.Tink.Android >= 1.7.0.1"
     ],
     "net7.0-ios16.1": [
-      "CommunityToolkit.Mvvm >= 8.2.0",
+      "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "Microsoft.Extensions.Logging >= 7.0.0",
-      "Microsoft.Extensions.Logging.Abstractions >= 7.0.0",
       "Microsoft.Extensions.Logging.Debug >= 7.0.0",
-      "Microsoft.Maui.Graphics >= 7.0.59",
-      "Plugin.BLE >= 3.0.0-beta.3"
+      "Microsoft.Maui.Graphics >= 7.0.101",
+      "Microsoft.NET.ILLink.Analyzers >= 7.0.100-1.23211.1",
+      "Microsoft.NET.ILLink.Tasks >= 7.0.100-1.23211.1"
     ],
     "net7.0-maccatalyst16.1": [
-      "CommunityToolkit.Mvvm >= 8.2.0",
+      "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "Microsoft.Extensions.Logging >= 7.0.0",
-      "Microsoft.Extensions.Logging.Abstractions >= 7.0.0",
       "Microsoft.Extensions.Logging.Debug >= 7.0.0",
-      "Microsoft.Maui.Graphics >= 7.0.59",
-      "Plugin.BLE >= 3.0.0-beta.3"
+      "Microsoft.Maui.Graphics >= 7.0.101",
+      "Microsoft.NET.ILLink.Analyzers >= 7.0.100-1.23211.1",
+      "Microsoft.NET.ILLink.Tasks >= 7.0.100-1.23211.1"
     ],
     "net7.0-windows10.0.19041": [
-      "CommunityToolkit.Mvvm >= 8.2.0",
+      "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "Microsoft.Extensions.Logging >= 7.0.0",
-      "Microsoft.Extensions.Logging.Abstractions >= 7.0.0",
       "Microsoft.Extensions.Logging.Debug >= 7.0.0",
-      "Microsoft.Maui.Graphics >= 7.0.59",
-      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop >= 7.0.59",
-      "Microsoft.Windows.SDK.BuildTools >= 10.0.22621.755",
-      "Microsoft.WindowsAppSDK >= 1.2.221209.1",
-      "Plugin.BLE >= 3.0.0-beta.3"
+      "Microsoft.Maui.Graphics >= 7.0.101",
+      "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop >= 7.0.101",
+      "Microsoft.WindowsAppSDK >= 1.2.221209.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adnan\\.nuget\\packages\\": {},
+    "D:\\Users\\adnan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Usuarios\\adnan\\source\\TG2\\FuelWise\\FuelWise.csproj",
+      "projectUniqueName": "D:\\Users\\adnan\\source\\TG2\\FuelWise\\FuelWise.csproj",
       "projectName": "FuelWise",
-      "projectPath": "D:\\Usuarios\\adnan\\source\\TG2\\FuelWise\\FuelWise.csproj",
-      "packagesPath": "C:\\Users\\adnan\\.nuget\\packages\\",
-      "outputPath": "D:\\Usuarios\\adnan\\source\\TG2\\FuelWise\\obj\\",
+      "projectPath": "D:\\Users\\adnan\\source\\TG2\\FuelWise\\FuelWise.csproj",
+      "packagesPath": "D:\\Users\\adnan\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\adnan\\source\\TG2\\FuelWise\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\Users\\adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -25524,7 +24935,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "c:\\program files\\dotnet\\library-packs": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -25549,6 +24960,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -25557,7 +24973,7 @@
         "dependencies": {
           "CommunityToolkit.Mvvm": {
             "target": "Package",
-            "version": "[8.2.0, )"
+            "version": "[8.2.2, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -25574,23 +24990,26 @@
             "version": "[7.0.0, )",
             "autoReferenced": true
           },
-          "Microsoft.Extensions.Logging.Abstractions": {
-            "target": "Package",
-            "version": "[7.0.0, )",
-            "autoReferenced": true
-          },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[7.0.0, )"
           },
           "Microsoft.Maui.Graphics": {
             "target": "Package",
-            "version": "[7.0.59, )",
+            "version": "[7.0.101, )",
             "autoReferenced": true
           },
-          "Plugin.BLE": {
+          "Microsoft.NET.ILLink.Analyzers": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[3.0.0-beta.3, )"
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
           },
           "Xamarin.Android.Glide": {
             "target": "Package",
@@ -25659,6 +25078,52 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Android.Ref.33",
+            "version": "[33.0.95, 33.0.95]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.33.android-arm",
+            "version": "[33.0.95, 33.0.95]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.33.android-arm64",
+            "version": "[33.0.95, 33.0.95]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.33.android-x64",
+            "version": "[33.0.95, 33.0.95]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.33.android-x86",
+            "version": "[33.0.95, 33.0.95]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Ref.android",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Runtime.android",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Ref.android",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Runtime.android",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Ref.android",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Runtime.android",
+            "version": "[7.0.101, 7.0.101]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.Android": {
             "privateAssets": "all"
@@ -25676,14 +25141,14 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       },
       "net7.0-ios16.1": {
         "targetAlias": "net7.0-ios",
         "dependencies": {
           "CommunityToolkit.Mvvm": {
             "target": "Package",
-            "version": "[8.2.0, )"
+            "version": "[8.2.2, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -25700,23 +25165,26 @@
             "version": "[7.0.0, )",
             "autoReferenced": true
           },
-          "Microsoft.Extensions.Logging.Abstractions": {
-            "target": "Package",
-            "version": "[7.0.0, )",
-            "autoReferenced": true
-          },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[7.0.0, )"
           },
           "Microsoft.Maui.Graphics": {
             "target": "Package",
-            "version": "[7.0.59, )",
+            "version": "[7.0.101, )",
             "autoReferenced": true
           },
-          "Plugin.BLE": {
+          "Microsoft.NET.ILLink.Analyzers": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[3.0.0-beta.3, )"
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
           }
         },
         "imports": [
@@ -25730,6 +25198,40 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.iOS.Ref",
+            "version": "[16.4.7129, 16.4.7129]"
+          },
+          {
+            "name": "Microsoft.iOS.Runtime.ios-arm64",
+            "version": "[16.4.7129, 16.4.7129]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Ref.ios",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Runtime.ios",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Ref.ios",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Runtime.ios",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Ref.ios",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Runtime.ios",
+            "version": "[7.0.101, 7.0.101]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.iOS": {
             "privateAssets": "all"
@@ -25747,14 +25249,14 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       },
       "net7.0-maccatalyst16.1": {
         "targetAlias": "net7.0-maccatalyst",
         "dependencies": {
           "CommunityToolkit.Mvvm": {
             "target": "Package",
-            "version": "[8.2.0, )"
+            "version": "[8.2.2, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -25771,23 +25273,26 @@
             "version": "[7.0.0, )",
             "autoReferenced": true
           },
-          "Microsoft.Extensions.Logging.Abstractions": {
-            "target": "Package",
-            "version": "[7.0.0, )",
-            "autoReferenced": true
-          },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[7.0.0, )"
           },
           "Microsoft.Maui.Graphics": {
             "target": "Package",
-            "version": "[7.0.59, )",
+            "version": "[7.0.101, )",
             "autoReferenced": true
           },
-          "Plugin.BLE": {
+          "Microsoft.NET.ILLink.Analyzers": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[3.0.0-beta.3, )"
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.0.100-1.23211.1, )",
+            "autoReferenced": true
           }
         },
         "imports": [
@@ -25802,6 +25307,40 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.MacCatalyst.Ref",
+            "version": "[16.4.7129, 16.4.7129]"
+          },
+          {
+            "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-x64",
+            "version": "[16.4.7129, 16.4.7129]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Ref.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Runtime.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Ref.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Runtime.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Ref.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Runtime.maccatalyst",
+            "version": "[7.0.101, 7.0.101]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.MacCatalyst": {
             "privateAssets": "all"
@@ -25819,14 +25358,14 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       },
       "net7.0-windows10.0.19041": {
         "targetAlias": "net7.0-windows10.0.19041.0",
         "dependencies": {
           "CommunityToolkit.Mvvm": {
             "target": "Package",
-            "version": "[8.2.0, )"
+            "version": "[8.2.2, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -25843,39 +25382,24 @@
             "version": "[7.0.0, )",
             "autoReferenced": true
           },
-          "Microsoft.Extensions.Logging.Abstractions": {
-            "target": "Package",
-            "version": "[7.0.0, )",
-            "autoReferenced": true
-          },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[7.0.0, )"
           },
           "Microsoft.Maui.Graphics": {
             "target": "Package",
-            "version": "[7.0.59, )",
+            "version": "[7.0.101, )",
             "autoReferenced": true
           },
           "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop": {
             "target": "Package",
-            "version": "[7.0.59, )",
-            "autoReferenced": true
-          },
-          "Microsoft.Windows.SDK.BuildTools": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[10.0.22621.755, )",
+            "version": "[7.0.101, )",
             "autoReferenced": true
           },
           "Microsoft.WindowsAppSDK": {
             "target": "Package",
             "version": "[1.2.221209.1, )",
             "autoReferenced": true
-          },
-          "Plugin.BLE": {
-            "target": "Package",
-            "version": "[3.0.0-beta.3, )"
           }
         },
         "imports": [
@@ -25892,19 +25416,43 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[7.0.3, 7.0.3]"
+            "version": "[7.0.17, 7.0.17]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Ref.win",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Controls.Runtime.win",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Ref.win",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Core.Runtime.win",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Ref.win",
+            "version": "[7.0.101, 7.0.101]"
+          },
+          {
+            "name": "Microsoft.Maui.Essentials.Runtime.win",
+            "version": "[7.0.101, 7.0.101]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[7.0.3, 7.0.3]"
+            "version": "[7.0.17, 7.0.17]"
           },
           {
             "name": "Microsoft.Windows.SDK.NET.Ref",
-            "version": "[10.0.19041.28, 10.0.19041.28]"
+            "version": "[10.0.19041.31, 10.0.19041.31]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[7.0.3, 7.0.3]"
+            "version": "[7.0.17, 7.0.17]"
           }
         ],
         "frameworkReferences": {
@@ -25924,7 +25472,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
@@ -25940,7 +25488,7 @@
       "android-x86": {
         "#import": []
       },
-      "iossimulator-x64": {
+      "ios-arm64": {
         "#import": []
       },
       "maccatalyst-x64": {

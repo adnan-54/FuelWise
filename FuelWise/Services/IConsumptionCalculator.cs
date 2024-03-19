@@ -23,7 +23,7 @@ public interface IConsumptionCalculator
 internal class ConsumptionCalculator : IConsumptionCalculator
 {
     private readonly IVehicleProvider vehicleProvider;
-    private OBD previousObd;
+    private OBD? previousObd;
 
     public ConsumptionCalculator(IVehicleProvider vehicleProvider)
     {
@@ -51,11 +51,13 @@ internal class ConsumptionCalculator : IConsumptionCalculator
 
     private static double CalculateFuelConsumed(OBD previousObd, OBD currentObd)
     {
-        double airFlowRate = (currentObd.MAF / 100) / (currentObd.IntakeAirTemperature + 273.15) * 28.97 / 8.314;
-        double fuelFlowRate = currentObd.FuelAirCommanded * airFlowRate / 14.7 / 60;
-        double fuelConsumed = fuelFlowRate * (currentObd.TimeSinceTroubleCodesCleared - previousObd.TimeSinceTroubleCodesCleared) / 3600 / 1000 * 0.264172;
+        return 0;
 
-        return fuelConsumed;
+        //double airFlowRate = (currentObd.MAF / 100) / (currentObd.IntakeAirTemperature + 273.15) * 28.97 / 8.314;
+        //double fuelFlowRate = currentObd.FuelAirCommanded * airFlowRate / 14.7 / 60;
+        //double fuelConsumed = fuelFlowRate * (currentObd.TimeSinceTroubleCodesCleared - previousObd.TimeSinceTroubleCodesCleared) / 3600 / 1000 * 0.264172;
+
+        //return fuelConsumed;
     }
 
     public double GetCalculatedTrip(OBD obd)
