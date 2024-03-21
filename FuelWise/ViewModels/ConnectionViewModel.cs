@@ -1,107 +1,137 @@
-﻿using System.Reflection;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FuelWise.Services;
 
 namespace FuelWise.ViewModels;
 
+public enum ConnectionState
+{
+    Searching,
+    DevicesFound,
+    DevicesNotFound,
+    Connecting,
+    Connected,
+    Disconecting,
+    Disconnected,
+    Error
+}
+
 public partial class ConnectionViewModel : ObservableObject
 {
-    private readonly IBluetoothService bluetoothService;
-
-    [ObservableProperty]
-    private bool isSearchingForDevices;
+    private readonly IBluetoothConnector btConnector;
+    private readonly IDialogManager dialogManager;
 
     [ObservableProperty]
     private List<string>? availableDevices;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CanShowDeviceInfos))]
+    [NotifyPropertyChangedFor(nameof(CanConnect))]
+    [NotifyCanExecuteChangedFor(nameof(ConnectCommand))]
     private string? selectedDevice;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNoDevicesToShow))]
-    private bool hasDevicesToShow;
+    [NotifyPropertyChangedFor(nameof(CanDisconnect))]
+    [NotifyCanExecuteChangedFor(nameof(DisconnectCommand))]
+    private string? connectedDevice;
 
-    public ConnectionViewModel(IBluetoothService bluetoothService)
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSearchDevices))]
+    [NotifyCanExecuteChangedFor(nameof(SearchDevicesCommand))]
+    private ConnectionState currentState;
+
+    public ConnectionViewModel(IBluetoothConnector btConnector, IDialogManager dialogManager)
     {
-        this.bluetoothService = bluetoothService;
-        availableDevices = new();
-        hasDevicesToShow = false;
+        this.btConnector = btConnector;
+        this.dialogManager = dialogManager;
+
+        CurrentState = ConnectionState.Disconnected;
     }
 
-    public bool CanShowDeviceInfos => SelectedDevice is not null;
+    public bool CanSearchDevices => CurrentState is ConnectionState.Disconnected or ConnectionState.DevicesNotFound or ConnectionState.Error;
 
-    public bool HasNoDevicesToShow => !HasDevicesToShow;
+    public bool CanConnect => !string.IsNullOrWhiteSpace(SelectedDevice);
 
-    [RelayCommand]
-    public async Task FindDevices()
+    public bool CanDisconnect => !string.IsNullOrWhiteSpace(ConnectedDevice);
+
+    [RelayCommand(CanExecute = nameof(CanSearchDevices))]
+    public async Task SearchDevices()
     {
         try
         {
-            IsSearchingForDevices = true;
-            var foundDevices = await bluetoothService.ScanDevices();
+            CurrentState = ConnectionState.Searching;
 
-            // Link de exemplo para configurar as permissões: https://github.com/dotnet-bluetooth-le/dotnet-bluetooth-le/blob/master/Source/BLE.Client/BLE.Client.Maui/Platforms/Android/DroidPlatformHelpers.cs
-            PermissionStatus status;
+            SelectedDevice = null;
+            
+            var devices = await btConnector.GetAvailableDevices();
+            AvailableDevices = new(devices);
+            
+            await Task.Delay(TimeSpan.FromSeconds(2));
 
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.S)
+            if (AvailableDevices.Any())
             {
-                status = await Permissions.CheckStatusAsync<BluetoothPermissions>();
-
-                if (status != PermissionStatus.Granted)
-                    await Application.Current.MainPage.DisplayAlert("Permission required", "Bluetooth scanning.", "OK");
-
-
-                status = await Permissions.RequestAsync<BluetoothPermissions>();
+                CurrentState = ConnectionState.DevicesFound;
+                SelectedDevice = AvailableDevices.FirstOrDefault(d => d.Contains("OBD", StringComparison.OrdinalIgnoreCase));
             }
             else
-            {
-                status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
-                if (status != PermissionStatus.Granted)
-                    await Application.Current.MainPage.DisplayAlert("Permission required", "Location permission is required for bluetooth scanning. We do not store or use your location at all.", "OK");
-
-                if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
-                    await Application.Current.MainPage.DisplayAlert("Permission required", "Location permission is required for bluetooth scanning. We do not store or use your location at all.", "OK");
-
-                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-            }
-
-            //Gets a list of all connected Bluetooth devices
-            var ConnectedDevices = _conditional.GetConnectedDevices();
-            // Como fazer o bind dos valores list<string>: https://stackoverflow.com/questions/2765369/binding-to-an-observablecollectionstring-listview?rq=4
-
-            AvailableDevices = new(ConnectedDevices);
-            HasDevicesToShow = AvailableDevices.Any();
+                CurrentState = ConnectionState.DevicesNotFound;
         }
-        catch
+        catch (Exception ex)
         {
-
-        }
-        finally
-        {
-            IsSearchingForDevices = false;
+            CurrentState = ConnectionState.Error;
+            await dialogManager.ShowError(ex.Message);
         }
     }
 
-    [RelayCommand(CanExecute = nameof(CanShowDeviceInfos))]
-    public async Task ShowDeviceInfos()
+    [RelayCommand(CanExecute = nameof(CanConnect))]
+    public async Task Connect()
     {
-        if (SelectedDevice is null)
-            return;
-
-        var propertyInfos = typeof(IDevice).GetProperties(BindingFlags.Public);
-
-        foreach (var propertyInfo in propertyInfos)
+        try
         {
-            var propertyName = propertyInfo.Name;
-            var propertyValue = propertyInfo.GetValue(SelectedDevice);
+            if (SelectedDevice is null)
+                return;
 
-            var result = await Application.Current!.MainPage!.DisplayAlert("Device Infos", $"{propertyName}: {propertyValue}", "Next", "Exit");
+            CurrentState = ConnectionState.Connecting;
 
-            if (!result)
-                break;
+            await btConnector.Connect(SelectedDevice);
+            await Task.Delay(TimeSpan.FromSeconds(2));
+
+            ConnectedDevice = SelectedDevice;
+            SelectedDevice = null;
+
+            CurrentState = ConnectionState.Connected;
+
+            await dialogManager.ShowSuccess("Dispositivo conectado com sucesso");
+        }
+        catch (Exception ex)
+        {
+            CurrentState = ConnectionState.Error;
+            await dialogManager.ShowError(ex.Message);
+        }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanDisconnect))]
+    public async Task Disconnect()
+    {
+        try
+        {
+            if (ConnectedDevice is null)
+                return;
+
+            CurrentState = ConnectionState.Disconecting;
+
+            await btConnector.Disconnect();
+            await Task.Delay(TimeSpan.FromSeconds(2));
+
+            ConnectedDevice = null;
+
+            CurrentState = ConnectionState.Disconnected;
+
+            await dialogManager.ShowSuccess("Dispositivo desconectado com sucesso");
+
+        }
+        catch (Exception ex)
+        {
+            CurrentState = ConnectionState.Error;
+            await dialogManager.ShowError(ex.Message);
         }
     }
 }

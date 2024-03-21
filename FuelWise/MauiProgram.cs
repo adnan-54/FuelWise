@@ -1,4 +1,4 @@
-﻿using FuelWise.Platforms.Android;
+﻿using CommunityToolkit.Maui;
 using FuelWise.Services;
 using FuelWise.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -12,6 +12,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -23,14 +24,15 @@ public static class MauiProgram
 #endif
 
 #if ANDROID
-        builder.Services.AddSingleton<IBluetoothConnector, AndroidBluetoothConnector>();
+        builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.AndroidBluetoothConnector>();
 #endif
+
+        builder.Services.AddSingleton<IDialogManager, DefaultDialogManager>();
 
         builder.Services.AddSingleton<IConsumptionCalculator, ConsumptionCalculator>();
         builder.Services.AddSingleton<IVehicleProvider, VehicleProvider>();
         builder.Services.AddSingleton<IGearController, GearController>();
         builder.Services.AddSingleton<IEfficiencyCalculator, EfficiencyCalculator>();
-        builder.Services.AddSingleton<IBluetoothService, BluetoothService>();
 
         builder.Services.AddTransient<MainPage>();
 

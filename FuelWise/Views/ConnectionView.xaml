@@ -1,23 +1,128 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
-             x:Class="FuelWise.Views.ConnectionView"
-             x:DataType="viewModels:ConnectionViewModel"
-             Title="Connection">
+<ContentPage
+    x:Class="FuelWise.Views.ConnectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
+    Title="Conexão"
+    x:DataType="viewModels:ConnectionViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:EnumToBoolConverter x:Key="EnumToBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout Padding="12" Spacing="6">
-        <ListView ItemsSource="{Binding AvailableDevices}" 
-                  SelectedItem="{Binding SelectedDevice}" 
-                  IsVisible="{Binding HasDevicesToShow}"/>
+        <!--  Searching  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Searching}}" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="True" />
 
-        <Label Text="No devices found" 
-               HorizontalTextAlignment="Center"
-               VerticalOptions="CenterAndExpand"
-               Opacity="0.7"
-               IsVisible="{Binding HasNoDevicesToShow}"/>
+            <Label
+                HorizontalTextAlignment="Center"
+                Opacity="0.7"
+                Text="Procurando dispositivos..."
+                VerticalOptions="CenterAndExpand" />
+        </StackLayout>
 
-        <Button Text="Search Devices" Command="{Binding FindDevicesCommand}" />
+        <!--  DevicesFound  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.DevicesFound}}" VerticalOptions="FillAndExpand">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Opacity="0.7"
+                Text="Dispositivos encontrados:" />
 
-        <Button Text="Show Device Infos" Command="{Binding ShowDeviceInfosCommand}" />
+            <ListView ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" />
+
+            <Button Command="{Binding ConnectCommand}" Text="Conectar" />
+        </StackLayout>
+
+        <!--  DevicesNotFound  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.DevicesNotFound}}" VerticalOptions="FillAndExpand">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Nenhum dispositivo encontrado" />
+
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Verifique sua conexão bluetooth e tente novamente" />
+            </VerticalStackLayout>
+
+            <Button Command="{Binding SearchDevicesCommand}" Text="Buscar Dispositivos" />
+        </StackLayout>
+
+        <!--  Connecting  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Connecting}}" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="True" />
+
+            <Label HorizontalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Conectando ao dispositivo " />
+                        <Span Text="{Binding SelectedDevice}" />
+                        <Span Text="..." />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+
+        <!--  Connected  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Connected}}" VerticalOptions="FillAndExpand">
+            <Label HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Conectado ao dispositivo " />
+                        <Span Text="{Binding ConnectedDevice}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Button Command="{Binding DisconnectCommand}" Text="Desconectar" />
+        </StackLayout>
+
+        <!--  Disconnecting  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Disconecting}}" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="True" />
+
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Desconectando..." />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+
+        <!--  Disconected  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Disconnected}}" VerticalOptions="FillAndExpand">
+            <Label
+                HorizontalTextAlignment="Center"
+                Opacity="0.7"
+                Text="Desconectado"
+                VerticalOptions="CenterAndExpand" />
+
+            <Button Command="{Binding SearchDevicesCommand}" Text="Buscar Dispositivos" />
+        </StackLayout>
+
+        <!--  Error  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.Error}}" VerticalOptions="FillAndExpand">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Ocorreu um erro" />
+
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Tente novamente" />
+            </VerticalStackLayout>
+
+            <Button Command="{Binding SearchDevicesCommand}" Text="Buscar Dispositivos" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
