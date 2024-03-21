@@ -1,4 +1,4 @@
-﻿namespace FuelWise;
+﻿namespace FuelWise.NativeDialog;
 
 public interface IDialogManager
 {

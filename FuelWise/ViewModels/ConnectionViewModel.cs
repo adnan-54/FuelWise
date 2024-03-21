@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FuelWise.BluetoothConnection;
+using FuelWise.NativeDialog;
 
 namespace FuelWise.ViewModels;
 

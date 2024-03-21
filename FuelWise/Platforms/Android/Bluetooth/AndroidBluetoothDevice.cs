@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using Android.Bluetooth;
+using FuelWise.BluetoothConnection;
 
-namespace FuelWise.Platforms.Android.Bluetooth;
+namespace FuelWise.Platforms.Android;
 
 public class AndroidBluetoothDevice : IBluetoothDevice
 {

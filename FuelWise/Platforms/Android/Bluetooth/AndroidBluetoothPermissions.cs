@@ -1,6 +1,6 @@
 ﻿using static Microsoft.Maui.ApplicationModel.Permissions;
 
-namespace FuelWise;
+namespace FuelWise.Platforms.Android;
 
 internal class AndroidBluetoothPermissions : BasePlatformPermission
 {

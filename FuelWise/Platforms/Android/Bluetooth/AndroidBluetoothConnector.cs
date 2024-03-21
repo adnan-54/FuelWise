@@ -1,5 +1,5 @@
 ﻿using Android.Bluetooth;
-using FuelWise.Platforms.Android.Bluetooth;
+using FuelWise.BluetoothConnection;
 using Java.Util;
 
 namespace FuelWise.Platforms.Android;
@@ -31,7 +31,7 @@ public class AndroidBluetoothConnector : IBluetoothConnector
                 return adapter.BondedDevices.Select(d => d.Name ?? "Dispositivo Desconhecido");
         }
 
-        return Enumerable.Empty<string>();
+        return [];
     }
 
     public async Task<IBluetoothDevice> Connect(string deviceName)

@@ -1,4 +1,4 @@
-﻿namespace FuelWise;
+﻿namespace FuelWise.BluetoothConnection;
 
 public interface IBluetoothDevice
 {

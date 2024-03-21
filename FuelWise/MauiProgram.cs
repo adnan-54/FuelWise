@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Maui;
+using FuelWise.BluetoothConnection;
+using FuelWise.NativeDialog;
+using FuelWise.Platforms.Android;
 using FuelWise.Services;
 using FuelWise.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -23,9 +26,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-#if ANDROID
-        builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.AndroidBluetoothConnector>();
-#endif
+        builder.Services.AddSingleton<IBluetoothConnector, AndroidBluetoothConnector>();
 
         builder.Services.AddSingleton<IDialogManager, DefaultDialogManager>();
 
