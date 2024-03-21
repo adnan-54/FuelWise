@@ -67,12 +67,12 @@ public class AndroidBluetoothConnector : IBluetoothConnector
 
     private static async Task<bool> CheckPermission()
     {
-        var status = await Permissions.CheckStatusAsync<BluetoothPermissions>();
+        var status = await Permissions.CheckStatusAsync<AndroidBluetoothPermissions>();
 
         if (status != PermissionStatus.Granted)
             await Application.Current!.MainPage!.DisplayAlert("Permissão Bluetooth", "Permita a conexão via Bluetooth", "OK");
 
-        status = await Permissions.RequestAsync<BluetoothPermissions>();
+        status = await Permissions.RequestAsync<AndroidBluetoothPermissions>();
 
         if (status != PermissionStatus.Granted)
             throw new Exception("Permissão bluetooth negada");
