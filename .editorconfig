@@ -2,3 +2,6 @@
 
 # CA1860: Evite usar o método de extensão 'Enumerable.Any()'
 dotnet_diagnostic.CA1860.severity = none
+
+# IDE0290: Usar construtor primário
+csharp_style_prefer_primary_constructors = false

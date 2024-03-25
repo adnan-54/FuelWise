@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Android.Bluetooth;
+﻿using Android.Bluetooth;
 using FuelWise.BluetoothConnection;
 
 namespace FuelWise.Platforms.Android;
@@ -22,22 +21,20 @@ public class AndroidBluetoothDevice : IBluetoothDevice
 
     public BluetoothSocket BluetoothSocket { get; }
 
-    public Task Send(string data)
+    public async Task SendAsync(byte[] data, CancellationToken cancellationToken)
     {
-        var buffer = Encoding.ASCII.GetBytes(data);
-        return outputStream.WriteAsync(buffer, 0, data.Length);
+        await outputStream.FlushAsync(cancellationToken);
+        await outputStream.WriteAsync(data, cancellationToken);
     }
 
-    public async Task<string> Read()
+    public async Task<byte[]> ReadAsync(CancellationToken cancellationToken)
     {
-        var output = new byte[16];
-        var size = await inputStream.ReadAsync(output.AsMemory(0));
+        var buffer = new byte[16];
+        var size = await inputStream.ReadAsync(buffer, cancellationToken);
+        await inputStream.FlushAsync(cancellationToken);
 
-        Array.Resize(ref output, size);
+        Array.Resize(ref buffer, size);
 
-        var value = Encoding.ASCII.GetString(output);
-
-        return value;
-
+        return buffer;
     }
 }

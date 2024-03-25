@@ -4,7 +4,7 @@ public interface IBluetoothDevice
 {
     string Name { get; }
 
-    Task Send(string data);
+    Task SendAsync(byte[] data, CancellationToken cancellation = default);
 
-    Task<string> Read();
+    Task<byte[]> ReadAsync(CancellationToken cancellation = default);
 }
