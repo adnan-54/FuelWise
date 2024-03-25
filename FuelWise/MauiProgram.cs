@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using FuelWise.BluetoothConnection;
 using FuelWise.NativeDialog;
-using FuelWise.Platforms.Android;
+using FuelWise.OBDEncoder;
 using FuelWise.Services;
 using FuelWise.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -26,9 +26,12 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton<IBluetoothConnector, AndroidBluetoothConnector>();
+#if ANDROID
+        builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.AndroidBluetoothConnector>();
+#endif
 
         builder.Services.AddSingleton<IDialogManager, DefaultDialogManager>();
+        builder.Services.AddSingleton<IOBDEncoder, DefaultOBDEncoder>();
 
         builder.Services.AddSingleton<IConsumptionCalculator, ConsumptionCalculator>();
         builder.Services.AddSingleton<IVehicleProvider, VehicleProvider>();
