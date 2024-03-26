@@ -14,6 +14,8 @@ public interface IOBDEncoder
 
 internal class DefaultOBDEncoder : IOBDEncoder
 {
+    private static readonly CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture;
+
     public byte[] Encode(Frame frame)
     {
         var data = frame.ToString();
@@ -25,26 +27,96 @@ internal class DefaultOBDEncoder : IOBDEncoder
     public Frame Decode(byte[] buffer)
     {
         var command = Encoding.ASCII.GetString(buffer);
-        var identifier = int.Parse(command[..3], NumberStyles.HexNumber);
-        var bytes = command[3..]
-            .Chunk(2)
-            .Select(c => new string(c))
-            .Select(s => byte.TryParse(s, NumberStyles.HexNumber, new CultureInfo("pt-br"), out var result) ? result : default)
-            .ToArray();
+        var bytes = GetBytes(command);
 
-        if (bytes.Length < 7)
-            throw new Exception($"Frame '{command}' não valido");
+        var canId = GetCanId(bytes);
+        var mode = GetMode(bytes);
+        var pid = GetPid(bytes);
+        var fragments = CreateFragments(bytes);
 
-        var canId = (CanId)identifier;
-        var numberOfBytes = bytes[0] - 0x01 - 0x01;
-        var mode = (Mode)bytes[1];
-        var pid = (PID)bytes[2];
-        var fragments = bytes[3..].Select((b, i) => numberOfBytes > i ? new DataFragment(b) : new DataFragment()).ToArray();
-
-        var data = new Data(fragments[0], fragments[1], fragments[2], fragments[3]);
+        var data = Data.CreateFrom(fragments);
         var payload = new Payload(mode, pid, data);
         var frame = new Frame(canId, payload);
 
         return frame;
+    }
+
+    private static byte[] GetBytes(string command)
+    {
+        command = $"0{command}";
+        var bytes = command.Chunk(2)
+            .Select(c => new string(c))
+            .Select(ParseByte)
+            .ToArray();
+
+        if (bytes.Length != 11)
+            throw new Exception($"Frame '{command}' não é valido");
+
+        return bytes;
+    }
+
+    private static byte ParseByte(string value)
+    {
+        if (byte.TryParse(value, NumberStyles.HexNumber, CurrentCulture, out var result))
+            return result;
+        return default;
+    }
+
+    private static CanId GetCanId(byte[] bytes)
+    {
+        var canId = ParseCanId(bytes);
+
+        if (Enum.IsDefined(typeof(CanId), canId))
+            return (CanId)canId;
+
+        throw new Exception($"Valor '{canId:x4}' não é um id valido");
+    }
+
+    private static int ParseCanId(byte[] bytes)
+    {
+        var concatenatedBytes = bytes.Take(2).Select(b => b.ToString("X2")).Aggregate((a, b) => a + b);
+        if (int.TryParse(concatenatedBytes, NumberStyles.HexNumber, CurrentCulture, out var result))
+            return result;
+        return default;
+    }
+
+    private static int GetNumberOfBytes(byte[] bytes)
+    {
+        return bytes[2];
+    }
+
+    private static Mode GetMode(byte[] bytes)
+    {
+        var mode = (int)bytes[3];
+
+        if (Enum.IsDefined(typeof(Mode), mode))
+            return (Mode)mode;
+
+        throw new Exception($"Valor '{mode:x2}' não é um modo valido");
+    }
+
+    private static PID GetPid(byte[] bytes)
+    {
+        var pid = (int)bytes[4];
+
+        if (Enum.IsDefined(typeof(PID), pid))
+            return (PID)pid;
+
+        throw new Exception($"Valor '{pid:x2}' não é um PID valido");
+    }
+
+    private static IEnumerable<DataFragment> CreateFragments(byte[] bytes)
+    {
+        var numberOfBytes = GetNumberOfBytes(bytes) - 2;
+
+        return bytes[5..].Select((b, i) => CreateFragment(b, numberOfBytes > i));
+    }
+
+    private static DataFragment CreateFragment(byte value, bool isUsed)
+    {
+        if (isUsed)
+            return new(value);
+
+        return new();
     }
 }
