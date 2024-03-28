@@ -4,6 +4,8 @@ public readonly record struct DataFragment(FormattedByte? Byte = null)
 {
     public readonly bool IsEmpty => Byte is null;
 
+    public readonly byte Value => Byte ?? 0xAA;
+
     public override readonly string ToString()
     {
         return Byte?.ToString() ?? 0xAA.ToString("X2");

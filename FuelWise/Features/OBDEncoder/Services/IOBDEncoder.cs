@@ -18,7 +18,7 @@ internal class DefaultOBDEncoder : IOBDEncoder
 
     public byte[] Encode(Frame frame)
     {
-        var data = frame.ToString();
+        var data = frame.ToShortRequestString();
         var buffer = Encoding.ASCII.GetBytes(data);
 
         return buffer;
@@ -27,6 +27,20 @@ internal class DefaultOBDEncoder : IOBDEncoder
     public Frame Decode(byte[] buffer)
     {
         var command = Encoding.ASCII.GetString(buffer);
+        if (command.Contains('>'))
+        {
+            var commands = command.Split('>');
+
+            foreach (var possibleCommand in commands.Reverse())
+            {
+                if (string.IsNullOrEmpty(possibleCommand))
+                    continue;
+
+                command = possibleCommand;
+                break;
+            }
+        }
+
         var bytes = GetBytes(command);
 
         var canId = GetCanId(bytes);
@@ -49,9 +63,6 @@ internal class DefaultOBDEncoder : IOBDEncoder
             .Select(ParseByte)
             .ToArray();
 
-        if (bytes.Length != 11)
-            throw new Exception($"Frame '{command}' não é valido");
-
         return bytes;
     }
 
@@ -69,7 +80,7 @@ internal class DefaultOBDEncoder : IOBDEncoder
         if (Enum.IsDefined(typeof(CanId), canId))
             return (CanId)canId;
 
-        throw new Exception($"Valor '{canId:x4}' não é um id valido");
+        return CanId.Response;
     }
 
     private static int ParseCanId(byte[] bytes)
@@ -87,12 +98,13 @@ internal class DefaultOBDEncoder : IOBDEncoder
 
     private static Mode GetMode(byte[] bytes)
     {
-        var mode = (int)bytes[3];
+        var b = bytes[3];
+        var mode = b > 0x40 ? b - 0x40 : b;
 
         if (Enum.IsDefined(typeof(Mode), mode))
             return (Mode)mode;
 
-        throw new Exception($"Valor '{mode:x2}' não é um modo valido");
+        return Mode.Error;
     }
 
     private static PID GetPid(byte[] bytes)
@@ -102,7 +114,7 @@ internal class DefaultOBDEncoder : IOBDEncoder
         if (Enum.IsDefined(typeof(PID), pid))
             return (PID)pid;
 
-        throw new Exception($"Valor '{pid:x2}' não é um PID valido");
+        return PID.Unknown;
     }
 
     private static IEnumerable<DataFragment> CreateFragments(byte[] bytes)

@@ -2,7 +2,15 @@
 
 public interface IBluetoothConnector
 {
+    event EventHandler? DeviceConnected;
+
+    event EventHandler? DeviceDisconnected;
+
+    event EventHandler? DeviceChanged;
+
     IBluetoothDevice? ConnectedDevice { get; }
+
+    bool IsConnected { get; }
 
     Task<IEnumerable<string>> GetAvailableDevices();
 

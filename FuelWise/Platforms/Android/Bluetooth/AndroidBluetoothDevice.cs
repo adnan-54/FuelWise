@@ -29,8 +29,18 @@ public class AndroidBluetoothDevice : IBluetoothDevice
 
     public async Task<byte[]> ReadAsync(CancellationToken cancellationToken)
     {
-        var buffer = new byte[16];
+        var buffer = new byte[128];
         var size = await inputStream.ReadAsync(buffer, cancellationToken);
+
+        while (buffer[size - 1] != 62)
+        {
+            var tempBuffer = new byte[128];
+            var tempSize = await inputStream.ReadAsync(tempBuffer, cancellationToken);
+
+            Array.Copy(tempBuffer, 0, buffer, size, tempSize);
+            size += tempSize;
+        }
+
         await inputStream.FlushAsync(cancellationToken);
 
         Array.Resize(ref buffer, size);

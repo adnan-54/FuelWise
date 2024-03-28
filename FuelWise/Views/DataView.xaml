@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
-             x:Class="FuelWise.Views.DataView"
-             x:DataType="viewModels:DataViewModel"
-             Title="Data">
+<ContentPage
+    x:Class="FuelWise.Views.DataView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
+    Title="Dados"
+    x:DataType="viewModels:DataViewModel">
 
     <VerticalStackLayout>
-        <Label 
-            Text="Data!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <Label HorizontalOptions="CenterAndExpand">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding Report}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button Command="{Binding RequestDataCommand}" Text="Atualizar" />
     </VerticalStackLayout>
 </ContentPage>

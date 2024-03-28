@@ -19,7 +19,29 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         adapter = manager.Adapter ?? throw new Exception("Adaptador bluetooth não encontrado");
     }
 
-    public IBluetoothDevice? ConnectedDevice => connectedDevice;
+    public event EventHandler? DeviceConnected;
+
+    public event EventHandler? DeviceDisconnected;
+
+    public event EventHandler? DeviceChanged;
+
+    public IBluetoothDevice? ConnectedDevice
+    {
+        get => connectedDevice;
+        private set
+        {
+            if (value is null)
+                DeviceDisconnected?.Invoke(this, EventArgs.Empty);
+            else
+                DeviceConnected?.Invoke(this, EventArgs.Empty);
+
+            connectedDevice = (AndroidBluetoothDevice?)value;
+
+            DeviceChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public bool IsConnected => ConnectedDevice != null;
 
     public async Task<IEnumerable<string>> GetAvailableDevices()
     {
@@ -39,9 +61,9 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         var device = (adapter.BondedDevices?.FirstOrDefault(d => d.Name == deviceName)) ?? throw new Exception($"Dispositivo '{deviceName}' não encontrado.");
         var socket = device.CreateInsecureRfcommSocketToServiceRecord(UUID.FromString(SspUdid)) ?? throw new Exception($"Não foi possivel criar um soket para o dispositivo '{deviceName}'");
         await socket.ConnectAsync();
-        connectedDevice = new AndroidBluetoothDevice(device, socket);
+        ConnectedDevice = new AndroidBluetoothDevice(device, socket);
 
-        return connectedDevice;
+        return ConnectedDevice;
     }
 
     public async Task Disconnect()
@@ -53,7 +75,7 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         {
             var socket = connectedDevice.BluetoothSocket;
 
-            if(socket.InputStream is not null)
+            if (socket.InputStream is not null)
                 await socket.InputStream.DisposeAsync();
 
             if (socket.OutputStream is not null)
@@ -61,7 +83,7 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         }
         finally
         {
-            connectedDevice = null;
+            ConnectedDevice = null;
         }
     }
 
@@ -80,4 +102,3 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         return status == PermissionStatus.Granted;
     }
 }
-

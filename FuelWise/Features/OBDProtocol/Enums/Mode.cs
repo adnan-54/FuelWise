@@ -8,4 +8,6 @@ public enum Mode
     ClearDiagnosticTroubleCodesAndStoredValues = 0x04,
     RequestVehicleInformation = 0x09,
     PermanentDiagnosticTroubleCodes = 0x0A,
+
+    Error = 0x12,
 }
