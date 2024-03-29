@@ -36,10 +36,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\.editorconfig" Link=".editorconfig" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -66,6 +62,10 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarFuelWiseHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ItemGroup>
+	  <ProjectReference Include="..\FuelWise.IA\FuelWise.IA.csproj" />
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerExceptionFuelWiseHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -3,7 +3,7 @@ using Frame = FuelWise.OBDProtocol.Frame;
 
 namespace FuelWise.OBDDataPuller;
 
-public sealed class RpmData : ObdData<double>
+public sealed class RpmData : ObdData<int>
 {
     public RpmData(Frame frame) : base(frame)
     {
@@ -13,14 +13,16 @@ public sealed class RpmData : ObdData<double>
 
     public override string Description => "Engine RPM";
 
-    public override double MaxValue => 16383.75;
+    public override int MaxValue => 16383;
 
-    public override double MinValue => 0;
+    public override int MinValue => 0;
 
     public override Unit Unit => Unit.Rpm;
 
-    public override double GetValue()
+    protected override int GetValue()
     {
-        return ((Data.A.Value * 256) + Data.B.Value) / 4.0;
+        var rpm = ((Data.A.Value * 256) + Data.B.Value) / 4.0;
+
+        return Convert.ToInt32(rpm);
     }
 }

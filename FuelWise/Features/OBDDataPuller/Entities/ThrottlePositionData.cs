@@ -19,7 +19,7 @@ public sealed class ThrottlePositionData : ObdData<int>
 
     public override Unit Unit => Unit.Percent;
 
-    public override int GetValue()
+    protected override int GetValue()
     {
         return Convert.ToInt32(Data.A.Value / 2.55);
     }

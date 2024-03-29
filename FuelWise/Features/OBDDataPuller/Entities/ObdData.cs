@@ -26,7 +26,7 @@ public abstract class ObdData<TValue> : IOBDData<TValue> where TValue : struct
 
     public abstract TValue MinValue { get; }
 
-    public abstract TValue GetValue();
+    protected abstract TValue GetValue();
 
     object IOBDData.Value => Value;
 

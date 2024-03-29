@@ -19,7 +19,7 @@ public sealed class IntakeManifoldPressureData : ObdData<int>
 
     public override Unit Unit => Unit.Kpa;
 
-    public override int GetValue()
+    protected override int GetValue()
     {
         return Data.A.Value;
     }

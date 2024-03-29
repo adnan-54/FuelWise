@@ -19,7 +19,7 @@ public sealed class FuelTypeData : ObdData<int>
 
     public override Unit Unit => Unit.None;
 
-    public override int GetValue()
+    protected override int GetValue()
     {
         return Data.A.Value;
     }

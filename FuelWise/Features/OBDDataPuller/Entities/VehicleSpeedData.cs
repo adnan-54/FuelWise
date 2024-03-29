@@ -19,8 +19,13 @@ public sealed class VehicleSpeedData : ObdData<int>
 
     public override Unit Unit => Unit.KilometerPerHour;
 
-    public override int GetValue()
+    protected override int GetValue()
     {
         return Data.A.Value;
+    }
+
+    public float ToMeterPerSecond()
+    {
+        return GetValue() / 3.6F;
     }
 }

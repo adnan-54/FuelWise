@@ -3,7 +3,7 @@ using Frame = FuelWise.OBDProtocol.Frame;
 
 namespace FuelWise.OBDDataPuller;
 
-public sealed class EngineCoolantTemperatureData : ObdData<double>
+public sealed class EngineCoolantTemperatureData : ObdData<int>
 {
     public EngineCoolantTemperatureData(Frame frame) : base(frame)
     {
@@ -13,13 +13,13 @@ public sealed class EngineCoolantTemperatureData : ObdData<double>
 
     public override string Description => "Engine coolant temperature";
 
-    public override double MaxValue => 215;
+    public override int MaxValue => 215;
 
-    public override double MinValue => -40;
+    public override int MinValue => -40;
 
     public override Unit Unit => Unit.Celsius;
 
-    public override double GetValue()
+    protected override int GetValue()
     {
         return Data.A.Value - 40;
     }

@@ -19,8 +19,13 @@ public sealed class IntakeAirTemperatureData : ObdData<int>
 
     public override Unit Unit => Unit.Celsius;
 
-    public override int GetValue()
+    protected override int GetValue()
     {
         return Data.A.Value - 40;
+    }
+
+    public int ToKelvin()
+    {
+        return Value + 273;
     }
 }
