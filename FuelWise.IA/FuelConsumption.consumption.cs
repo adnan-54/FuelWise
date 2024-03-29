@@ -5,6 +5,9 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Maui.Storage;
+
 namespace FuelWise_IA
 {
     public partial class FuelConsumption
@@ -12,7 +15,9 @@ namespace FuelWise_IA
         /// <summary>
         /// model input class for FuelConsumption.
         /// </summary>
+
         #region model input class
+
         public class ModelInput
         {
             [LoadColumn(1)]
@@ -50,15 +55,16 @@ namespace FuelWise_IA
             [LoadColumn(13)]
             [ColumnName(@"FuelConsumptionAverage")]
             public float FuelConsumptionAverage { get; set; }
-
         }
 
-        #endregion
+        #endregion model input class
 
         /// <summary>
         /// model output class for FuelConsumption.
         /// </summary>
+
         #region model output class
+
         public class ModelOutput
         {
             [ColumnName(@"VehicleSpeedInstantaneous")]
@@ -93,20 +99,19 @@ namespace FuelWise_IA
 
             [ColumnName(@"Score")]
             public float Score { get; set; }
-
         }
 
-        #endregion
+        #endregion model output class
 
-        private static string MLNetModelPath = Path.GetFullPath("FuelConsumption.mlnet");
+        //private static string MLNetModelPath = Path.GetFullPath("FuelConsumption.mlnet");
 
-        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new(() => CreatePredictEngine().GetAwaiter().GetResult(), true);
 
-
-        private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
+        private static async Task<PredictionEngine<ModelInput, ModelOutput>> CreatePredictEngine()
         {
             var mlContext = new MLContext();
-            ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var _);
+            using var stream = await FileSystem.OpenAppPackageFileAsync("FuelConsumption.mlnet");
+            ITransformer mlModel = mlContext.Model.Load(stream, out var _);
             return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
         }
 

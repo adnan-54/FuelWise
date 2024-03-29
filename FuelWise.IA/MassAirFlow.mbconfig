@@ -8,29 +8,13 @@
     "KeepPunctuations": false,
     "AllowQuoting": false,
     "Type": "TabularFile",
-    "FilePath": "D:\\Users\\adnan\\Desktop\\OBD.csv",
-    "Delimiter": ",",
-    "DecimalMarker": ".",
+    "FilePath": "D:\\Users\\adnan\\Desktop\\MAF3.csv",
+    "Delimiter": ";",
+    "DecimalMarker": ",",
     "HasHeader": true,
     "ColumnProperties": [
       {
-        "ColumnName": "GPSTime",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "String",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "DeviceTime",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "String",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "Longitude",
+        "ColumnName": "EngineCoolantTemperature",
         "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
@@ -38,79 +22,7 @@
         "Version": 5
       },
       {
-        "ColumnName": "Latitude",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "Speed",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "HorizontalDilutionOfPrecision",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "Altitude",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "Bearing",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "XG",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "YG",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "ZG",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "CalibratedG",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "CoolantTemperature",
+        "ColumnName": "EngineLoad",
         "ColumnPurpose": "Feature",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
@@ -126,15 +38,7 @@
         "Version": 5
       },
       {
-        "ColumnName": "IntakeAirTemperature",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "EngineLoad",
+        "ColumnName": "IntakeManifoldPressure",
         "ColumnPurpose": "Feature",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
@@ -150,8 +54,40 @@
         "Version": 5
       },
       {
+        "ColumnName": "IntakeAirTemperature",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Speed",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "ShortTermFuelTrimBank1",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
         "ColumnName": "ThrottlePosition",
         "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "TimingAdvance",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
         "Type": "Column",
@@ -171,52 +107,46 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "LightGbmRegression",
-        "Score": 0.94032635384123786,
-        "RuntimeInSeconds": 1.441,
+        "Score": 0.95789619777951207,
+        "RuntimeInSeconds": 0.35,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e4",
           "e0": {
             "OutputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "OutputColumnName": "Features"
           },
           "e4": {
-            "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 25,
-            "LearningRate": 0.0069726318673312832,
-            "NumberOfTrees": 9406,
-            "SubsampleFraction": 0.99999977667298645,
-            "MaximumBinCountPerFeature": 206,
-            "FeatureFraction": 0.7030581895254967,
-            "L1Regularization": 6.7470678684982183E-07,
-            "L2Regularization": 0.30415623063702757,
+            "NumberOfLeaves": 1282,
+            "MinimumExampleCountPerLeaf": 23,
+            "LearningRate": 0.99999977667298645,
+            "NumberOfTrees": 258,
+            "SubsampleFraction": 0.28896478182883739,
+            "MaximumBinCountPerFeature": 416,
+            "FeatureFraction": 0.964199913977243,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 0.99999977667298645,
             "LabelColumnName": "MassAirFlow",
             "FeatureColumnName": "Features"
           }
@@ -226,44 +156,38 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastForestRegression",
-        "Score": 0.93658401430866633,
-        "RuntimeInSeconds": 27.092,
+        "Score": 0.92410496535500131,
+        "RuntimeInSeconds": 0.813,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e3",
           "e0": {
             "OutputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "OutputColumnName": "Features"
           },
           "e3": {
-            "NumberOfTrees": 32767,
+            "NumberOfTrees": 4,
             "NumberOfLeaves": 4,
             "FeatureFraction": 1.0,
             "LabelColumnName": "MassAirFlow",
@@ -274,45 +198,88 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.93629300681501826,
-        "RuntimeInSeconds": 0.72,
+        "TrainerName": "LightGbmRegression",
+        "Score": 0.91089372606354624,
+        "RuntimeInSeconds": 0.092,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e4",
           "e0": {
             "OutputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
+              "ThrottlePosition"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 20,
+            "LearningRate": 1.0,
+            "NumberOfTrees": 4,
+            "SubsampleFraction": 1.0,
+            "MaximumBinCountPerFeature": 254,
+            "FeatureFraction": 1.0,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 1.0,
+            "LabelColumnName": "MassAirFlow",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.90139432876899506,
+        "RuntimeInSeconds": 0.148,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
+              "ThrottlePosition"
+            ],
+            "InputColumnNames": [
+              "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
+              "ThrottlePosition"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "OutputColumnName": "Features"
           },
           "e3": {
-            "NumberOfTrees": 733,
+            "NumberOfTrees": 4,
             "NumberOfLeaves": 4,
             "FeatureFraction": 1.0,
             "LabelColumnName": "MassAirFlow",
@@ -324,101 +291,46 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastTreeRegression",
-        "Score": 0.93063398928796492,
-        "RuntimeInSeconds": 0.078,
+        "Score": -0.22584760447806507,
+        "RuntimeInSeconds": 0.283,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
               "EngineLoad",
+              "RPM",
+              "IntakeManifoldPressure",
+              "IntakeAirTemperature",
               "ThrottlePosition"
             ],
             "OutputColumnName": "Features"
           },
           "e2": {
             "NumberOfLeaves": 4,
-            "MinimumExampleCountPerLeaf": 23,
-            "NumberOfTrees": 183,
-            "MaximumBinCountPerFeature": 1023,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.048002753052465541,
+            "MinimumExampleCountPerLeaf": 20,
+            "NumberOfTrees": 4,
+            "MaximumBinCountPerFeature": 254,
+            "FeatureFraction": 1.0,
+            "LearningRate": 0.099999999999999978,
             "LabelColumnName": "MassAirFlow",
             "FeatureColumnName": "Features",
             "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.9249370052422613,
-        "RuntimeInSeconds": 4.299,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
-          "e0": {
-            "OutputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
-              "EngineLoad",
-              "ThrottlePosition"
-            ],
-            "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
-              "EngineLoad",
-              "ThrottlePosition"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "Speed",
-              "Altitude",
-              "CoolantTemperature",
-              "RPM",
-              "IntakeAirTemperature",
-              "EngineLoad",
-              "ThrottlePosition"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e3": {
-            "NumberOfTrees": 6366,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 0.763846338,
-            "LabelColumnName": "MassAirFlow",
-            "FeatureColumnName": "Features"
           }
         }
       }
@@ -443,7 +355,7 @@
     "Subsampling": true,
     "Tuner": "eci-cfo",
     "Type": "RegressionTrainingOption",
-    "TrainingTime": 120,
+    "TrainingTime": 10,
     "OptimizeMetric": "RSquared",
     "LabelColumn": "MassAirFlow",
     "AvailableTrainers": [
@@ -456,7 +368,7 @@
     "ValidationOption": {
       "Version": 0,
       "Type": "TrainValidateSplitValidationOption",
-      "SplitRatio": 0.3
+      "SplitRatio": 0.1
     }
   }
 }

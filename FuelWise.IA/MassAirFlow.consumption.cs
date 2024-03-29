@@ -5,8 +5,8 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.Maui.Storage;
+using System.Threading.Tasks;
 
 namespace FuelWise_IA
 {
@@ -20,35 +20,27 @@ namespace FuelWise_IA
 
         public class ModelInput
         {
-            [LoadColumn(4)]
-            [ColumnName(@"Speed")]
-            public float Speed { get; set; }
-
-            [LoadColumn(6)]
-            [ColumnName(@"Altitude")]
-            public float Altitude { get; set; }
-
-            [LoadColumn(12)]
-            [ColumnName(@"CoolantTemperature")]
-            public float CoolantTemperature { get; set; }
-
-            [LoadColumn(13)]
-            [ColumnName(@"RPM")]
-            public float RPM { get; set; }
-
-            [LoadColumn(14)]
-            [ColumnName(@"IntakeAirTemperature")]
-            public float IntakeAirTemperature { get; set; }
-
-            [LoadColumn(15)]
+            [LoadColumn(1)]
             [ColumnName(@"EngineLoad")]
             public float EngineLoad { get; set; }
 
-            [LoadColumn(16)]
+            [LoadColumn(2)]
+            [ColumnName(@"RPM")]
+            public float RPM { get; set; }
+
+            [LoadColumn(3)]
+            [ColumnName(@"IntakeManifoldPressure")]
+            public float IntakeManifoldPressure { get; set; }
+
+            [LoadColumn(4)]
             [ColumnName(@"MassAirFlow")]
             public float MassAirFlow { get; set; }
 
-            [LoadColumn(17)]
+            [LoadColumn(5)]
+            [ColumnName(@"IntakeAirTemperature")]
+            public float IntakeAirTemperature { get; set; }
+
+            [LoadColumn(8)]
             [ColumnName(@"ThrottlePosition")]
             public float ThrottlePosition { get; set; }
         }
@@ -63,26 +55,20 @@ namespace FuelWise_IA
 
         public class ModelOutput
         {
-            [ColumnName(@"Speed")]
-            public float Speed { get; set; }
-
-            [ColumnName(@"Altitude")]
-            public float Altitude { get; set; }
-
-            [ColumnName(@"CoolantTemperature")]
-            public float CoolantTemperature { get; set; }
+            [ColumnName(@"EngineLoad")]
+            public float EngineLoad { get; set; }
 
             [ColumnName(@"RPM")]
             public float RPM { get; set; }
 
-            [ColumnName(@"IntakeAirTemperature")]
-            public float IntakeAirTemperature { get; set; }
-
-            [ColumnName(@"EngineLoad")]
-            public float EngineLoad { get; set; }
+            [ColumnName(@"IntakeManifoldPressure")]
+            public float IntakeManifoldPressure { get; set; }
 
             [ColumnName(@"MassAirFlow")]
             public float MassAirFlow { get; set; }
+
+            [ColumnName(@"IntakeAirTemperature")]
+            public float IntakeAirTemperature { get; set; }
 
             [ColumnName(@"ThrottlePosition")]
             public float ThrottlePosition { get; set; }
@@ -96,7 +82,9 @@ namespace FuelWise_IA
 
         #endregion model output class
 
-        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine().GetAwaiter().GetResult(), true);
+        //private static string MLNetModelPath = Path.GetFullPath("MassAirFlow.mlnet");
+
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new(() => CreatePredictEngine().GetAwaiter().GetResult(), true);
 
         private static async Task<PredictionEngine<ModelInput, ModelOutput>> CreatePredictEngine()
         {

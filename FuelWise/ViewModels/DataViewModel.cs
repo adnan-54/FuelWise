@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FuelWise.BluetoothConnection;
@@ -30,35 +31,43 @@ public partial class DataViewModel : ObservableObject
 
         try
         {
-            var speed = await dataPuller.PullDataAsync<VehicleSpeedData>();
-            var coolantData = await dataPuller.PullDataAsync<EngineCoolantTemperatureData>();
-            var rpmData = await dataPuller.PullDataAsync<RpmData>();
-            var intakeAirTempData = await dataPuller.PullDataAsync<IntakeAirTemperatureData>();
-            var engineLoadData = await dataPuller.PullDataAsync<EngineLoadData>();
-            var throttlePositionData = await dataPuller.PullDataAsync<ThrottlePositionData>();
-            var mapData = await dataPuller.PullDataAsync<IntakeManifoldPressureData>();
-
-            var sampleData = new MassAirFlow.ModelInput()
-            {
-                Speed = speed.ToMeterPerSecond(),
-                Altitude = 500F,
-                CoolantTemperature = coolantData.Value,
-                RPM = rpmData.Value,
-                IntakeAirTemperature = intakeAirTempData.Value,
-                EngineLoad = engineLoadData.Value,
-                ThrottlePosition = throttlePositionData.Value,
-            };
-
-            var result = MassAirFlow.Predict(sampleData);
+            //var speed = await dataPuller.PullDataAsync<VehicleSpeedData>();
+            //var coolantData = await dataPuller.PullDataAsync<EngineCoolantTemperatureData>();
 
             //volumetric efficiency
             //2.82/(873*1.07*(1.6/120))
             //maf/(rpm*density of air*(displace/120))
 
-            var imap = rpmData.Value * mapData.Value / intakeAirTempData.ToKelvin() / 2;
-            var gramsOfAir = imap * 5.13806818;
+            var engineLoadData = await dataPuller.PullDataAsync<EngineLoadData>();
+            var rpmData = await dataPuller.PullDataAsync<RpmData>();
+            var mapData = await dataPuller.PullDataAsync<IntakeManifoldPressureData>();
+            var intakeAirTempData = await dataPuller.PullDataAsync<IntakeAirTemperatureData>();
+            var throttlePositionData = await dataPuller.PullDataAsync<ThrottlePositionData>();
 
-            Report = $"Calculated MAF: {gramsOfAir}g/s{Environment.NewLine}Predicted MAF: {result.Score}g/s";
+            MassAirFlow.ModelInput input = new()
+            {
+                EngineLoad = engineLoadData.Value,
+                RPM = rpmData.Value,
+                IntakeManifoldPressure = mapData.Value,
+                IntakeAirTemperature = intakeAirTempData.Value,
+                ThrottlePosition = throttlePositionData.Value
+            };
+
+            var result = MassAirFlow.Predict(input);
+            var estimatedMaf = result.Score;
+
+            var volumetricEfficiency = estimatedMaf / (rpmData.Value * 1.07 * (1.6 / 120));
+
+            var imap = rpmData.Value * mapData.Value / (intakeAirTempData.ToKelvin() / 2);
+            var maf = imap / 60 * volumetricEfficiency * 1.6 * 3.484484;
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"Estimated MAF: {estimatedMaf}");
+            sb.AppendLine($"Volumetric Efficiency: {volumetricEfficiency}");
+            sb.AppendLine($"IMAP: {imap}");
+            sb.AppendLine($"Calculated MAF: {maf}");
+
+            Report = sb.ToString();
         }
         catch (Exception ex)
         {

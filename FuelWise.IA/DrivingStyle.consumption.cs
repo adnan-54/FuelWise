@@ -5,6 +5,9 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Maui.Storage;
+
 namespace FuelWise_IA
 {
     public partial class DrivingStyle
@@ -12,13 +15,11 @@ namespace FuelWise_IA
         /// <summary>
         /// model input class for DrivingStyle.
         /// </summary>
+
         #region model input class
+
         public class ModelInput
         {
-            [LoadColumn(0)]
-            [ColumnName(@"AltitudeVariation")]
-            public float AltitudeVariation { get; set; }
-
             [LoadColumn(1)]
             [ColumnName(@"VehicleSpeedInstantaneous")]
             public float VehicleSpeedInstantaneous { get; set; }
@@ -26,18 +27,6 @@ namespace FuelWise_IA
             [LoadColumn(2)]
             [ColumnName(@"VehicleSpeedAverage")]
             public float VehicleSpeedAverage { get; set; }
-
-            [LoadColumn(3)]
-            [ColumnName(@"VehicleSpeedVariance")]
-            public float VehicleSpeedVariance { get; set; }
-
-            [LoadColumn(4)]
-            [ColumnName(@"VehicleSpeedVariation")]
-            public float VehicleSpeedVariation { get; set; }
-
-            [LoadColumn(5)]
-            [ColumnName(@"LongitudinalAcceleration")]
-            public float LongitudinalAcceleration { get; set; }
 
             [LoadColumn(6)]
             [ColumnName(@"EngineLoad")]
@@ -59,57 +48,26 @@ namespace FuelWise_IA
             [ColumnName(@"MassAirFlow")]
             public float MassAirFlow { get; set; }
 
-            [LoadColumn(11)]
-            [ColumnName(@"IntakeAirTemperature")]
-            public float IntakeAirTemperature { get; set; }
-
-            [LoadColumn(12)]
-            [ColumnName(@"VerticalAcceleration")]
-            public float VerticalAcceleration { get; set; }
-
-            [LoadColumn(13)]
-            [ColumnName(@"FuelConsumptionAverage")]
-            public float FuelConsumptionAverage { get; set; }
-
-            [LoadColumn(14)]
-            [ColumnName(@"RoadSurface")]
-            public float RoadSurface { get; set; }
-
-            [LoadColumn(15)]
-            [ColumnName(@"Traffic")]
-            public float Traffic { get; set; }
-
             [LoadColumn(16)]
             [ColumnName(@"DrivingStyle")]
             public float DrivingStyle { get; set; }
-
         }
 
-        #endregion
+        #endregion model input class
 
         /// <summary>
         /// model output class for DrivingStyle.
         /// </summary>
+
         #region model output class
+
         public class ModelOutput
         {
-            [ColumnName(@"AltitudeVariation")]
-            public float AltitudeVariation { get; set; }
-
             [ColumnName(@"VehicleSpeedInstantaneous")]
             public float VehicleSpeedInstantaneous { get; set; }
 
             [ColumnName(@"VehicleSpeedAverage")]
             public float VehicleSpeedAverage { get; set; }
-
-            [ColumnName(@"VehicleSpeedVariance")]
-            public float VehicleSpeedVariance { get; set; }
-
-            [ColumnName(@"VehicleSpeedVariation")]
-            public float VehicleSpeedVariation { get; set; }
-
-            [ColumnName(@"LongitudinalAcceleration")]
-            public float LongitudinalAcceleration { get; set; }
 
             [ColumnName(@"EngineLoad")]
             public float EngineLoad { get; set; }
@@ -126,21 +84,6 @@ namespace FuelWise_IA
             [ColumnName(@"MassAirFlow")]
             public float MassAirFlow { get; set; }
 
-            [ColumnName(@"IntakeAirTemperature")]
-            public float IntakeAirTemperature { get; set; }
-
-            [ColumnName(@"VerticalAcceleration")]
-            public float VerticalAcceleration { get; set; }
-
-            [ColumnName(@"FuelConsumptionAverage")]
-            public float FuelConsumptionAverage { get; set; }
-
-            [ColumnName(@"RoadSurface")]
-            public float RoadSurface { get; set; }
-
-            [ColumnName(@"Traffic")]
-            public float Traffic { get; set; }
-
             [ColumnName(@"DrivingStyle")]
             public uint DrivingStyle { get; set; }
 
@@ -152,20 +95,19 @@ namespace FuelWise_IA
 
             [ColumnName(@"Score")]
             public float[] Score { get; set; }
-
         }
 
-        #endregion
+        #endregion model output class
 
-        private static string MLNetModelPath = Path.GetFullPath("DrivingStyle.mlnet");
+        //private static string MLNetModelPath = Path.GetFullPath("DrivingStyle.mlnet");
 
-        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new(() => CreatePredictEngine().GetAwaiter().GetResult(), true);
 
-
-        private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
+        private static async Task<PredictionEngine<ModelInput, ModelOutput>> CreatePredictEngine()
         {
             var mlContext = new MLContext();
-            ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var _);
+            using var stream = await FileSystem.OpenAppPackageFileAsync("DrivingStyle.mlnet");
+            ITransformer mlModel = mlContext.Model.Load(stream, out var _);
             return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
         }
 

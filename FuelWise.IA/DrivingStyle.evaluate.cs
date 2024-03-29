@@ -41,13 +41,13 @@ namespace FuelWise_IA
 
             var featureImportanceMetrics =
                  permutationFeatureImportance
-                 .Select((kvp) => new { kvp.Key, kvp.Value.MacroAccuracy })
-                 .OrderByDescending(myFeatures => Math.Abs(myFeatures.MacroAccuracy.Mean));
+                 .Select((kvp) => new { kvp.Key, kvp.Value.MicroAccuracy })
+                 .OrderByDescending(myFeatures => Math.Abs(myFeatures.MicroAccuracy.Mean));
 
             var featurePFI = new List<Tuple<string, double>>();
             foreach (var feature in featureImportanceMetrics)
             {
-                var pfiValue = Math.Abs(feature.MacroAccuracy.Mean);
+                var pfiValue = Math.Abs(feature.MicroAccuracy.Mean);
                 featurePFI.Add(new Tuple<string, double>(feature.Key, pfiValue));
             }
 
