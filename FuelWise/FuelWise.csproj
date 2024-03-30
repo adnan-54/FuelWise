@@ -11,13 +11,11 @@
 
 		<ApplicationTitle>FuelWise</ApplicationTitle>
 
-		<ApplicationId>com.companyname.FuelWise</ApplicationId>
+		<ApplicationId>com.adnan54.FuelWise</ApplicationId>
 		<ApplicationIdGuid>d8e6d204-0c67-4c10-a321-1d45296e6180</ApplicationIdGuid>
 
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
-
-
 		
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
@@ -66,6 +64,6 @@
 	  <ProjectReference Include="..\FuelWise.IA\FuelWise.IA.csproj" />
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerExceptionFuelWiseHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerExceptionFuelWiseHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionFuelWiseHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

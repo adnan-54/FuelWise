@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers.LightGbm;
+using Microsoft.ML.Trainers.FastTree;
 using Microsoft.ML.Trainers;
 using Microsoft.ML;
 
@@ -90,10 +90,10 @@ namespace FuelWise_IA
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"VehicleSpeedInstantaneous", @"VehicleSpeedInstantaneous"),new InputOutputColumnPair(@"VehicleSpeedAverage", @"VehicleSpeedAverage"),new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"EngineCoolantTemperature", @"EngineCoolantTemperature"),new InputOutputColumnPair(@"ManifoldAbsolutePressure", @"ManifoldAbsolutePressure"),new InputOutputColumnPair(@"EngineRPM", @"EngineRPM"),new InputOutputColumnPair(@"MassAirFlow", @"MassAirFlow")})      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"VehicleSpeedInstantaneous",@"VehicleSpeedAverage",@"EngineLoad",@"EngineCoolantTemperature",@"ManifoldAbsolutePressure",@"EngineRPM",@"MassAirFlow"}))      
+            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"VehicleSpeedInstantaneous", @"VehicleSpeedInstantaneous"),new InputOutputColumnPair(@"VehicleSpeedAverage", @"VehicleSpeedAverage"),new InputOutputColumnPair(@"VehicleSpeedVariation", @"VehicleSpeedVariation"),new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"EngineCoolantTemperature", @"EngineCoolantTemperature"),new InputOutputColumnPair(@"ManifoldAbsolutePressure", @"ManifoldAbsolutePressure"),new InputOutputColumnPair(@"EngineRPM", @"EngineRPM"),new InputOutputColumnPair(@"MassAirFlow", @"MassAirFlow"),new InputOutputColumnPair(@"IntakeAirTemperature", @"IntakeAirTemperature"),new InputOutputColumnPair(@"FuelConsumptionAverage", @"FuelConsumptionAverage"),new InputOutputColumnPair(@"RoadSurface", @"RoadSurface"),new InputOutputColumnPair(@"Traffic", @"Traffic")})      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"VehicleSpeedInstantaneous",@"VehicleSpeedAverage",@"VehicleSpeedVariation",@"EngineLoad",@"EngineCoolantTemperature",@"ManifoldAbsolutePressure",@"EngineRPM",@"MassAirFlow",@"IntakeAirTemperature",@"FuelConsumptionAverage",@"RoadSurface",@"Traffic"}))      
                                     .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"DrivingStyle",inputColumnName:@"DrivingStyle",addKeyValueAnnotationsAsText:false))      
-                                    .Append(mlContext.MulticlassClassification.Trainers.LightGbm(new LightGbmMulticlassTrainer.Options(){NumberOfLeaves=2549,NumberOfIterations=3826,MinimumExampleCountPerLeaf=26,LearningRate=0.0273594591057093,LabelColumnName=@"DrivingStyle",FeatureColumnName=@"Features",Booster=new GradientBooster.Options(){SubsampleFraction=0.00190518201228369,FeatureFraction=0.824713255699157,L1Regularization=3.11863706434116E-07,L2Regularization=0.0610973939009743},MaximumBinCountPerFeature=907}))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastTree(new FastTreeBinaryTrainer.Options(){NumberOfLeaves=298,MinimumExampleCountPerLeaf=11,NumberOfTrees=17,MaximumBinCountPerFeature=234,FeatureFraction=0.832445106311254,LearningRate=0.999999776672986,LabelColumnName=@"DrivingStyle",FeatureColumnName=@"Features",DiskTranspose=false}),labelColumnName: @"DrivingStyle"))      
                                     .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName:@"PredictedLabel",inputColumnName:@"PredictedLabel"));
 
             return pipeline;

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using FuelWise.BluetoothConnection;
+using FuelWise.IA;
 using FuelWise.NativeDialog;
 using FuelWise.OBDDataPuller;
 using FuelWise.OBDEncoder;
@@ -30,6 +31,8 @@ public static class MauiProgram
 #if ANDROID
         builder.Services.AddSingleton<IBluetoothConnector, Platforms.Android.AndroidBluetoothConnector>();
 #endif
+
+        builder.Services.AddMachineLearning();
 
         builder.Services.AddSingleton<IDialogManager, DefaultDialogManager>();
         builder.Services.AddSingleton<IOBDEncoder, DefaultOBDEncoder>();
