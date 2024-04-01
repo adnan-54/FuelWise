@@ -7,9 +7,8 @@
     Title="Dados"
     x:DataType="viewModels:DataViewModel">
 
-    <VerticalStackLayout>
-
-        <Label HorizontalOptions="CenterAndExpand">
+    <StackLayout Padding="12" Spacing="6">
+        <Label>
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{Binding Report}" />
@@ -17,6 +16,47 @@
             </Label.FormattedText>
         </Label>
 
-        <Button Command="{Binding RequestDataCommand}" Text="Atualizar" />
-    </VerticalStackLayout>
+        <Label
+            FontAttributes="Bold"
+            FontSize="400"
+            HorizontalOptions="Center"
+            Text="{Binding Gear}"
+            VerticalOptions="CenterAndExpand" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                FontSize="32"
+                HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Speed}" />
+                        <Span Text=" km/h" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label
+                Grid.Column="1"
+                FontSize="32"
+                HorizontalOptions="End">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Rpm}" />
+                        <Span Text=" rpm" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+
+        <Button
+            Command="{Binding RequestDataCommand}"
+            Text="Iniciar/Parar"
+            VerticalOptions="End" />
+    </StackLayout>
 </ContentPage>

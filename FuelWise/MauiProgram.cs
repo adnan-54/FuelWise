@@ -4,8 +4,9 @@ using FuelWise.IA;
 using FuelWise.NativeDialog;
 using FuelWise.OBDDataPuller;
 using FuelWise.OBDEncoder;
-using FuelWise.Services;
+using FuelWise.VehicleInformations;
 using FuelWise.ViewModels;
+using FuelWise.WiseCalculations;
 using Microsoft.Extensions.Logging;
 
 namespace FuelWise;
@@ -39,11 +40,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<IDataPuller, DefaultDataPuller>();
         builder.Services.AddSingleton<IDataFactory, DefaultDataFactory>();
         builder.Services.AddSingleton<IRequestProcessor, DefaultRequestProcessor>();
-
-        builder.Services.AddSingleton<IConsumptionCalculator, ConsumptionCalculator>();
-        builder.Services.AddSingleton<IVehicleProvider, VehicleProvider>();
-        builder.Services.AddSingleton<IGearController, GearController>();
-        builder.Services.AddSingleton<IEfficiencyCalculator, EfficiencyCalculator>();
+        builder.Services.AddSingleton<IVehicleProvider, DefaultVehicleProvider>();
+        builder.Services.AddSingleton<IVehicleRepository, DefaultVehicleRepository>();
+        builder.Services.AddSingleton<IWiseCalculations, DefaultWiseCalculations>();
 
         builder.Services.AddTransient<MainPage>();
 

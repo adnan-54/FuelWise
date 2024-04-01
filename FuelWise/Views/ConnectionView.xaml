@@ -52,7 +52,7 @@
                     Text="Verifique sua conexão bluetooth e tente novamente" />
             </VerticalStackLayout>
 
-            <Button Command="{Binding SearchDevicesCommand}" Text="Buscar Dispositivos" />
+            <Button Command="{Binding SearchDevicesCommand}" Text="Tentar Novamente" />
         </StackLayout>
 
         <!--  Connecting  -->
@@ -122,7 +122,7 @@
                     Text="Tente novamente" />
             </VerticalStackLayout>
 
-            <Button Command="{Binding SearchDevicesCommand}" Text="Buscar Dispositivos" />
+            <Button Command="{Binding SearchDevicesCommand}" Text="Tentar Novamente" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

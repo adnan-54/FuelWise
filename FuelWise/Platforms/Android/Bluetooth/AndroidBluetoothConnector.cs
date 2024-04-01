@@ -30,14 +30,14 @@ public class AndroidBluetoothConnector : IBluetoothConnector
         get => connectedDevice;
         private set
         {
+            connectedDevice = (AndroidBluetoothDevice?)value;
+
+            DeviceChanged?.Invoke(this, EventArgs.Empty);
+
             if (value is null)
                 DeviceDisconnected?.Invoke(this, EventArgs.Empty);
             else
                 DeviceConnected?.Invoke(this, EventArgs.Empty);
-
-            connectedDevice = (AndroidBluetoothDevice?)value;
-
-            DeviceChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

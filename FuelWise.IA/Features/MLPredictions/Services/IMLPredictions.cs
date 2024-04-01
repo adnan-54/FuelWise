@@ -71,6 +71,9 @@ internal class MLPredictions : IMLPredictions
                                             RoadSurfaceCondition roadSurface = RoadSurfaceCondition.Smooth,
                                             TrafficCondition trafficCondition = TrafficCondition.LowCongestion)
     {
+        if (rpm == 0)
+            return DrivingStyle.Even;
+
         //converting from km/L to L/100km
         fuelConsumptionAverage = 100 / fuelConsumptionAverage;
 
@@ -102,6 +105,9 @@ internal class MLPredictions : IMLPredictions
                                          RoadSurfaceCondition roadSurface = RoadSurfaceCondition.Smooth,
                                          TrafficCondition trafficCondition = TrafficCondition.LowCongestion)
     {
+        if (rpm == 0)
+            return 0;
+
         var input = new FuelConsumptionModel.ModelInput
         {
             VehicleSpeedInstantaneous = speed,
@@ -126,6 +132,9 @@ internal class MLPredictions : IMLPredictions
 
     public double PredictMAF(float engineLoad, float rpm, float intakePressure, float intakeAirTemperature, float throttlePosition)
     {
+        if (rpm == 0)
+            return 0;
+
         var input = new MassAirFlowModel.ModelInput
         {
             EngineLoad = engineLoad,
