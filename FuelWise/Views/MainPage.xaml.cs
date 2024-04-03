@@ -9,5 +9,9 @@ public partial class MainPage : TabbedPage
         InitializeComponent();
         BindingContext = mainPageViewModel;
     }
-}
 
+    public void NavigateToDataView()
+    {
+        CurrentPage = Children.Last();
+    }
+}

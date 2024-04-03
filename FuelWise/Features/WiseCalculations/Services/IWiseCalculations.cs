@@ -4,7 +4,7 @@ namespace FuelWise.WiseCalculations;
 
 public interface IWiseCalculations
 {
-    int GetCurrentGear(double rpm, int speed);
+    int GetCurrentGear(double rpm, double speed);
 
     double GetVolumetricEfficiency(double rpm, double maf);
 
@@ -22,7 +22,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         this.vehicleProvider = vehicleProvider;
     }
 
-    public int GetCurrentGear(double rpm, int speed)
+    public int GetCurrentGear(double rpm, double speed)
     {
         if (rpm == 0 || speed == 0)
             return 0;
@@ -42,11 +42,11 @@ internal class DefaultWiseCalculations : IWiseCalculations
         var lowestDifference = differences.Min();
         var lowestDifferenceIndex = differences.IndexOf(lowestDifference);
 
-        var possibleSpeed = possibleSpeeds.ElementAt(lowestDifferenceIndex);
-        var differencePercentage = GetSpeedDifference(speed, possibleSpeed);
+        //var possibleSpeed = possibleSpeeds.ElementAt(lowestDifferenceIndex);
+        //var differencePercentage = GetSpeedDifference(speed, possibleSpeed);
 
-        if (differencePercentage > 20)
-            return 0;
+        //if (differencePercentage > 20)
+        //    return 0;
 
         return lowestDifferenceIndex + 1;
     }

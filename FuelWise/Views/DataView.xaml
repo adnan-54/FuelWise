@@ -3,60 +3,557 @@
     x:Class="FuelWise.Views.DataView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
     Title="Dados"
     x:DataType="viewModels:DataViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:EnumToBoolConverter x:Key="EnumToBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <StackLayout Padding="12" Spacing="6">
-        <Label>
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="{Binding Report}" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+    <Grid Padding="12,0">
 
-        <Label
-            FontAttributes="Bold"
-            FontSize="400"
-            HorizontalOptions="Center"
-            Text="{Binding Gear}"
-            VerticalOptions="CenterAndExpand" />
+        <!--  NotConnected  -->
+        <StackLayout
+            IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:DataState.NotConnected}}"
+            Spacing="12"
+            VerticalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Label
+                    FontSize="Body"
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Nenhum dispositivo conectado" />
 
+                <Label
+                    Padding="0,12"
+                    HorizontalTextAlignment="Center"
+                    Opacity="0.7"
+                    Text="Conecte-se a algum dispositivo OBD para continuar" />
+            </StackLayout>
+
+            <Button Command="{Binding NavigateToConnectionCommand}" Text="Conectar-se a um dispositivo" />
+        </StackLayout>
+
+        <!--  VehicleMoving  -->
+        <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:DataState.VehicleMoving}}" VerticalOptions="CenterAndExpand">
             <Label
-                Grid.Column="0"
-                FontSize="32"
-                HorizontalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding Speed}" />
-                        <Span Text=" km/h" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                FontSize="Body"
+                HorizontalTextAlignment="Center"
+                Opacity="0.7"
+                Text="Conteudo indisponível com o veículo em movimento" />
+        </StackLayout>
 
-            <Label
-                Grid.Column="1"
-                FontSize="32"
-                HorizontalOptions="End">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding Rpm}" />
-                        <Span Text=" rpm" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </Grid>
+        <!--  ViewData  -->
+        <ScrollView IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:DataState.ViewData}}">
+            <StackLayout>
+                <!--  Speed  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-        <Button
-            Command="{Binding RequestDataCommand}"
-            Text="Iniciar/Parar"
-            VerticalOptions="End" />
-    </StackLayout>
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Velocidade" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Speed}" />
+                                <Span Text="km/h" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  AverageSpeed  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Velocidade média" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AverageSpeed}" />
+                                <Span Text="km/h" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  SpeedVariation  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Variação de velocidade" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding SpeedVariation}" />
+                                <Span Text="km/h" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  RPM  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="RPM" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Rpm}" />
+                                <Span Text="rpm" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  CoolantTemperature  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Temperatura Arrefecimento" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding CoolantTemperature}" />
+                                <Span Text="°C" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  EngineLoad  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Carga do Motor" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding EngineLoad}" />
+                                <Span Text="%" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  IntakeAirTemp  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Temperatura Admissão" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding IntakeAirTemperature}" />
+                                <Span Text="°C" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  IntakePressure  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Pressão Admissão" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding IntakePressure}" />
+                                <Span Text="kPa" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  ThrottlePosition  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Posição Acelerador" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ThrottlePosition}" />
+                                <Span Text="%" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  Gear  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Marcha Atual" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Gear}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  InstantFuelComsumption  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Consumo Instantâneo" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding InstantFuelComsumption}" />
+                                <Span Text="km/L" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  AverageFuelComsumption  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Consumo Médio" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AverageFuelComsumption}" />
+                                <Span Text="km/L" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  MassAirFlow  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Massa de Ar" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding MassAirFlow}" />
+                                <Span Text="g/s" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  VolumetricEfficiency  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Eficiência Volumétrica" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding VolumetricEfficiency}" />
+                                <Span Text="%" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  DrivingStyle  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Estilo de Condução" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DrivingStyle}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  DrivingEfficiency  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Eficiência de Condução" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding DrivingEfficiency}" />
+                                <Span Text="%" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  VehicleMoving  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Em Movimento" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding VehicleMoving}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  EngineRunning  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Em Funcionamento" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding EngineRunning}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+
+                <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="2"
+                    Opacity="0.2" />
+
+                <!--  ReportGenerationTime  -->
+                <Grid Padding="0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Body"
+                        Text="Latência" />
+
+                    <Label Grid.Column="1" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ReportGenerationTime}" />
+                                <Span Text="ms" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

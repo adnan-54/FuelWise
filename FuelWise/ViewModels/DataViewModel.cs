@@ -1,118 +1,158 @@
-﻿using System.Diagnostics;
-using System.Text;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FuelWise.BluetoothConnection;
-using FuelWise.IA;
-using FuelWise.OBDDataPuller;
-using FuelWise.WiseCalculations;
-using FuelWise_IA;
+using FuelWise.Reporting;
+using FuelWise.Views;
 
 namespace FuelWise.ViewModels;
 
+public enum DataState
+{
+    NotConnected,
+    ViewData,
+    VehicleMoving,
+}
+
 public partial class DataViewModel : ObservableObject
 {
-    private readonly IBluetoothConnector bluetoothConnector;
-    private readonly IDataPuller dataPuller;
-    private readonly IWiseCalculations wiseCalculations;
-    private readonly IMLPredictions mlPredictions;
-    private bool isGeneratingReport;
+    [ObservableProperty]
+    private DataState currentState;
 
     [ObservableProperty]
-    private string? report;
+    private string? speed;
 
     [ObservableProperty]
-    private string? gear = "0";
+    private string? averageSpeed;
 
     [ObservableProperty]
-    private string? rpm = "0000";
+    private string? speedVariation;
 
     [ObservableProperty]
-    private string? speed = "000";
+    private string? rpm;
 
-    public DataViewModel(IBluetoothConnector bluetoothConnector, IDataPuller dataPuller, IWiseCalculations wiseCalculations, IMLPredictions mlPredictions)
+    [ObservableProperty]
+    private string? coolantTemperature;
+
+    [ObservableProperty]
+    private string? engineLoad;
+
+    [ObservableProperty]
+    private string? intakeAirTemperature;
+
+    [ObservableProperty]
+    private string? intakePressure;
+
+    [ObservableProperty]
+    private string? throttlePosition;
+
+    [ObservableProperty]
+    private string? gear;
+
+    [ObservableProperty]
+    private string? instantFuelComsumption;
+
+    [ObservableProperty]
+    private string? averageFuelComsumption;
+
+    [ObservableProperty]
+    private string? massAirFlow;
+
+    [ObservableProperty]
+    private string? volumetricEfficiency;
+
+    [ObservableProperty]
+    private string? drivingStyle;
+
+    [ObservableProperty]
+    private string? drivingEfficiency;
+
+    [ObservableProperty]
+    private string? vehicleMoving;
+
+    [ObservableProperty]
+    private string? engineRunning;
+
+    [ObservableProperty]
+    private string? reportGenerationTime;
+
+    private Report? lastReport;
+
+    public DataViewModel(IBluetoothConnector bluetoothConnector, IReportGenerator reportGenerator)
     {
-        this.bluetoothConnector = bluetoothConnector;
-        this.dataPuller = dataPuller;
-        this.wiseCalculations = wiseCalculations;
-        this.mlPredictions = mlPredictions;
+        bluetoothConnector.DeviceConnected += OnDeviceConnected;
+        bluetoothConnector.DeviceDisconnected += OnDeviceDisconnected;
+        reportGenerator.ReportGenerated += OnReportGenerated;
+
+        CurrentState = DataState.NotConnected;
     }
 
-    private IDispatcherTimer? timer;
+    private void OnReportGenerated(object sender, ReportGeneratedEventArgs e)
+    {
+        var report = e.Report;
+
+        if (CurrentState == DataState.NotConnected)
+            return;
+
+        if (report.IsVehicleMoving)
+        {
+            //CurrentState = DataState.VehicleMoving;
+            //return;
+        }
+        else if (CurrentState != DataState.ViewData)
+            CurrentState = DataState.ViewData;
+
+        ReportGenerationTime = (DateTime.Now - (lastReport is null ? DateTime.Now : lastReport.CreatedAt)).TotalMilliseconds.ToString("0");
+
+        Speed = report.Speed.ToString("0");
+        AverageSpeed = report.AverageSpeed.ToString("0");
+        SpeedVariation = report.SpeedVariation.ToString("0");
+
+        Rpm = report.Rpm.ToString("0");
+
+        CoolantTemperature = report.CoolantTemperature.ToString("0");
+
+        EngineLoad = report.EngineLoad.ToString("0");
+
+        IntakeAirTemperature = report.IntakeAirTemperature.ToString("0");
+
+        IntakePressure = report.IntakePressure.ToString("0.00");
+
+        ThrottlePosition = report.ThrottlePosition.ToString("0");
+
+        Gear = report.Gear == 0 ? "N" : report.Gear.ToString("0");
+
+        InstantFuelComsumption = report.InstantFuelConsumption.ToString("0.00");
+        AverageFuelComsumption = report.AverageFuelConsumption.ToString("0.00");
+
+        MassAirFlow = report.MassAirFlow.ToString("0.00");
+
+        VolumetricEfficiency = report.VolumetricEfficiency.ToString("0");
+
+        DrivingStyle = report.DrivingStyle == IA.DrivingStyle.Even ? "Contínuo" : "Agressivo";
+
+        DrivingEfficiency = report.DrivingEfficiency.ToString("0");
+
+        VehicleMoving = report.IsVehicleMoving ? "Sim" : "Não";
+
+        EngineRunning = report.IsEngineRunning ? "Sim" : "Não";
+
+        lastReport = report;
+    }
 
     [RelayCommand]
-    public async Task RequestData()
+    public void NavigateToConnection()
     {
-        if (!bluetoothConnector.IsConnected)
-            return;
-
-        if (timer is null)
-        {
-            timer = Application.Current?.Dispatcher.CreateTimer();
-            timer.Interval = TimeSpan.FromSeconds(1 / 4);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-        else
-        {
-            timer.Stop();
-            timer = null;
-        }
-
-        try
-        {
-            var engineLoadData = await dataPuller.PullDataAsync<EngineLoadData>();
-            var rpmData = await dataPuller.PullDataAsync<RpmData>();
-            var mapData = await dataPuller.PullDataAsync<IntakeManifoldPressureData>();
-            var intakeAirTempData = await dataPuller.PullDataAsync<IntakeAirTemperatureData>();
-            var throttlePositionData = await dataPuller.PullDataAsync<ThrottlePositionData>();
-            var speedData = await dataPuller.PullDataAsync<VehicleSpeedData>();
-
-            var estimatedMaf = mlPredictions.PredictMAF(engineLoadData.Value, rpmData.Value, mapData.Value, intakeAirTempData.Value, throttlePositionData.Value);
-
-            var volumetricEfficiency = wiseCalculations.GetVolumetricEfficiency(rpmData.Value, estimatedMaf);
-
-            var imap = wiseCalculations.GetCalculatedImap(rpmData.Value, mapData.Value, intakeAirTempData.Value);
-            var maf = wiseCalculations.GetCalculatedMaf(imap, volumetricEfficiency);
-            var gear = wiseCalculations.GetCurrentGear(rpmData.Value, speedData.Value);
-
-            var sb = new StringBuilder();
-            sb.AppendLine($"Estimated MAF: {estimatedMaf}");
-            sb.AppendLine($"Volumetric Efficiency: {volumetricEfficiency}");
-            sb.AppendLine($"IMAP: {imap}");
-            sb.AppendLine($"Calculated MAF: {maf}");
-            sb.AppendLine($"Gear: {gear}");
-
-            Report = sb.ToString();
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex);
-        }
+        if (Application.Current is not null && Application.Current.MainPage is MainPage mainPage)
+            mainPage.NavigateToDataView();
     }
 
-    private bool isPullingData = false;
-
-    private async void Timer_Tick(object? sender, EventArgs e)
+    private void OnDeviceConnected(object? sender, EventArgs e)
     {
-        if (isPullingData)
-            return;
+        CurrentState = DataState.ViewData;
+    }
 
-        try
-        {
-            isPullingData = true;
-
-            var rpmData = await dataPuller.PullDataAsync<RpmData>();
-            var speedData = await dataPuller.PullDataAsync<VehicleSpeedData>();
-
-            Speed = speedData.Value.ToString();
-            Rpm = rpmData.Value.ToString();
-            Gear = wiseCalculations.GetCurrentGear(rpmData.Value, speedData.Value).ToString();
-        }
-        catch { }
-        finally
-        {
-            isPullingData = false;
-        }
+    private void OnDeviceDisconnected(object? sender, EventArgs e)
+    {
+        CurrentState = DataState.NotConnected;
     }
 }
