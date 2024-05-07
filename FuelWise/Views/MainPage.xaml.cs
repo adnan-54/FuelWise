@@ -44,11 +44,13 @@ public partial class MainPage : TabbedPage
     {
         NavigateToHome();
         Application.Current!.MainPage = this;
+        DeviceDisplay.Current.KeepScreenOn = true;
     }
 
     private void OnDeviceDisconnected(object? sender, EventArgs e)
     {
         NavigateToConnection();
         Application.Current!.MainPage = Children.Last();
+        DeviceDisplay.Current.KeepScreenOn = false;
     }
 }
