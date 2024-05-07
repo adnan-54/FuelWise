@@ -143,7 +143,7 @@ public partial class DataViewModel : ObservableObject
     public void NavigateToConnection()
     {
         if (Application.Current is not null && Application.Current.MainPage is MainPage mainPage)
-            mainPage.NavigateToDataView();
+            mainPage.NavigateToConnection();
     }
 
     private void OnDeviceConnected(object? sender, EventArgs e)

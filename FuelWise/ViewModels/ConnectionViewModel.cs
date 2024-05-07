@@ -62,10 +62,10 @@ public partial class ConnectionViewModel : ObservableObject
             CurrentState = ConnectionState.Searching;
 
             SelectedDevice = null;
-            
+
             var devices = await btConnector.GetAvailableDevices();
             AvailableDevices = new(devices);
-            
+
             await Task.Delay(TimeSpan.FromSeconds(2));
 
             if (AvailableDevices.Any())
@@ -128,7 +128,6 @@ public partial class ConnectionViewModel : ObservableObject
             CurrentState = ConnectionState.Disconnected;
 
             await dialogManager.ShowSuccess("Dispositivo desconectado com sucesso");
-
         }
         catch (Exception ex)
         {
