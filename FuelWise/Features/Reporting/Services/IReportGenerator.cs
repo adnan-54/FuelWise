@@ -167,12 +167,12 @@ internal class DefaultReportGenerator : IReportGenerator
 
             MassAirFlow = 0,
 
-            VolumetricEfficiency = 64,
+            VolumetricEfficiency = 0,
 
             DrivingStyle = DrivingStyle.Even,
 
-            DrivingEfficiency = 100,
-            AverageDrivingEfficiency = 100
+            DrivingEfficiency = 0,
+            AverageDrivingEfficiency = 0
         };
 
         return Task.FromResult(report);
