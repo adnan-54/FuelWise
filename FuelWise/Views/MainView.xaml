@@ -4,19 +4,69 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
     Title="Início"
     x:DataType="viewModels:MainViewViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout Padding="12" Spacing="6">
         <!--  CurrentVehicle  -->
         <Label FontSize="Subtitle" Text="{Binding VehicleName}" />
+
+        <!--  Overheating Warning  -->
+        <Label
+            FontAttributes="Bold"
+            FontSize="30"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding IsOverheating}"
+            Text="Temperatura do motor elevada"
+            TextColor="Red"
+            TextTransform="Uppercase"
+            VerticalOptions="CenterAndExpand" />
+
+        <!--  CalibrationProgress  -->
+        <VerticalStackLayout
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding IsCalibrating}"
+            Spacing="12"
+            VerticalOptions="CenterAndExpand">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontAttributes="Bold" Text="{Binding CalibrationProgress, StringFormat='{0:F0}'}" />
+                        <Span FontAttributes="Bold" Text="%" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ProgressBar
+                Margin="24,0"
+                HorizontalOptions="FillAndExpand"
+                Progress="{Binding CalibrationProgress, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/100'}" />
+
+            <Label
+                FontSize="Body"
+                HorizontalTextAlignment="Center"
+                Text="Realizando Calibração" />
+        </VerticalStackLayout>
 
         <!--  EfficiencyGauge  -->
         <progressBar:SfCircularProgressBar
             BackgroundColor="Transparent"
             EndAngle="410"
             HorizontalOptions="CenterAndExpand"
+            IsVisible="{Binding IsCalibrating, Converter={StaticResource InvertedBoolConverter}}"
             Maximum="100"
             Minimum="0"
             Progress="{Binding AverageEfficiency}"
@@ -33,7 +83,10 @@
             </progressBar:SfCircularProgressBar.GradientStops>
 
             <progressBar:SfCircularProgressBar.Content>
-                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Grid
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="200">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -47,12 +100,14 @@
 
                     <Label
                         Grid.Row="1"
+                        FontAttributes="Bold"
                         FontSize="40"
+                        HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding AverageEfficiency}" />
-                                <Span Text="%" />
+                                <Span FontAttributes="Bold" Text="{Binding AverageEfficiency}" />
+                                <Span FontAttributes="Bold" Text="%" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -69,11 +124,11 @@
 
             <StackLayout Grid.Column="0">
                 <Label>Velocidade</Label>
-                <Label FontSize="Large">
+                <Label FontAttributes="Bold" FontSize="Large">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Speed}" />
-                            <Span Text="km/h" />
+                            <Span FontAttributes="Bold" Text="{Binding Speed}" />
+                            <Span FontAttributes="Bold" Text="km/h" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -81,11 +136,14 @@
 
             <StackLayout Grid.Column="1">
                 <Label HorizontalTextAlignment="End">Consumo Médio</Label>
-                <Label FontSize="Large" HorizontalTextAlignment="End">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalTextAlignment="End">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding AverageComsumption, StringFormat='{0:F2}'}" />
-                            <Span Text="km/L" />
+                            <Span FontAttributes="Bold" Text="{Binding AverageComsumption, StringFormat='{0:F2}'}" />
+                            <Span FontAttributes="Bold" Text="km/L" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

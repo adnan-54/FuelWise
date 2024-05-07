@@ -6,6 +6,8 @@ namespace FuelWise.ViewModels;
 
 public partial class MainViewViewModel : ObservableObject
 {
+    private readonly IReportGenerator reportGenerator;
+
     [ObservableProperty]
     private string? vehicleName;
 
@@ -18,8 +20,19 @@ public partial class MainViewViewModel : ObservableObject
     [ObservableProperty]
     private int averageEfficiency;
 
+    [ObservableProperty]
+    private bool isCalibrating;
+
+    [ObservableProperty]
+    private double calibrationProgress;
+
+    [ObservableProperty]
+    private bool isOverheating;
+
     public MainViewViewModel(IReportGenerator reportGenerator, IVehicleProvider vehicleProvider)
     {
+        this.reportGenerator = reportGenerator;
+
         vehicleProvider.VehicleChanged += OnVehicleChanged;
         reportGenerator.ReportGenerated += OnReportGenerated;
     }
@@ -41,5 +54,11 @@ public partial class MainViewViewModel : ObservableObject
         Speed = Convert.ToInt32(e.Report.Speed);
         AverageComsumption = e.Report.AverageFuelConsumption;
         AverageEfficiency = Convert.ToInt32(e.Report.AverageDrivingEfficiency);
+
+        IsOverheating = e.Report.CoolantTemperature > 105;
+
+        IsCalibrating = reportGenerator.Reports.Count < 100;
+        if (IsCalibrating)
+            CalibrationProgress = reportGenerator.Reports.Count;
     }
 }

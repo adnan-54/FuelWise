@@ -64,7 +64,7 @@ internal class DefaultReportGenerator : IReportGenerator
         var timingAdvanceData = await dataPuller.PullDataAsync<TimingAdvanceData>();
 
         var speed = speedData.Value;
-        var averageSpeed = lastMinuteReports.Any() ? lastMinuteReports.Average(r => r.Speed) : 0;
+        var averageSpeed = lastMinuteReports.Average(r => r.Speed);
         var speedVariation = speedData.Value - lastReport.Speed;
         var rpm = rpmData.Value;
         var coolantTemperature = coolantData.Value;
@@ -102,11 +102,11 @@ internal class DefaultReportGenerator : IReportGenerator
             fuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption) / 2;
         }
 
-        var averageFuelComsumption = lastMinuteReports.Any() ? lastMinuteReports.Average(r => r.FuelConsumption) : 0;
+        var averageFuelComsumption = lastMinuteReports.Average(r => r.FuelConsumption);
 
         var predictedDrivingStyle = mlPredictions.PredictDrivingStyle(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, (float)averageFuelComsumption);
         var drivingEfficiency = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
-        var averageDrivingEfficiency = lastSecondsReports.Any() ? lastSecondsReports.Average(r => r.DrivingEfficiency) : 0;
+        var averageDrivingEfficiency = lastSecondsReports.Average(r => r.DrivingEfficiency);
 
         var createdAt = DateTime.Now;
 
