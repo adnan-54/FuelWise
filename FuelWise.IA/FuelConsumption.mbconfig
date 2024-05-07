@@ -8,19 +8,11 @@
     "KeepPunctuations": false,
     "AllowQuoting": false,
     "Type": "TabularFile",
-    "FilePath": "D:\\Users\\adnan\\Desktop\\DrivingStyle1.csv",
+    "FilePath": "D:\\Users\\adnan\\source\\TG2\\FuelWise.IA\\Datasets\\DrivingStyle1.csv",
     "Delimiter": ";",
     "DecimalMarker": ",",
     "HasHeader": true,
     "ColumnProperties": [
-      {
-        "ColumnName": "AltitudeVariation",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
       {
         "ColumnName": "VehicleSpeedInstantaneous",
         "ColumnPurpose": "Feature",
@@ -38,23 +30,7 @@
         "Version": 5
       },
       {
-        "ColumnName": "VehicleSpeedVariance",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
         "ColumnName": "VehicleSpeedVariation",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
-        "ColumnName": "LongitudinalAcceleration",
         "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
@@ -110,14 +86,6 @@
         "Version": 5
       },
       {
-        "ColumnName": "VerticalAcceleration",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 5
-      },
-      {
         "ColumnName": "FuelConsumptionAverage",
         "ColumnPurpose": "Label",
         "ColumnDataFormat": "Single",
@@ -127,7 +95,7 @@
       },
       {
         "ColumnName": "RoadSurface",
-        "ColumnPurpose": "Feature",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": true,
         "Type": "Column",
@@ -135,7 +103,7 @@
       },
       {
         "ColumnName": "Traffic",
-        "ColumnPurpose": "Feature",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": true,
         "Type": "Column",
@@ -143,7 +111,7 @@
       },
       {
         "ColumnName": "DrivingStyle",
-        "ColumnPurpose": "Feature",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": true,
         "Type": "Column",
@@ -163,66 +131,54 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "LightGbmRegression",
-        "Score": 0.94043902850320471,
-        "RuntimeInSeconds": 41.653,
+        "Score": 0.91405421820592159,
+        "RuntimeInSeconds": 85.118,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e4",
           "e0": {
             "OutputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ]
           },
           "e1": {
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "OutputColumnName": "Features"
           },
           "e4": {
-            "NumberOfLeaves": 2478,
-            "MinimumExampleCountPerLeaf": 21,
-            "LearningRate": 0.0481689399919347,
-            "NumberOfTrees": 1677,
-            "SubsampleFraction": 0.55886520615139845,
-            "MaximumBinCountPerFeature": 266,
-            "FeatureFraction": 0.94079148224937137,
-            "L1Regularization": 4.2649691130355668E-10,
+            "NumberOfLeaves": 5142,
+            "MinimumExampleCountPerLeaf": 20,
+            "LearningRate": 0.0029101717463398229,
+            "NumberOfTrees": 3601,
+            "SubsampleFraction": 0.30364316421028881,
+            "MaximumBinCountPerFeature": 119,
+            "FeatureFraction": 0.99999999,
+            "L1Regularization": 2E-10,
             "L2Regularization": 0.99999977667298645,
             "LabelColumnName": "FuelConsumptionAverage",
             "FeatureColumnName": "Features"
@@ -233,66 +189,54 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "LightGbmRegression",
-        "Score": 0.93125822059937291,
-        "RuntimeInSeconds": 22.205,
+        "Score": 0.91000483737398563,
+        "RuntimeInSeconds": 16.326,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e4",
           "e0": {
             "OutputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ]
           },
           "e1": {
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "OutputColumnName": "Features"
           },
           "e4": {
-            "NumberOfLeaves": 3222,
-            "MinimumExampleCountPerLeaf": 21,
-            "LearningRate": 0.2505974973724065,
-            "NumberOfTrees": 821,
-            "SubsampleFraction": 0.43822231909808179,
-            "MaximumBinCountPerFeature": 267,
-            "FeatureFraction": 0.93770196558258467,
-            "L1Regularization": 6.9697353676130364E-10,
+            "NumberOfLeaves": 3550,
+            "MinimumExampleCountPerLeaf": 20,
+            "LearningRate": 0.00856074632319987,
+            "NumberOfTrees": 776,
+            "SubsampleFraction": 0.22005759797737562,
+            "MaximumBinCountPerFeature": 229,
+            "FeatureFraction": 0.93354079066851869,
+            "L1Regularization": 2E-10,
             "L2Regularization": 0.99999977667298645,
             "LabelColumnName": "FuelConsumptionAverage",
             "FeatureColumnName": "Features"
@@ -303,137 +247,55 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "LightGbmRegression",
-        "Score": 0.93115350489867932,
-        "RuntimeInSeconds": 50.693,
+        "Score": 0.90125220953798413,
+        "RuntimeInSeconds": 20.213,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e4",
           "e0": {
             "OutputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ]
           },
           "e1": {
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "OutputColumnName": "Features"
           },
           "e4": {
-            "NumberOfLeaves": 6190,
+            "NumberOfLeaves": 222,
             "MinimumExampleCountPerLeaf": 25,
-            "LearningRate": 0.21638441525746932,
-            "NumberOfTrees": 2017,
-            "SubsampleFraction": 0.52852753498618477,
-            "MaximumBinCountPerFeature": 190,
-            "FeatureFraction": 0.86104636699175086,
-            "L1Regularization": 5.1716436662920863E-10,
-            "L2Regularization": 0.92634472087100794,
-            "LabelColumnName": "FuelConsumptionAverage",
-            "FeatureColumnName": "Features"
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "LightGbmRegression",
-        "Score": 0.92072984303320293,
-        "RuntimeInSeconds": 112.241,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e4",
-          "e0": {
-            "OutputColumnNames": [
-              "VehicleSpeedInstantaneous",
-              "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
-              "EngineLoad",
-              "EngineCoolantTemperature",
-              "ManifoldAbsolutePressure",
-              "EngineRPM",
-              "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
-            ],
-            "InputColumnNames": [
-              "VehicleSpeedInstantaneous",
-              "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
-              "EngineLoad",
-              "EngineCoolantTemperature",
-              "ManifoldAbsolutePressure",
-              "EngineRPM",
-              "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "VehicleSpeedInstantaneous",
-              "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
-              "EngineLoad",
-              "EngineCoolantTemperature",
-              "ManifoldAbsolutePressure",
-              "EngineRPM",
-              "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e4": {
-            "NumberOfLeaves": 8523,
-            "MinimumExampleCountPerLeaf": 22,
-            "LearningRate": 0.43984644059028083,
-            "NumberOfTrees": 4522,
-            "SubsampleFraction": 0.84275152545790022,
-            "MaximumBinCountPerFeature": 204,
-            "FeatureFraction": 0.90165963824198536,
-            "L1Regularization": 1.3921439322454153E-09,
-            "L2Regularization": 0.218930856610839,
+            "LearningRate": 0.40986205034430906,
+            "NumberOfTrees": 1609,
+            "SubsampleFraction": 0.99999977667298645,
+            "MaximumBinCountPerFeature": 243,
+            "FeatureFraction": 0.93533351157379774,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 0.99999977667298645,
             "LabelColumnName": "FuelConsumptionAverage",
             "FeatureColumnName": "Features"
           }
@@ -443,67 +305,113 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastTreeRegression",
-        "Score": 0.90903736799688983,
-        "RuntimeInSeconds": 2.781,
+        "Score": 0.88715704072035051,
+        "RuntimeInSeconds": 2.072,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ]
           },
           "e1": {
             "InputColumnNames": [
               "VehicleSpeedInstantaneous",
               "VehicleSpeedAverage",
-              "VehicleSpeedVariation",
               "EngineLoad",
               "EngineCoolantTemperature",
               "ManifoldAbsolutePressure",
               "EngineRPM",
               "MassAirFlow",
-              "IntakeAirTemperature",
-              "RoadSurface",
-              "Traffic",
-              "DrivingStyle"
+              "IntakeAirTemperature"
             ],
             "OutputColumnName": "Features"
           },
           "e2": {
-            "NumberOfLeaves": 10,
-            "MinimumExampleCountPerLeaf": 6,
-            "NumberOfTrees": 3080,
-            "MaximumBinCountPerFeature": 218,
-            "FeatureFraction": 0.44232496161253643,
-            "LearningRate": 0.283841750493549,
+            "NumberOfLeaves": 37,
+            "MinimumExampleCountPerLeaf": 66,
+            "NumberOfTrees": 182,
+            "MaximumBinCountPerFeature": 635,
+            "FeatureFraction": 0.96665784814940081,
+            "LearningRate": 0.41856018305942705,
             "LabelColumnName": "FuelConsumptionAverage",
             "FeatureColumnName": "Features",
             "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LightGbmRegression",
+        "Score": 0.87927315116579885,
+        "RuntimeInSeconds": 7.81,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e4",
+          "e0": {
+            "OutputColumnNames": [
+              "VehicleSpeedInstantaneous",
+              "VehicleSpeedAverage",
+              "EngineLoad",
+              "EngineCoolantTemperature",
+              "ManifoldAbsolutePressure",
+              "EngineRPM",
+              "MassAirFlow",
+              "IntakeAirTemperature"
+            ],
+            "InputColumnNames": [
+              "VehicleSpeedInstantaneous",
+              "VehicleSpeedAverage",
+              "EngineLoad",
+              "EngineCoolantTemperature",
+              "ManifoldAbsolutePressure",
+              "EngineRPM",
+              "MassAirFlow",
+              "IntakeAirTemperature"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "VehicleSpeedInstantaneous",
+              "VehicleSpeedAverage",
+              "EngineLoad",
+              "EngineCoolantTemperature",
+              "ManifoldAbsolutePressure",
+              "EngineRPM",
+              "MassAirFlow",
+              "IntakeAirTemperature"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 33,
+            "MinimumExampleCountPerLeaf": 24,
+            "LearningRate": 0.71758134045267408,
+            "NumberOfTrees": 1491,
+            "SubsampleFraction": 0.33247167310776132,
+            "MaximumBinCountPerFeature": 298,
+            "FeatureFraction": 0.99999999,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 0.99999977667298645,
+            "LabelColumnName": "FuelConsumptionAverage",
+            "FeatureColumnName": "Features"
           }
         }
       }
@@ -540,8 +448,8 @@
     ],
     "ValidationOption": {
       "Version": 0,
-      "Type": "TrainValidateSplitValidationOption",
-      "SplitRatio": 0.2
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
     }
   }
 }

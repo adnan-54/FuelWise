@@ -14,7 +14,7 @@ namespace FuelWise_IA
 {
     public partial class FuelConsumption
     {
-        public const string RetrainFilePath =  @"D:\Users\adnan\Desktop\DrivingStyle1.csv";
+        public const string RetrainFilePath =  @"D:\Users\adnan\source\TG2\FuelWise.IA\Datasets\DrivingStyle1.csv";
         public const char RetrainSeparatorChar = ';';
         public const bool RetrainHasHeader =  true;
         public const bool RetrainAllowQuoting =  false;
@@ -90,9 +90,9 @@ namespace FuelWise_IA
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"VehicleSpeedInstantaneous", @"VehicleSpeedInstantaneous"),new InputOutputColumnPair(@"VehicleSpeedAverage", @"VehicleSpeedAverage"),new InputOutputColumnPair(@"VehicleSpeedVariation", @"VehicleSpeedVariation"),new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"EngineCoolantTemperature", @"EngineCoolantTemperature"),new InputOutputColumnPair(@"ManifoldAbsolutePressure", @"ManifoldAbsolutePressure"),new InputOutputColumnPair(@"EngineRPM", @"EngineRPM"),new InputOutputColumnPair(@"MassAirFlow", @"MassAirFlow"),new InputOutputColumnPair(@"IntakeAirTemperature", @"IntakeAirTemperature"),new InputOutputColumnPair(@"RoadSurface", @"RoadSurface"),new InputOutputColumnPair(@"Traffic", @"Traffic"),new InputOutputColumnPair(@"DrivingStyle", @"DrivingStyle")})      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"VehicleSpeedInstantaneous",@"VehicleSpeedAverage",@"VehicleSpeedVariation",@"EngineLoad",@"EngineCoolantTemperature",@"ManifoldAbsolutePressure",@"EngineRPM",@"MassAirFlow",@"IntakeAirTemperature",@"RoadSurface",@"Traffic",@"DrivingStyle"}))      
-                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=2478,NumberOfIterations=1677,MinimumExampleCountPerLeaf=21,LearningRate=0.0481689399919347,LabelColumnName=@"FuelConsumptionAverage",FeatureColumnName=@"Features",Booster=new GradientBooster.Options(){SubsampleFraction=0.558865206151398,FeatureFraction=0.940791482249371,L1Regularization=4.26496911303557E-10,L2Regularization=0.999999776672986},MaximumBinCountPerFeature=266}));
+            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"VehicleSpeedInstantaneous", @"VehicleSpeedInstantaneous"),new InputOutputColumnPair(@"VehicleSpeedAverage", @"VehicleSpeedAverage"),new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"EngineCoolantTemperature", @"EngineCoolantTemperature"),new InputOutputColumnPair(@"ManifoldAbsolutePressure", @"ManifoldAbsolutePressure"),new InputOutputColumnPair(@"EngineRPM", @"EngineRPM"),new InputOutputColumnPair(@"MassAirFlow", @"MassAirFlow"),new InputOutputColumnPair(@"IntakeAirTemperature", @"IntakeAirTemperature")})      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"VehicleSpeedInstantaneous",@"VehicleSpeedAverage",@"EngineLoad",@"EngineCoolantTemperature",@"ManifoldAbsolutePressure",@"EngineRPM",@"MassAirFlow",@"IntakeAirTemperature"}))      
+                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=5142,NumberOfIterations=3601,MinimumExampleCountPerLeaf=20,LearningRate=0.00291017174633982,LabelColumnName=@"FuelConsumptionAverage",FeatureColumnName=@"Features",Booster=new GradientBooster.Options(){SubsampleFraction=0.303643164210289,FeatureFraction=0.99999999,L1Regularization=2E-10,L2Regularization=0.999999776672986},MaximumBinCountPerFeature=119}));
 
             return pipeline;
         }

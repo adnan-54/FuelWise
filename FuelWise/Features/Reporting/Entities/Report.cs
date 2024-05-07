@@ -24,7 +24,7 @@ public record Report()
 
     public required int Gear { get; init; }
 
-    public required double InstantFuelConsumption { get; init; }
+    public required double FuelConsumption { get; init; }
     public required double AverageFuelConsumption { get; init; }
 
     public required double MassAirFlow { get; init; }
@@ -34,6 +34,8 @@ public record Report()
     public required DrivingStyle DrivingStyle { get; init; }
 
     public required double DrivingEfficiency { get; init; }
+
+    public required double AverageDrivingEfficiency { get; init; }
 
     public bool IsVehicleMoving => Speed > 0;
     public bool IsEngineRunning => Rpm > 0;

@@ -3,11 +3,93 @@
     x:Class="FuelWise.Views.MainView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
     xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
     Title="Início"
     x:DataType="viewModels:MainViewViewModel">
 
     <StackLayout Padding="12" Spacing="6">
-        <!--  teste  -->
+        <!--  CurrentVehicle  -->
+        <Label FontSize="Subtitle" Text="{Binding VehicleName}" />
+
+        <!--  EfficiencyGauge  -->
+        <progressBar:SfCircularProgressBar
+            BackgroundColor="Transparent"
+            EndAngle="410"
+            HorizontalOptions="CenterAndExpand"
+            Maximum="100"
+            Minimum="0"
+            Progress="{Binding AverageEfficiency}"
+            ProgressThickness="30"
+            StartAngle="130"
+            TrackThickness="3"
+            VerticalOptions="CenterAndExpand">
+            <progressBar:SfCircularProgressBar.GradientStops>
+                <progressBar:ProgressGradientStop Color="Red" Value="0" />
+                <progressBar:ProgressGradientStop Color="OrangeRed" Value="25" />
+                <progressBar:ProgressGradientStop Color="Yellow" Value="50" />
+                <progressBar:ProgressGradientStop Color="GreenYellow" Value="75" />
+                <progressBar:ProgressGradientStop Color="LimeGreen" Value="100" />
+            </progressBar:SfCircularProgressBar.GradientStops>
+
+            <progressBar:SfCircularProgressBar.Content>
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Text="Eficiência" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontSize="40"
+                        HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AverageEfficiency}" />
+                                <Span Text="%" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+            </progressBar:SfCircularProgressBar.Content>
+        </progressBar:SfCircularProgressBar>
+
+        <!--  Footer  -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0">
+                <Label>Velocidade</Label>
+                <Label FontSize="Large">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Speed}" />
+                            <Span Text="km/h" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Grid.Column="1">
+                <Label HorizontalTextAlignment="End">Consumo Médio</Label>
+                <Label FontSize="Large" HorizontalTextAlignment="End">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding AverageComsumption, StringFormat='{0:F2}'}" />
+                            <Span Text="km/L" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </Grid>
     </StackLayout>
 </ContentPage>

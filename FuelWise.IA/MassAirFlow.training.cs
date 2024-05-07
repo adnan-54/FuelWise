@@ -14,7 +14,7 @@ namespace FuelWise_IA
 {
     public partial class MassAirFlow
     {
-        public const string RetrainFilePath =  @"D:\Users\adnan\Desktop\MAF3.csv";
+        public const string RetrainFilePath =  @"D:\Users\adnan\source\TG2\FuelWise.IA\Datasets\MAF3.csv";
         public const char RetrainSeparatorChar = ';';
         public const bool RetrainHasHeader =  true;
         public const bool RetrainAllowQuoting =  false;
@@ -90,9 +90,9 @@ namespace FuelWise_IA
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"RPM", @"RPM"),new InputOutputColumnPair(@"IntakeManifoldPressure", @"IntakeManifoldPressure"),new InputOutputColumnPair(@"IntakeAirTemperature", @"IntakeAirTemperature"),new InputOutputColumnPair(@"ThrottlePosition", @"ThrottlePosition")})      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"EngineLoad",@"RPM",@"IntakeManifoldPressure",@"IntakeAirTemperature",@"ThrottlePosition"}))      
-                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=1282,NumberOfIterations=258,MinimumExampleCountPerLeaf=23,LearningRate=0.999999776672986,LabelColumnName=@"MassAirFlow",FeatureColumnName=@"Features",Booster=new GradientBooster.Options(){SubsampleFraction=0.288964781828837,FeatureFraction=0.964199913977243,L1Regularization=2E-10,L2Regularization=0.999999776672986},MaximumBinCountPerFeature=416}));
+            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"EngineCoolantTemperature", @"EngineCoolantTemperature"),new InputOutputColumnPair(@"EngineLoad", @"EngineLoad"),new InputOutputColumnPair(@"RPM", @"RPM"),new InputOutputColumnPair(@"IntakeManifoldPressure", @"IntakeManifoldPressure"),new InputOutputColumnPair(@"IntakeAirTemperature", @"IntakeAirTemperature"),new InputOutputColumnPair(@"Speed", @"Speed"),new InputOutputColumnPair(@"ShortTermFuelTrimBank1", @"ShortTermFuelTrimBank1"),new InputOutputColumnPair(@"ThrottlePosition", @"ThrottlePosition"),new InputOutputColumnPair(@"TimingAdvance", @"TimingAdvance")})      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"EngineCoolantTemperature",@"EngineLoad",@"RPM",@"IntakeManifoldPressure",@"IntakeAirTemperature",@"Speed",@"ShortTermFuelTrimBank1",@"ThrottlePosition",@"TimingAdvance"}))      
+                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=2359,NumberOfIterations=590,MinimumExampleCountPerLeaf=30,LearningRate=0.152395152978007,LabelColumnName=@"MassAirFlow",FeatureColumnName=@"Features",Booster=new GradientBooster.Options(){SubsampleFraction=0.999999776672986,FeatureFraction=0.99999999,L1Regularization=2E-10,L2Regularization=0.999999776672986},MaximumBinCountPerFeature=396}));
 
             return pipeline;
         }

@@ -121,7 +121,7 @@ public partial class DataViewModel : ObservableObject
 
         Gear = report.Gear == 0 ? "N" : report.Gear.ToString("0");
 
-        InstantFuelComsumption = report.InstantFuelConsumption.ToString("0.00");
+        InstantFuelComsumption = report.FuelConsumption.ToString("0.00");
         AverageFuelComsumption = report.AverageFuelConsumption.ToString("0.00");
 
         MassAirFlow = report.MassAirFlow.ToString("0.00");

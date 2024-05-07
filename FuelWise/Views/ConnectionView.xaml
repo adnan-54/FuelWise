@@ -28,8 +28,8 @@
         <!--  DevicesFound  -->
         <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:ConnectionState.DevicesFound}}" VerticalOptions="FillAndExpand">
             <Label
-                HorizontalOptions="CenterAndExpand"
-                HorizontalTextAlignment="Center"
+                Margin="0,12"
+                FontSize="Body"
                 Opacity="0.7"
                 Text="Dispositivos encontrados:" />
 

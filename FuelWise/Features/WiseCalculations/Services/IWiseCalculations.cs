@@ -1,4 +1,5 @@
-﻿using FuelWise.VehicleInformations;
+﻿using Android.Health.Connect.DataTypes.Units;
+using FuelWise.VehicleInformations;
 
 namespace FuelWise.WiseCalculations;
 
@@ -6,7 +7,7 @@ public interface IWiseCalculations
 {
     int GetCurrentGear(double rpm, double speed);
 
-    double GetVolumetricEfficiency(double rpm, double maf);
+    double GetVolumetricEfficiency(double rpm, double maf, double intakeTemperature, double map);
 
     double GetCalculatedImap(double rpm, double map, double intakeAirTemperature);
 
@@ -15,6 +16,8 @@ public interface IWiseCalculations
 
 internal class DefaultWiseCalculations : IWiseCalculations
 {
+    private const double MOLAR_MASS = 0.28705;
+
     private readonly IVehicleProvider vehicleProvider;
 
     public DefaultWiseCalculations(IVehicleProvider vehicleProvider)
@@ -65,7 +68,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         return difference / average * 100;
     }
 
-    public double GetVolumetricEfficiency(double rpm, double maf)
+    public double GetVolumetricEfficiency(double rpm, double maf, double intakeTemperature, double map)
     {
         if (rpm == 0 || maf == 0)
             return 0;
@@ -75,9 +78,31 @@ internal class DefaultWiseCalculations : IWiseCalculations
         if (vehicle is null)
             return 0;
 
-        var displacementInLiters = vehicle.Engine.Displacement / 1000.0;
+        var engine = vehicle.Engine;
 
-        return maf / (rpm * 1.07 * (displacementInLiters / 120.0)) * 100;
+        var engineSize = engine.Displacement / 1000;
+
+        //var cubicInches = engineSize / 0.0163871;
+        //var airFlowLibras = maf * 0.00220462 * 60;
+
+        var fahrenheitDegrees = intakeTemperature * 9 / 5 + 32;
+        var celciusDegrees = (fahrenheitDegrees - 32) * 5 / 9;
+        var kelvinDegrees = celciusDegrees + 273.15;
+
+        var volume = (maf * kelvinDegrees * MOLAR_MASS) / map;
+
+        var airVolume = volume * 60;
+        var theoreticalAirVolume = engineSize * rpm / 2;
+        var estimatedVolumetricEfficiency = (airVolume / theoreticalAirVolume) * 100;
+
+        //var cylinderAir = maf * 120 / (rpm * engine.Cylinders);
+        //var referenceCylinderAir = engineSize * 1.168 / engine.Cylinders;
+
+        //var gross = airFlowLibras * 10;
+        //var whp = gross * 0.85;
+        //var engineLoad = (cylinderAir / referenceCylinderAir) * 100;
+
+        return estimatedVolumetricEfficiency > 100 ? 100 : estimatedVolumetricEfficiency;
     }
 
     public double GetCalculatedImap(double rpm, double map, double intakeAirTemperature)

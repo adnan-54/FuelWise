@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Android.Views;
 using FuelWise.BluetoothConnection;
 using FuelWise.IA;
 using FuelWise.OBDDataPuller;
@@ -17,6 +16,7 @@ public interface IReportGenerator
 
 internal class DefaultReportGenerator : IReportGenerator
 {
+    private const double MPG_TO_KML = 2.352;
     private const double REFRESH_RATE = 4;
 
     private readonly List<Report> reports;
@@ -49,6 +49,10 @@ internal class DefaultReportGenerator : IReportGenerator
         if (reports.Count == 0)
             return await GenerateFirstReport();
 
+        var lastReport = reports.Last();
+        var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-6));
+        var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1));
+
         var coolantData = await dataPuller.PullDataAsync<EngineCoolantTemperatureData>();
         var engineLoadData = await dataPuller.PullDataAsync<EngineLoadData>();
         var intakeTemperatureData = await dataPuller.PullDataAsync<IntakeAirTemperatureData>();
@@ -56,14 +60,11 @@ internal class DefaultReportGenerator : IReportGenerator
         var rpmData = await dataPuller.PullDataAsync<RpmData>();
         var throttlePositionData = await dataPuller.PullDataAsync<ThrottlePositionData>();
         var speedData = await dataPuller.PullDataAsync<VehicleSpeedData>();
-
-        var lastReport = reports.Last();
-        var lastReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-5));
-        var lastReportsCount = (double)lastReports.Count();
-        var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1));
+        var fuelTrimData = await dataPuller.PullDataAsync<ShortTermFuelTrimData>();
+        var timingAdvanceData = await dataPuller.PullDataAsync<TimingAdvanceData>();
 
         var speed = speedData.Value;
-        var averageSpeed = (lastMinuteReports.Sum(r => r.Speed) + speedData.Value) / (lastMinuteReports.Count() + 1);
+        var averageSpeed = lastMinuteReports.Any() ? lastMinuteReports.Average(r => r.Speed) : 0;
         var speedVariation = speedData.Value - lastReport.Speed;
         var rpm = rpmData.Value;
         var coolantTemperature = coolantData.Value;
@@ -71,18 +72,20 @@ internal class DefaultReportGenerator : IReportGenerator
         var intakeAirTemperature = intakeTemperatureData.Value;
         var intakePressure = intakePressureData.Value;
         var throttlePosition = throttlePositionData.Value;
+        var fuelTrim = fuelTrimData.Value;
+        var timingAdvance = timingAdvanceData.Value;
 
         var gear = wiseCalculations.GetCurrentGear(rpmData.Value, speedData.Value);
 
-        var predictedMassAirFlow = mlPredictions.PredictMAF(engineLoad, rpm, intakePressure, intakeAirTemperature, throttlePosition);
-        var volumetricEfficiency = (lastReport.VolumetricEfficiency + wiseCalculations.GetVolumetricEfficiency(rpm, predictedMassAirFlow)) / 2;
+        var predictedMassAirFlow = mlPredictions.PredictMAF(engineLoad, rpm, intakePressure, intakeAirTemperature, throttlePosition, coolantTemperature, (float)fuelTrim, speed, (float)timingAdvance);
+        var volumetricEfficiency = wiseCalculations.GetVolumetricEfficiency(rpm, predictedMassAirFlow, intakeAirTemperature, intakePressure) * 0.8;
 
         var imap = wiseCalculations.GetCalculatedImap(rpm, intakePressure, intakeAirTemperature);
         var calculatedMassAirFlow = wiseCalculations.GetCalculatedMaf(imap, volumetricEfficiency);
         var maf = (predictedMassAirFlow + calculatedMassAirFlow) / 2;
 
         var predictedFuelComsumption = mlPredictions.PredictFuelComsumption(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, lastReport.DrivingStyle);
-        var instantFuelComsumption = predictedFuelComsumption;
+        var fuelComsumption = predictedFuelComsumption;
 
         if (speed > 0)
         {
@@ -94,19 +97,16 @@ internal class DefaultReportGenerator : IReportGenerator
             var milesPerHour = speed / 1.6;
             var milesPerGal = galsPerHour == 0 ? 0 : milesPerHour / galsPerHour;
 
-            var calculatedFuelComsumption = milesPerGal / 2.352; // converting from mpg to km/l
+            var calculatedFuelComsumption = milesPerGal / MPG_TO_KML;
 
-            instantFuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption) / 2;
+            fuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption) / 2;
         }
 
-        var averageFuelComsumption = (lastMinuteReports.Sum(r => r.InstantFuelConsumption) + instantFuelComsumption) / (lastMinuteReports.Count() + 1);
+        var averageFuelComsumption = lastMinuteReports.Any() ? lastMinuteReports.Average(r => r.FuelConsumption) : 0;
 
-        (var drivingStyle, _) = mlPredictions.PredictDrivingStyle(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, (float)instantFuelComsumption);
-
-        var drivingEfficiency = (lastReports.Sum(r => (int)r.DrivingStyle) + (int)drivingStyle) / (lastReportsCount + 1);
-        drivingEfficiency -= 1;
-        drivingEfficiency = 1 - drivingEfficiency;
-        drivingEfficiency *= 100;
+        var predictedDrivingStyle = mlPredictions.PredictDrivingStyle(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, (float)averageFuelComsumption);
+        var drivingEfficiency = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
+        var averageDrivingEfficiency = lastSecondsReports.Any() ? lastSecondsReports.Average(r => r.DrivingEfficiency) : 0;
 
         var createdAt = DateTime.Now;
 
@@ -128,16 +128,17 @@ internal class DefaultReportGenerator : IReportGenerator
 
             Gear = gear,
 
-            InstantFuelConsumption = instantFuelComsumption,
+            FuelConsumption = fuelComsumption,
             AverageFuelConsumption = averageFuelComsumption,
 
             MassAirFlow = maf,
 
             VolumetricEfficiency = volumetricEfficiency,
 
-            DrivingStyle = drivingStyle,
+            DrivingStyle = predictedDrivingStyle.DrivingStyle,
 
-            DrivingEfficiency = drivingEfficiency
+            DrivingEfficiency = drivingEfficiency,
+            AverageDrivingEfficiency = averageDrivingEfficiency
         };
     }
 
@@ -161,7 +162,7 @@ internal class DefaultReportGenerator : IReportGenerator
 
             Gear = 0,
 
-            InstantFuelConsumption = 0,
+            FuelConsumption = 0,
             AverageFuelConsumption = 0,
 
             MassAirFlow = 0,
@@ -170,7 +171,8 @@ internal class DefaultReportGenerator : IReportGenerator
 
             DrivingStyle = DrivingStyle.Even,
 
-            DrivingEfficiency = 1.0
+            DrivingEfficiency = 100,
+            AverageDrivingEfficiency = 100
         };
 
         return Task.FromResult(report);

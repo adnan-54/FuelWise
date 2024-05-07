@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid Padding="12,0">
+    <Grid Padding="12">
 
         <!--  NotConnected  -->
         <StackLayout
@@ -41,7 +41,7 @@
         <!--  VehicleMoving  -->
         <StackLayout IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:DataState.VehicleMoving}}" VerticalOptions="CenterAndExpand">
             <Label
-                FontSize="Body"
+                FontSize="Header"
                 HorizontalTextAlignment="Center"
                 Opacity="0.7"
                 Text="Conteudo indisponível com o veículo em movimento" />
@@ -49,9 +49,9 @@
 
         <!--  ViewData  -->
         <ScrollView IsVisible="{Binding CurrentState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static viewModels:DataState.ViewData}}">
-            <StackLayout>
+            <StackLayout Spacing="24">
                 <!--  Speed  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -78,7 +78,7 @@
                     Opacity="0.2" />
 
                 <!--  AverageSpeed  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -105,7 +105,7 @@
                     Opacity="0.2" />
 
                 <!--  SpeedVariation  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -132,7 +132,7 @@
                     Opacity="0.2" />
 
                 <!--  RPM  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -159,7 +159,7 @@
                     Opacity="0.2" />
 
                 <!--  CoolantTemperature  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -186,7 +186,7 @@
                     Opacity="0.2" />
 
                 <!--  EngineLoad  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -213,7 +213,7 @@
                     Opacity="0.2" />
 
                 <!--  IntakeAirTemp  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -240,7 +240,7 @@
                     Opacity="0.2" />
 
                 <!--  IntakePressure  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -267,7 +267,7 @@
                     Opacity="0.2" />
 
                 <!--  ThrottlePosition  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -294,7 +294,7 @@
                     Opacity="0.2" />
 
                 <!--  Gear  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -320,7 +320,7 @@
                     Opacity="0.2" />
 
                 <!--  InstantFuelComsumption  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -347,7 +347,7 @@
                     Opacity="0.2" />
 
                 <!--  AverageFuelComsumption  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -374,7 +374,7 @@
                     Opacity="0.2" />
 
                 <!--  MassAirFlow  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -401,7 +401,7 @@
                     Opacity="0.2" />
 
                 <!--  VolumetricEfficiency  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -428,7 +428,7 @@
                     Opacity="0.2" />
 
                 <!--  DrivingStyle  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -454,7 +454,7 @@
                     Opacity="0.2" />
 
                 <!--  DrivingEfficiency  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -481,7 +481,7 @@
                     Opacity="0.2" />
 
                 <!--  VehicleMoving  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -507,7 +507,7 @@
                     Opacity="0.2" />
 
                 <!--  EngineRunning  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -533,7 +533,7 @@
                     Opacity="0.2" />
 
                 <!--  ReportGenerationTime  -->
-                <Grid Padding="0,24">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />

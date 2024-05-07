@@ -9,6 +9,7 @@ using FuelWise.VehicleInformations;
 using FuelWise.ViewModels;
 using FuelWise.WiseCalculations;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace FuelWise;
 
@@ -20,6 +21,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
