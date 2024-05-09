@@ -25,10 +25,10 @@ public interface IMLPredictions
     /// <param name="trafficCondition">Possible traffic conditions</param>
     /// <returns>A tuple containing the enum representing the predicted driving style and a double representing the efficiency in percentage (0 - 100 range)</returns>
     PredictedDrivingStyle PredictDrivingStyle(float speed, float speedAverage, float speedVariation, float engineLoad,
-                              float coolantTemperature, float intakeAirTemperature, float intakePressure,
-                              float massAirFlow, float rpm, float fuelConsumptionAverage,
-                              RoadSurfaceCondition roadSurface = RoadSurfaceCondition.Smooth,
-                              TrafficCondition trafficCondition = TrafficCondition.LowCongestion);
+                                              float coolantTemperature, float intakeAirTemperature, float intakePressure,
+                                              float massAirFlow, float rpm, float fuelConsumptionAverage,
+                                              RoadSurfaceCondition roadSurface = RoadSurfaceCondition.Smooth,
+                                              TrafficCondition trafficCondition = TrafficCondition.LowCongestion);
 
     /// <summary>
     /// Tries to predict the fuel consumption based on the given parameters.
@@ -85,7 +85,7 @@ internal class MLPredictions : IMLPredictions
         var input = new DrivingStyleModel.ModelInput
         {
             VehicleSpeedInstantaneous = speed,
-            //VehicleSpeedAverage = speedAverage,
+            VehicleSpeedAverage = speedAverage,
             VehicleSpeedVariation = speedVariation,
             EngineLoad = engineLoad,
             EngineCoolantTemperature = coolantTemperature,
@@ -94,13 +94,13 @@ internal class MLPredictions : IMLPredictions
             MassAirFlow = massAirFlow,
             EngineRPM = rpm,
             FuelConsumptionAverage = fuelConsumptionAverage,
-            //Traffic = (int)trafficCondition,
-            //RoadSurface = (int)roadSurface,
+            Traffic = (int)trafficCondition,
+            RoadSurface = (int)roadSurface,
         };
 
         var result = DrivingStyleModel.PredictAllLabels(input);
 
-        var drivingStyle = result.First().Key == "1" ? DrivingStyle.Even : DrivingStyle.Aggresive;
+        var drivingStyle = result.First().Key == "1" ? DrivingStyle.Even : DrivingStyle.Aggressive;
 
         var efficiency = drivingStyle == DrivingStyle.Even ? result.First().Value : 1 - result.First().Value;
         efficiency *= 100;
@@ -130,7 +130,7 @@ internal class MLPredictions : IMLPredictions
             EngineRPM = rpm,
             //Traffic = (int)trafficCondition,
             //RoadSurface = (int)roadSurface,
-            //DrivingStyle = (int)drivingStyle
+            //DrivingStyle = (int)drivingStyle,
         };
 
         var result = FuelConsumptionModel.Predict(input);
@@ -153,10 +153,10 @@ internal class MLPredictions : IMLPredictions
             IntakeManifoldPressure = intakePressure,
             IntakeAirTemperature = intakeAirTemperature,
             ThrottlePosition = throttlePosition,
-            EngineCoolantTemperature = engineCoolantTemperature,
-            ShortTermFuelTrimBank1 = shortTermFuelTrim,
-            Speed = speed,
-            TimingAdvance = timingAdvance
+            //EngineCoolantTemperature = engineCoolantTemperature,
+            //ShortTermFuelTrimBank1 = shortTermFuelTrim,
+            //Speed = speed,
+            //TimingAdvance = timingAdvance
         };
 
         var result = MassAirFlowModel.Predict(input);

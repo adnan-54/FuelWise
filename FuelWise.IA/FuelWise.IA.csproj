@@ -20,8 +20,4 @@
 		<PackageReference Include="Microsoft.ML.TimeSeries" Version="3.0.1" />
 		<PackageReference Include="Plotly.NET" Version="3.0.1" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Platforms\Android\" />
-	</ItemGroup>
 </Project>

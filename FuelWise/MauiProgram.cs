@@ -5,10 +5,12 @@ using FuelWise.NativeDialog;
 using FuelWise.OBDDataPuller;
 using FuelWise.OBDEncoder;
 using FuelWise.Reporting;
+using FuelWise.TemperatureAlert;
 using FuelWise.VehicleInformations;
 using FuelWise.ViewModels;
 using FuelWise.WiseCalculations;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 using Syncfusion.Maui.Core.Hosting;
 
 namespace FuelWise;
@@ -47,6 +49,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<IVehicleRepository, DefaultVehicleRepository>();
         builder.Services.AddSingleton<IWiseCalculations, DefaultWiseCalculations>();
         builder.Services.AddSingleton<IReportGenerator, DefaultReportGenerator>();
+        builder.Services.AddSingleton<ITemperatureAlert, DefaultTemperatureAlert>();
+
+        builder.Services.AddSingleton(AudioManager.Current);
 
         builder.Services.AddTransient<MainPage>();
 

@@ -7,6 +7,7 @@ namespace FuelWise.ViewModels;
 public partial class MainViewViewModel : ObservableObject
 {
     private readonly IReportGenerator reportGenerator;
+    private readonly IVehicleProvider vehicleProvider;
 
     [ObservableProperty]
     private string? vehicleName;
@@ -32,6 +33,7 @@ public partial class MainViewViewModel : ObservableObject
     public MainViewViewModel(IReportGenerator reportGenerator, IVehicleProvider vehicleProvider)
     {
         this.reportGenerator = reportGenerator;
+        this.vehicleProvider = vehicleProvider;
 
         vehicleProvider.VehicleChanged += OnVehicleChanged;
         reportGenerator.ReportGenerated += OnReportGenerated;
@@ -55,7 +57,10 @@ public partial class MainViewViewModel : ObservableObject
         AverageComsumption = e.Report.AverageFuelConsumption;
         AverageEfficiency = Convert.ToInt32(e.Report.AverageDrivingEfficiency);
 
-        IsOverheating = e.Report.CoolantTemperature > 105;
+        var engine = vehicleProvider.Vehicle?.Engine;
+
+        if (engine is not null)
+            IsOverheating = e.Report.CoolantTemperature > engine.OperatingTemperature * 1.09;
 
         IsCalibrating = reportGenerator.Reports.Count < 100;
         if (IsCalibrating)

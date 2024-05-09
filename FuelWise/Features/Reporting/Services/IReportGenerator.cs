@@ -16,8 +16,7 @@ public interface IReportGenerator
 
 internal class DefaultReportGenerator : IReportGenerator
 {
-    private const double MPG_TO_KML = 2.352;
-    private const double REFRESH_RATE = 4;
+    private const double REFRESH_RATE = 0.5;
 
     private readonly List<Report> reports;
     private readonly IDataPuller dataPuller;
@@ -50,63 +49,55 @@ internal class DefaultReportGenerator : IReportGenerator
             return await GenerateFirstReport();
 
         var lastReport = reports.Last();
-        var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-6));
-        var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1));
+        var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-15)).ToList();
+        var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1)).ToList();
 
-        var coolantData = await dataPuller.PullDataAsync<EngineCoolantTemperatureData>();
-        var engineLoadData = await dataPuller.PullDataAsync<EngineLoadData>();
-        var intakeTemperatureData = await dataPuller.PullDataAsync<IntakeAirTemperatureData>();
-        var intakePressureData = await dataPuller.PullDataAsync<IntakeManifoldPressureData>();
-        var rpmData = await dataPuller.PullDataAsync<RpmData>();
-        var throttlePositionData = await dataPuller.PullDataAsync<ThrottlePositionData>();
-        var speedData = await dataPuller.PullDataAsync<VehicleSpeedData>();
-        var fuelTrimData = await dataPuller.PullDataAsync<ShortTermFuelTrimData>();
-        var timingAdvanceData = await dataPuller.PullDataAsync<TimingAdvanceData>();
+        var coolantData = dataPuller.PullDataAsync<EngineCoolantTemperatureData>();
+        var engineLoadData = dataPuller.PullDataAsync<EngineLoadData>();
+        var intakeTemperatureData = dataPuller.PullDataAsync<IntakeAirTemperatureData>();
+        var intakePressureData = dataPuller.PullDataAsync<IntakeManifoldPressureData>();
+        var rpmData = dataPuller.PullDataAsync<RpmData>();
+        var throttlePositionData = dataPuller.PullDataAsync<ThrottlePositionData>();
+        var speedData = dataPuller.PullDataAsync<VehicleSpeedData>();
+        var fuelTrimData = dataPuller.PullDataAsync<ShortTermFuelTrimData>();
+        var timingAdvanceData = dataPuller.PullDataAsync<TimingAdvanceData>();
 
-        var speed = speedData.Value;
-        var averageSpeed = lastMinuteReports.Average(r => r.Speed);
-        var speedVariation = speedData.Value - lastReport.Speed;
-        var rpm = rpmData.Value;
-        var coolantTemperature = coolantData.Value;
-        var engineLoad = engineLoadData.Value;
-        var intakeAirTemperature = intakeTemperatureData.Value;
-        var intakePressure = intakePressureData.Value;
-        var throttlePosition = throttlePositionData.Value;
-        var fuelTrim = fuelTrimData.Value;
-        var timingAdvance = timingAdvanceData.Value;
+        await Task.WhenAll(coolantData, engineLoadData, intakeTemperatureData, intakePressureData, rpmData, throttlePositionData, speedData, fuelTrimData, timingAdvanceData);
 
-        var gear = wiseCalculations.GetCurrentGear(rpmData.Value, speedData.Value);
+        var speed = speedData.Result.Value;
+        var averageSpeed = wiseCalculations.GetAverageSpeed(lastMinuteReports.Select(r => r.Speed));
+        var speedVariation = speed - lastReport.Speed;
+        var rpm = rpmData.Result.Value;
+        var coolantTemperature = coolantData.Result.Value;
+        var engineLoad = engineLoadData.Result.Value;
+        var intakeAirTemperature = intakeTemperatureData.Result.Value;
+        var intakePressure = intakePressureData.Result.Value;
+        var throttlePosition = throttlePositionData.Result.Value;
+        var fuelTrim = fuelTrimData.Result.Value;
+        var timingAdvance = timingAdvanceData.Result.Value;
 
-        var predictedMassAirFlow = mlPredictions.PredictMAF(engineLoad, rpm, intakePressure, intakeAirTemperature, throttlePosition, coolantTemperature, (float)fuelTrim, speed, (float)timingAdvance);
-        var volumetricEfficiency = wiseCalculations.GetVolumetricEfficiency(rpm, predictedMassAirFlow, intakeAirTemperature, intakePressure) * 0.8;
+        var gear = wiseCalculations.GetCurrentGear(rpm, speed);
 
-        var imap = wiseCalculations.GetCalculatedImap(rpm, intakePressure, intakeAirTemperature);
-        var calculatedMassAirFlow = wiseCalculations.GetCalculatedMaf(imap, volumetricEfficiency);
-        var maf = (predictedMassAirFlow + calculatedMassAirFlow) / 2;
+        var predictedMaf = mlPredictions.PredictMAF(engineLoad, rpm, intakePressure, intakeAirTemperature, throttlePosition, coolantTemperature, (float)fuelTrim, speed, (float)timingAdvance);
+        predictedMaf = (predictedMaf + lastReport.MassAirFlow) / 2;
+        var volumetricEfficiency = wiseCalculations.GetVolumetricEfficiency(rpm, predictedMaf, intakeAirTemperature, intakePressure);
+        var imap = wiseCalculations.GetImap(rpm, intakePressure, intakeAirTemperature);
+        var calculatedMaf = wiseCalculations.GetCalculatedMaf(imap, volumetricEfficiency);
+        var maf = (predictedMaf + calculatedMaf) / 2;
+
+        var isOnHighway = averageSpeed > 60;
 
         var predictedFuelComsumption = mlPredictions.PredictFuelComsumption(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, lastReport.DrivingStyle);
-        var fuelComsumption = predictedFuelComsumption;
+        var fuelComsumption = wiseCalculations.GetFuelComsumption(predictedFuelComsumption, speed, maf, throttlePosition, rpm);
+        var averageFuelComsumption = wiseCalculations.GetAverageFuelComsumption(lastSecondsReports.Select(r => r.FuelConsumption));
+        var consumptionVariance = wiseCalculations.GetComsumptionVariance(lastSecondsReports.Select(r => r.FuelConsumption));
+        var fuelEfficiency = wiseCalculations.GetFuelEfficiency(fuelComsumption, isOnHighway);
 
-        if (speed > 0)
-        {
-            var airFuelRatio = vehicleProvider.Vehicle?.Engine.GetAirFuelRatio() ?? 12.0;
-            var gramsOfFuel = maf / airFuelRatio;
-            var lbsOfFuel = gramsOfFuel / 453.592;
-            var galsOfFuel = lbsOfFuel / 6.701;
-            var galsPerHour = galsOfFuel * 3600;
-            var milesPerHour = speed / 1.6;
-            var milesPerGal = galsPerHour == 0 ? 0 : milesPerHour / galsPerHour;
+        var drivingStyle = consumptionVariance > 33 ? DrivingStyle.Aggressive : DrivingStyle.Even;
+        var averageDrivingStyle = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
 
-            var calculatedFuelComsumption = milesPerGal / MPG_TO_KML;
-
-            fuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption) / 2;
-        }
-
-        var averageFuelComsumption = lastMinuteReports.Average(r => r.FuelConsumption);
-
-        var predictedDrivingStyle = mlPredictions.PredictDrivingStyle(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, (float)averageFuelComsumption);
-        var drivingEfficiency = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
-        var averageDrivingEfficiency = lastSecondsReports.Average(r => r.DrivingEfficiency);
+        var drivingEfficiency = (fuelEfficiency + averageDrivingStyle) / 2;
+        var averageDrivingEfficiency = lastSecondsReports.Any() ? lastSecondsReports.Average(r => r.DrivingEfficiency) : 0;
 
         var createdAt = DateTime.Now;
 
@@ -135,7 +126,7 @@ internal class DefaultReportGenerator : IReportGenerator
 
             VolumetricEfficiency = volumetricEfficiency,
 
-            DrivingStyle = predictedDrivingStyle.DrivingStyle,
+            DrivingStyle = drivingStyle,
 
             DrivingEfficiency = drivingEfficiency,
             AverageDrivingEfficiency = averageDrivingEfficiency
@@ -187,7 +178,7 @@ internal class DefaultReportGenerator : IReportGenerator
         }
 
         timer = Application.Current!.Dispatcher.CreateTimer();
-        timer.Interval = TimeSpan.FromSeconds(1 / REFRESH_RATE);
+        timer.Interval = TimeSpan.FromMilliseconds(100);
         timer.Tick += OnTick;
         timer.Start();
     }

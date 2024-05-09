@@ -23,6 +23,10 @@ namespace FuelWise_IA
             [ColumnName(@"VehicleSpeedInstantaneous")]
             public float VehicleSpeedInstantaneous { get; set; }
 
+            [LoadColumn(1)]
+            [ColumnName(@"VehicleSpeedAverage")]
+            public float VehicleSpeedAverage { get; set; }
+
             [LoadColumn(2)]
             [ColumnName(@"VehicleSpeedVariation")]
             public float VehicleSpeedVariation { get; set; }
@@ -55,6 +59,14 @@ namespace FuelWise_IA
             [ColumnName(@"FuelConsumptionAverage")]
             public float FuelConsumptionAverage { get; set; }
 
+            [LoadColumn(10)]
+            [ColumnName(@"RoadSurface")]
+            public float RoadSurface { get; set; }
+
+            [LoadColumn(11)]
+            [ColumnName(@"Traffic")]
+            public float Traffic { get; set; }
+
             [LoadColumn(12)]
             [ColumnName(@"DrivingStyle")]
             public float DrivingStyle { get; set; }
@@ -72,6 +84,9 @@ namespace FuelWise_IA
         {
             [ColumnName(@"VehicleSpeedInstantaneous")]
             public float VehicleSpeedInstantaneous { get; set; }
+
+            [ColumnName(@"VehicleSpeedAverage")]
+            public float VehicleSpeedAverage { get; set; }
 
             [ColumnName(@"VehicleSpeedVariation")]
             public float VehicleSpeedVariation { get; set; }
@@ -97,6 +112,12 @@ namespace FuelWise_IA
             [ColumnName(@"FuelConsumptionAverage")]
             public float FuelConsumptionAverage { get; set; }
 
+            [ColumnName(@"RoadSurface")]
+            public float RoadSurface { get; set; }
+
+            [ColumnName(@"Traffic")]
+            public float Traffic { get; set; }
+
             [ColumnName(@"DrivingStyle")]
             public uint DrivingStyle { get; set; }
 
@@ -112,7 +133,7 @@ namespace FuelWise_IA
 
         #endregion model output class
 
-        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new(() => CreatePredictEngine(), true);
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
         private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
         {

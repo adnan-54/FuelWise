@@ -3,6 +3,6 @@
 public enum RoadSurfaceCondition
 {
     Smooth = 1,
-    FullOfHoles = 2,
-    Uneven = 3
+    Uneven = 2,
+    FullOfHoles = 3
 }

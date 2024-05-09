@@ -19,10 +19,6 @@ namespace FuelWise_IA
 
         public class ModelInput
         {
-            [LoadColumn(0)]
-            [ColumnName(@"EngineCoolantTemperature")]
-            public float EngineCoolantTemperature { get; set; }
-
             [LoadColumn(1)]
             [ColumnName(@"EngineLoad")]
             public float EngineLoad { get; set; }
@@ -43,21 +39,9 @@ namespace FuelWise_IA
             [ColumnName(@"IntakeAirTemperature")]
             public float IntakeAirTemperature { get; set; }
 
-            [LoadColumn(6)]
-            [ColumnName(@"Speed")]
-            public float Speed { get; set; }
-
-            [LoadColumn(7)]
-            [ColumnName(@"ShortTermFuelTrimBank1")]
-            public float ShortTermFuelTrimBank1 { get; set; }
-
             [LoadColumn(8)]
             [ColumnName(@"ThrottlePosition")]
             public float ThrottlePosition { get; set; }
-
-            [LoadColumn(9)]
-            [ColumnName(@"TimingAdvance")]
-            public float TimingAdvance { get; set; }
         }
 
         #endregion model input class
@@ -70,9 +54,6 @@ namespace FuelWise_IA
 
         public class ModelOutput
         {
-            [ColumnName(@"EngineCoolantTemperature")]
-            public float EngineCoolantTemperature { get; set; }
-
             [ColumnName(@"EngineLoad")]
             public float EngineLoad { get; set; }
 
@@ -88,17 +69,8 @@ namespace FuelWise_IA
             [ColumnName(@"IntakeAirTemperature")]
             public float IntakeAirTemperature { get; set; }
 
-            [ColumnName(@"Speed")]
-            public float Speed { get; set; }
-
-            [ColumnName(@"ShortTermFuelTrimBank1")]
-            public float ShortTermFuelTrimBank1 { get; set; }
-
             [ColumnName(@"ThrottlePosition")]
             public float ThrottlePosition { get; set; }
-
-            [ColumnName(@"TimingAdvance")]
-            public float TimingAdvance { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }
@@ -109,7 +81,7 @@ namespace FuelWise_IA
 
         #endregion model output class
 
-        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new(CreatePredictEngine, true);
+        public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
         private static PredictionEngine<ModelInput, ModelOutput> CreatePredictEngine()
         {
