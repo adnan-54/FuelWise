@@ -28,6 +28,9 @@ public partial class MainViewViewModel : ObservableObject
     private double calibrationProgress;
 
     [ObservableProperty]
+    private bool isUnderOperatingTemperature;
+
+    [ObservableProperty]
     private bool isOverheating;
 
     public MainViewViewModel(IReportGenerator reportGenerator, IVehicleProvider vehicleProvider)
@@ -58,11 +61,14 @@ public partial class MainViewViewModel : ObservableObject
         AverageEfficiency = Convert.ToInt32(e.Report.AverageDrivingEfficiency);
 
         var engine = vehicleProvider.Vehicle?.Engine;
+        var operatingTemperature = engine?.OperatingTemperature ?? 0;
+        var coolantTemperature = e.Report.CoolantTemperature;
 
-        if (engine is not null)
-            IsOverheating = e.Report.CoolantTemperature > engine.OperatingTemperature * 1.09;
+        IsUnderOperatingTemperature = coolantTemperature < operatingTemperature * 0.9;
+        IsOverheating = coolantTemperature > operatingTemperature + 9;
 
         IsCalibrating = reportGenerator.Reports.Count < 100;
+
         if (IsCalibrating)
             CalibrationProgress = reportGenerator.Reports.Count;
     }

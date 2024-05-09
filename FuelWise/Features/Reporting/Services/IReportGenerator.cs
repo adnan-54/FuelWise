@@ -49,7 +49,7 @@ internal class DefaultReportGenerator : IReportGenerator
             return await GenerateFirstReport();
 
         var lastReport = reports.Last();
-        var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-15)).ToList();
+        var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-10)).ToList();
         var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1)).ToList();
 
         var coolantData = dataPuller.PullDataAsync<EngineCoolantTemperatureData>();

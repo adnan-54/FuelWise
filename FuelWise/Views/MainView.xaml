@@ -20,16 +20,55 @@
         <!--  CurrentVehicle  -->
         <Label FontSize="Subtitle" Text="{Binding VehicleName}" />
 
+        <!--  UnderWorkingTemperature Warning  -->
+        <Grid
+            Margin="0,12"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding IsUnderOperatingTemperature}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="Motor abaixo da temperatura de funcionamento"
+                TextColor="Goldenrod"
+                TextTransform="Uppercase" />
+
+            <Label
+                Grid.Row="1"
+                HorizontalTextAlignment="Center"
+                Text="Precisão dos resultados pode ser afetada" />
+        </Grid>
+
         <!--  Overheating Warning  -->
-        <Label
-            FontAttributes="Bold"
-            FontSize="30"
-            HorizontalTextAlignment="Center"
-            IsVisible="{Binding IsOverheating}"
-            Text="Temperatura do motor elevada"
-            TextColor="Red"
-            TextTransform="Uppercase"
-            VerticalOptions="CenterAndExpand" />
+        <Grid
+            Margin="0,12"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding IsOverheating}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="Motor acima da temperatura de funcionamento"
+                TextColor="Red"
+                TextTransform="Uppercase" />
+
+            <Label
+                Grid.Row="1"
+                HorizontalTextAlignment="Center"
+                Text="Temperaturas elevadas podem ocasionar danos ao motor" />
+        </Grid>
 
         <!--  CalibrationProgress  -->
         <VerticalStackLayout
