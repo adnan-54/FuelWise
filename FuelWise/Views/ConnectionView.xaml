@@ -3,6 +3,7 @@
     x:Class="FuelWise.Views.ConnectionView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
     Title="Conexão"
@@ -33,7 +34,45 @@
                 Opacity="0.7"
                 Text="Dispositivos encontrados:" />
 
-            <ListView ItemsSource="{Binding AvailableDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" />
+            <syncfusion:SfListView
+                Margin="0,12"
+                Background="Transparent"
+                ItemsSource="{Binding AvailableDevices}"
+                SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                VerticalOptions="FillAndExpand">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Padding="12,0"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0">
+                            <Label
+                                Text="{Binding}"
+                                TextColor="{AppThemeBinding Light={DynamicResource Primary},
+                                                            Dark={DynamicResource Tertiary}}"
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+
+                <syncfusion:SfListView.SelectedItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Padding="12,0"
+                            BackgroundColor="{AppThemeBinding Light={DynamicResource Primary},
+                                                              Dark={DynamicResource Tertiary}}"
+                            StrokeShape="RoundRectangle 8,8,8,8"
+                            StrokeThickness="0">
+                            <Label
+                                Text="{Binding}"
+                                TextColor="White"
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </syncfusion:SfListView.SelectedItemTemplate>
+            </syncfusion:SfListView>
 
             <Button Command="{Binding ConnectCommand}" Text="Conectar" />
         </StackLayout>

@@ -103,7 +103,7 @@ internal class DefaultReportGenerator : IReportGenerator
         var rpmVariance = wiseCalculations.GetRpmVariance([.. lastSecondsReports.Select(r => r.Rpm), rpm]);
         var speedVariance = wiseCalculations.GetSpeedVariance([.. lastSecondsReports.Select(r => r.Speed), speed]);
         var tpsVariance = wiseCalculations.GetTpsVariance([.. lastSecondsReports.Select(r => r.ThrottlePosition), throttlePosition]);
-        var averageVariance = (consumptionVariance + rpmVariance + speedVariation) / 3;
+        var averageVariance = (consumptionVariance + rpmVariance + speedVariation + tpsVariance) / 4;
 
         var drivingStyle = averageVariance >= 25 ? DrivingStyle.Aggressive : DrivingStyle.Even;
         var averageDrivingStyle = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();

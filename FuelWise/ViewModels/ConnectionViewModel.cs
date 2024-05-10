@@ -101,7 +101,7 @@ public partial class ConnectionViewModel : ObservableObject
 
             CurrentState = ConnectionState.Connected;
 
-            await dialogManager.ShowSuccess("Dispositivo conectado com sucesso");
+            //await dialogManager.ShowSuccess("Dispositivo conectado com sucesso");
         }
         catch (Exception ex)
         {
@@ -127,7 +127,7 @@ public partial class ConnectionViewModel : ObservableObject
 
             CurrentState = ConnectionState.Disconnected;
 
-            await dialogManager.ShowSuccess("Dispositivo desconectado com sucesso");
+            //await dialogManager.ShowSuccess("Dispositivo desconectado com sucesso");
         }
         catch (Exception ex)
         {
