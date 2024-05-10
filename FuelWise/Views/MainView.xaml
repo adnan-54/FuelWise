@@ -18,7 +18,11 @@
 
     <StackLayout Padding="12" Spacing="6">
         <!--  CurrentVehicle  -->
-        <Label FontSize="Subtitle" Text="{Binding VehicleName}" />
+        <Label
+            Margin="0,6"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            Text="{Binding VehicleName}" />
 
         <!--  UnderWorkingTemperature Warning  -->
         <Grid
@@ -42,7 +46,7 @@
             <Label
                 Grid.Row="1"
                 HorizontalTextAlignment="Center"
-                Text="Precisão dos resultados pode ser afetada" />
+                Text="A precisão dos resultados pode ser afetada" />
         </Grid>
 
         <!--  Overheating Warning  -->

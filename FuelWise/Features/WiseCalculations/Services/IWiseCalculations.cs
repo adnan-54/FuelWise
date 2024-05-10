@@ -1,6 +1,8 @@
 ﻿using FuelWise.IA;
 using FuelWise.Reporting;
 using FuelWise.VehicleInformations;
+using Java.Time.Temporal;
+using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace FuelWise.WiseCalculations;
 
@@ -14,7 +16,7 @@ public interface IWiseCalculations
 
     double GetCalculatedMaf(double imap, double volumetricEfficiency);
 
-    double GetFuelComsumption(double predictedFuelComsumption, double speed, double maf, double tps, double rpm);
+    double GetFuelComsumption(double predictedFuelComsumption, double speed, double maf, int fuelStatus);
 
     double GetFuelEfficiency(double fuelComsumption, bool isOnHighway);
 
@@ -25,6 +27,12 @@ public interface IWiseCalculations
     TrafficCondition GetTrafficCondition(double averageSpeed, bool isOnHighway);
 
     double GetAverageSpeed(IEnumerable<double> speeds);
+
+    double GetRpmVariance(IEnumerable<double> rpms);
+
+    double GetSpeedVariance(IEnumerable<double> speeds);
+
+    double GetTpsVariance(IEnumerable<double> tps);
 }
 
 internal class DefaultWiseCalculations : IWiseCalculations
@@ -102,6 +110,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         var airVolume = volume * 60;
         var theoreticalAirVolume = engineSize * rpm / 2;
         var estimatedVolumetricEfficiency = (airVolume / theoreticalAirVolume) * 100;
+        estimatedVolumetricEfficiency = estimatedVolumetricEfficiency.ClampTo(0, 100);
         estimatedVolumetricEfficiency = (estimatedVolumetricEfficiency + 75) / 2;
         //var cylinderAir = maf * 120 / (rpm * engine.Cylinders);
         //var referenceCylinderAir = engineSize * 1.168 / engine.Cylinders;
@@ -110,7 +119,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         //var whp = gross * 0.85;
         //var engineLoad = (cylinderAir / referenceCylinderAir) * 100;
 
-        return estimatedVolumetricEfficiency.ClampTo(0, 100);
+        return estimatedVolumetricEfficiency;
     }
 
     public double GetImap(double rpm, double map, double intakeAirTemperature)
@@ -140,16 +149,15 @@ internal class DefaultWiseCalculations : IWiseCalculations
         return imap / 60.0 * volumetricEfficiency * displacementInLiters * 3.484484;
     }
 
-    public double GetFuelComsumption(double predictedFuelComsumption, double speed, double maf, double tps, double rpm)
+    public double GetFuelComsumption(double predictedFuelComsumption, double speed, double maf, int fuelStatus)
     {
         var engine = vehicleProvider.Vehicle?.Engine;
 
         if (engine is null || speed == 0)
-            return predictedFuelComsumption;
+            return 0;
 
-        //todo: should use fuel status to detect if engine is in cutoff mode
-        if (tps == 0 && rpm > 1250)
-            return 42.5;
+        if (fuelStatus == 4)
+            return double.PositiveInfinity;
 
         var airFuelRatio = engine.GetAirFuelRatio();
         var gramsOfFuel = maf / airFuelRatio;
@@ -160,7 +168,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         var milesPerGal = galsPerHour == 0 ? 0 : milesPerHour / galsPerHour;
         var calculatedFuelComsumption = milesPerGal / MPG_TO_KML;
 
-        var fuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption) / 2;
+        var fuelComsumption = (predictedFuelComsumption + calculatedFuelComsumption + calculatedFuelComsumption) / 3;
 
         return fuelComsumption;
     }
@@ -175,7 +183,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         var urbanConsumption = engine.UrbanConsumption;
         var higwayConsumption = engine.HighwayConsumption;
         var targetComsumption = isOnHighway ? higwayConsumption : urbanConsumption;
-        var efficiency = (fuelComsumption / targetComsumption);
+        var efficiency = fuelComsumption / targetComsumption;
         efficiency *= 100;
 
         return efficiency.ClampTo(0, 100);
@@ -183,10 +191,15 @@ internal class DefaultWiseCalculations : IWiseCalculations
 
     public double GetAverageFuelComsumption(IEnumerable<double> comsumptions)
     {
+        var engine = vehicleProvider.Vehicle?.Engine;
+
+        if (engine is null)
+            return 0;
+
         comsumptions = comsumptions.Where(c => !double.IsInfinity(c));
 
         if (!comsumptions.Any())
-            return 0;
+            return engine.UrbanConsumption;
 
         return comsumptions.Average();
     }
@@ -198,7 +211,7 @@ internal class DefaultWiseCalculations : IWiseCalculations
         if (!comsumptions.Any())
             return 0;
 
-        return comsumptions.CoefficientOfVariance().ClampTo(0, 100);
+        return Math.Abs(comsumptions.CoefficientOfVariance()).ClampTo(0, 100);
     }
 
     public TrafficCondition GetTrafficCondition(double averageSpeed, bool isOnHighway)
@@ -233,5 +246,29 @@ internal class DefaultWiseCalculations : IWiseCalculations
             return 0;
 
         return speeds.Average();
+    }
+
+    public double GetRpmVariance(IEnumerable<double> rpms)
+    {
+        if (!rpms.Any())
+            return 0;
+
+        return Math.Abs(rpms.CoefficientOfVariance()).ClampTo(0, 100);
+    }
+
+    public double GetSpeedVariance(IEnumerable<double> speeds)
+    {
+        if (!speeds.Any())
+            return 0;
+
+        return Math.Abs(speeds.CoefficientOfVariance()).ClampTo(0, 100);
+    }
+
+    public double GetTpsVariance(IEnumerable<double> tps)
+    {
+        if (!tps.Any())
+            return 0;
+
+        return Math.Abs(tps.CoefficientOfVariance()).ClampTo(0, 100);
     }
 }

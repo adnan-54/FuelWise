@@ -2,6 +2,7 @@
 
 public enum PID
 {
+    FuelSystemStatus = 0x03,
     EngineLoad = 0x04,
     EngineCoolantTemperature = 0x05,
     ShortTermFuelTrim = 0x06,

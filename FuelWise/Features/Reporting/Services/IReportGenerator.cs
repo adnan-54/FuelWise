@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.Intrinsics.Arm;
 using FuelWise.BluetoothConnection;
 using FuelWise.IA;
 using FuelWise.OBDDataPuller;
@@ -48,6 +49,9 @@ internal class DefaultReportGenerator : IReportGenerator
         if (reports.Count == 0)
             return await GenerateFirstReport();
 
+        if (reports.Count > 150)
+            reports.RemoveRange(0, 50);
+
         var lastReport = reports.Last();
         var lastSecondsReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddSeconds(-10)).ToList();
         var lastMinuteReports = reports.Where(r => r.CreatedAt > DateTime.Now.AddMinutes(-1)).ToList();
@@ -61,11 +65,12 @@ internal class DefaultReportGenerator : IReportGenerator
         var speedData = dataPuller.PullDataAsync<VehicleSpeedData>();
         var fuelTrimData = dataPuller.PullDataAsync<ShortTermFuelTrimData>();
         var timingAdvanceData = dataPuller.PullDataAsync<TimingAdvanceData>();
+        var fuelStatusData = dataPuller.PullDataAsync<FuelSystemStatusData>();
 
-        await Task.WhenAll(coolantData, engineLoadData, intakeTemperatureData, intakePressureData, rpmData, throttlePositionData, speedData, fuelTrimData, timingAdvanceData);
+        await Task.WhenAll(coolantData, engineLoadData, intakeTemperatureData, intakePressureData, rpmData, throttlePositionData, speedData, fuelTrimData, timingAdvanceData, fuelStatusData);
 
         var speed = speedData.Result.Value;
-        var averageSpeed = wiseCalculations.GetAverageSpeed(lastMinuteReports.Select(r => r.Speed));
+        var averageSpeed = wiseCalculations.GetAverageSpeed([.. lastMinuteReports.Select(r => r.Speed), speed]);
         var speedVariation = speed - lastReport.Speed;
         var rpm = rpmData.Result.Value;
         var coolantTemperature = coolantData.Result.Value;
@@ -75,12 +80,14 @@ internal class DefaultReportGenerator : IReportGenerator
         var throttlePosition = throttlePositionData.Result.Value;
         var fuelTrim = fuelTrimData.Result.Value;
         var timingAdvance = timingAdvanceData.Result.Value;
+        var fuelSystemStatus = fuelStatusData.Result.Value;
 
         var gear = wiseCalculations.GetCurrentGear(rpm, speed);
 
         var predictedMaf = mlPredictions.PredictMAF(engineLoad, rpm, intakePressure, intakeAirTemperature, throttlePosition, coolantTemperature, (float)fuelTrim, speed, (float)timingAdvance);
         predictedMaf = (predictedMaf + lastReport.MassAirFlow) / 2;
         var volumetricEfficiency = wiseCalculations.GetVolumetricEfficiency(rpm, predictedMaf, intakeAirTemperature, intakePressure);
+        volumetricEfficiency = (lastReport.VolumetricEfficiency + volumetricEfficiency) / 2;
         var imap = wiseCalculations.GetImap(rpm, intakePressure, intakeAirTemperature);
         var calculatedMaf = wiseCalculations.GetCalculatedMaf(imap, volumetricEfficiency);
         var maf = (predictedMaf + calculatedMaf) / 2;
@@ -88,15 +95,26 @@ internal class DefaultReportGenerator : IReportGenerator
         var isOnHighway = averageSpeed > 60;
 
         var predictedFuelComsumption = mlPredictions.PredictFuelComsumption(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, lastReport.DrivingStyle);
-        var fuelComsumption = wiseCalculations.GetFuelComsumption(predictedFuelComsumption, speed, maf, throttlePosition, rpm);
-        var averageFuelComsumption = wiseCalculations.GetAverageFuelComsumption(lastSecondsReports.Select(r => r.FuelConsumption));
-        var consumptionVariance = wiseCalculations.GetComsumptionVariance(lastSecondsReports.Select(r => r.FuelConsumption));
+        var fuelComsumption = wiseCalculations.GetFuelComsumption(predictedFuelComsumption, speed, maf, fuelSystemStatus);
+        var averageFuelComsumption = wiseCalculations.GetAverageFuelComsumption([.. lastSecondsReports.Select(r => r.FuelConsumption), fuelComsumption]);
         var fuelEfficiency = wiseCalculations.GetFuelEfficiency(fuelComsumption, isOnHighway);
 
-        var drivingStyle = consumptionVariance > 33 ? DrivingStyle.Aggressive : DrivingStyle.Even;
+        var consumptionVariance = wiseCalculations.GetComsumptionVariance([.. lastSecondsReports.Select(r => r.FuelConsumption), fuelComsumption]);
+        var rpmVariance = wiseCalculations.GetRpmVariance([.. lastSecondsReports.Select(r => r.Rpm), rpm]);
+        var speedVariance = wiseCalculations.GetSpeedVariance([.. lastSecondsReports.Select(r => r.Speed), speed]);
+        var tpsVariance = wiseCalculations.GetTpsVariance([.. lastSecondsReports.Select(r => r.ThrottlePosition), throttlePosition]);
+        var averageVariance = (consumptionVariance + rpmVariance + speedVariation) / 3;
+
+        var drivingStyle = averageVariance >= 25 ? DrivingStyle.Aggressive : DrivingStyle.Even;
         var averageDrivingStyle = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
 
-        var drivingEfficiency = (fuelEfficiency + averageDrivingStyle) / 2;
+        double drivingEfficiency = averageDrivingStyle;
+        if (speed > 0)
+        {
+            drivingEfficiency += fuelEfficiency;
+            drivingEfficiency /= 2;
+        }
+
         var averageDrivingEfficiency = lastSecondsReports.Any() ? lastSecondsReports.Average(r => r.DrivingEfficiency) : 0;
 
         var createdAt = DateTime.Now;
