@@ -1,9 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Runtime.Intrinsics.Arm;
 using FuelWise.BluetoothConnection;
 using FuelWise.IA;
 using FuelWise.OBDDataPuller;
-using FuelWise.VehicleInformations;
 using FuelWise.WiseCalculations;
 
 namespace FuelWise.Reporting;
@@ -17,27 +15,22 @@ public interface IReportGenerator
 
 internal class DefaultReportGenerator : IReportGenerator
 {
-    private const double REFRESH_RATE = 0.5;
-
-    private readonly List<Report> reports;
     private readonly IDataPuller dataPuller;
     private readonly IWiseCalculations wiseCalculations;
     private readonly IMLPredictions mlPredictions;
-    private readonly IVehicleProvider vehicleProvider;
+    private readonly List<Report> reports = [];
 
     private IDispatcherTimer? timer;
     private bool isGeneratingReport;
 
-    public DefaultReportGenerator(IBluetoothConnector bluetoothConnector, IDataPuller dataPuller, IWiseCalculations wiseCalculations, IMLPredictions mlPredictions, IVehicleProvider vehicleProvider)
+    public DefaultReportGenerator(IBluetoothConnector bluetoothConnector, IDataPuller dataPuller, IWiseCalculations wiseCalculations, IMLPredictions mlPredictions)
     {
-        reports = [];
-
-        bluetoothConnector.DeviceConnected += OnDeviceConnected;
-        bluetoothConnector.DeviceDisconnected += OnDeviceDisconnected;
         this.dataPuller = dataPuller;
         this.wiseCalculations = wiseCalculations;
         this.mlPredictions = mlPredictions;
-        this.vehicleProvider = vehicleProvider;
+
+        bluetoothConnector.DeviceConnected += OnDeviceConnected;
+        bluetoothConnector.DeviceDisconnected += OnDeviceDisconnected;
     }
 
     public event ReportGeneratedEventHandler? ReportGenerated;
@@ -97,7 +90,7 @@ internal class DefaultReportGenerator : IReportGenerator
         var predictedFuelComsumption = mlPredictions.PredictFuelComsumption(speed, (float)averageSpeed, (float)speedVariation, engineLoad, coolantTemperature, intakeAirTemperature, intakePressure, (float)maf, rpm, lastReport.DrivingStyle);
         var fuelComsumption = wiseCalculations.GetFuelComsumption(predictedFuelComsumption, speed, maf, fuelSystemStatus);
         var averageFuelComsumption = wiseCalculations.GetAverageFuelComsumption([.. lastSecondsReports.Select(r => r.FuelConsumption), fuelComsumption]);
-        var fuelEfficiency = wiseCalculations.GetFuelEfficiency(fuelComsumption, isOnHighway);
+        var fuelEfficiency = wiseCalculations.GetFuelEfficiency(speed == 0 ? predictedFuelComsumption : fuelComsumption, isOnHighway);
 
         var consumptionVariance = wiseCalculations.GetComsumptionVariance([.. lastSecondsReports.Select(r => r.FuelConsumption), fuelComsumption]);
         var rpmVariance = wiseCalculations.GetRpmVariance([.. lastSecondsReports.Select(r => r.Rpm), rpm]);
@@ -108,13 +101,7 @@ internal class DefaultReportGenerator : IReportGenerator
         var drivingStyle = averageVariance >= 25 ? DrivingStyle.Aggressive : DrivingStyle.Even;
         var averageDrivingStyle = reports.TakeLast(100).Where(r => r.DrivingStyle == DrivingStyle.Even).Count();
 
-        double drivingEfficiency = averageDrivingStyle;
-        if (speed > 0)
-        {
-            drivingEfficiency += fuelEfficiency;
-            drivingEfficiency /= 2;
-        }
-
+        double drivingEfficiency = (averageDrivingStyle + fuelEfficiency) / 2;
         var averageDrivingEfficiency = lastSecondsReports.Any() ? lastSecondsReports.Average(r => r.DrivingEfficiency) : 0;
 
         var createdAt = DateTime.Now;
@@ -126,23 +113,22 @@ internal class DefaultReportGenerator : IReportGenerator
             Speed = speed,
             AverageSpeed = averageSpeed,
             SpeedVariation = speedVariation,
-
             Rpm = rpm,
-
             CoolantTemperature = coolantTemperature,
             EngineLoad = engineLoad,
             IntakeAirTemperature = intakeAirTemperature,
             IntakePressure = intakePressure,
             ThrottlePosition = throttlePosition,
+            FuelTrim = fuelTrim,
+            FuelStatus = fuelSystemStatus,
+            MassAirFlow = maf,
+
+            VolumetricEfficiency = volumetricEfficiency,
 
             Gear = gear,
 
             FuelConsumption = fuelComsumption,
             AverageFuelConsumption = averageFuelComsumption,
-
-            MassAirFlow = maf,
-
-            VolumetricEfficiency = volumetricEfficiency,
 
             DrivingStyle = drivingStyle,
 
@@ -181,7 +167,10 @@ internal class DefaultReportGenerator : IReportGenerator
             DrivingStyle = DrivingStyle.Even,
 
             DrivingEfficiency = 0,
-            AverageDrivingEfficiency = 0
+            AverageDrivingEfficiency = 0,
+
+            FuelStatus = 0,
+            FuelTrim = 0
         };
 
         return Task.FromResult(report);
