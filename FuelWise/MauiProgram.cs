@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using FuelWise.BluetoothConnection;
+using FuelWise.DriverFeedback;
 using FuelWise.IA;
 using FuelWise.NativeDialog;
 using FuelWise.OBDDataPuller;
@@ -50,6 +51,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IWiseCalculations, DefaultWiseCalculations>();
         builder.Services.AddSingleton<IReportGenerator, DefaultReportGenerator>();
         builder.Services.AddSingleton<ITemperatureAlert, DefaultTemperatureAlert>();
+        builder.Services.AddSingleton<IDriverFeedback, DefaultDriverFeedback>();
 
         builder.Services.AddSingleton(AudioManager.Current);
 

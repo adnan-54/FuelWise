@@ -34,6 +34,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\gear.png" />
+	  <None Remove="Resources\Images\speed.png" />
+	  <None Remove="Resources\Images\throttle.png" />
+	  <None Remove="Resources\Images\variation.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -77,6 +84,7 @@
 
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\" />
+	  <Folder Include="Features\DriverFeedback\Events\" />
+	  <Folder Include="Features\DriverFeedback\Enums\" />
 	</ItemGroup>
 </Project>

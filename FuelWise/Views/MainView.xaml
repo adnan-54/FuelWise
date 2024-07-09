@@ -3,6 +3,7 @@
     x:Class="FuelWise.Views.MainView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:feedback="clr-namespace:FuelWise.DriverFeedback"
     xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:FuelWise.ViewModels"
@@ -13,184 +14,319 @@
         <ResourceDictionary>
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <toolkit:MathExpressionConverter x:Key="MathExpressionConverter" />
+            <toolkit:EnumToBoolConverter x:Key="EnumToBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Padding="12" Spacing="6">
-        <!--  CurrentVehicle  -->
-        <Label
-            Margin="0,6"
-            FontAttributes="Bold"
-            FontSize="Medium"
-            Text="{Binding VehicleName}" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <!--  UnderWorkingTemperature Warning  -->
-        <Grid
-            Margin="0,12"
-            HorizontalOptions="FillAndExpand"
-            IsVisible="{Binding IsUnderOperatingTemperature}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
+        <!--  Efficiency  -->
+        <StackLayout Padding="12" Spacing="6">
+            <!--  CurrentVehicle  -->
             <Label
-                Grid.Row="0"
+                Margin="0,6"
                 FontAttributes="Bold"
                 FontSize="Medium"
-                HorizontalTextAlignment="Center"
-                Text="Motor abaixo da temperatura de funcionamento"
-                TextColor="Goldenrod"
-                TextTransform="Uppercase" />
+                Text="{Binding VehicleName}" />
 
-            <Label
-                Grid.Row="1"
-                HorizontalTextAlignment="Center"
-                Text="A precisão dos resultados pode ser afetada" />
-        </Grid>
-
-        <!--  Overheating Warning  -->
-        <Grid
-            Margin="0,12"
-            HorizontalOptions="FillAndExpand"
-            IsVisible="{Binding IsOverheating}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Label
-                Grid.Row="0"
-                FontAttributes="Bold"
-                FontSize="Medium"
-                HorizontalTextAlignment="Center"
-                Text="Motor acima da temperatura de funcionamento"
-                TextColor="Red"
-                TextTransform="Uppercase" />
-
-            <Label
-                Grid.Row="1"
-                HorizontalTextAlignment="Center"
-                Text="Temperaturas elevadas podem ocasionar danos ao motor" />
-        </Grid>
-
-        <!--  CalibrationProgress  -->
-        <VerticalStackLayout
-            HorizontalOptions="FillAndExpand"
-            IsVisible="{Binding IsCalibrating}"
-            Spacing="12"
-            VerticalOptions="CenterAndExpand">
-
-            <Label
-                FontAttributes="Bold"
-                FontSize="Title"
-                HorizontalTextAlignment="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span FontAttributes="Bold" Text="{Binding CalibrationProgress, StringFormat='{0:F0}'}" />
-                        <Span FontAttributes="Bold" Text="%" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-
-            <ProgressBar
-                Margin="24,0"
+            <!--  UnderWorkingTemperature Warning  -->
+            <Grid
+                Margin="0,12"
                 HorizontalOptions="FillAndExpand"
-                Progress="{Binding CalibrationProgress, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/100'}" />
+                IsVisible="{Binding IsUnderOperatingTemperature}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <Label
-                FontSize="Body"
-                HorizontalTextAlignment="Center"
-                Text="Realizando Calibração" />
-        </VerticalStackLayout>
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    HorizontalTextAlignment="Center"
+                    Text="Motor abaixo da temperatura de funcionamento"
+                    TextColor="Goldenrod"
+                    TextTransform="Uppercase" />
 
-        <!--  EfficiencyGauge  -->
-        <progressBar:SfCircularProgressBar
-            BackgroundColor="Transparent"
-            EndAngle="410"
-            HorizontalOptions="CenterAndExpand"
-            IsVisible="{Binding IsCalibrating, Converter={StaticResource InvertedBoolConverter}}"
-            Maximum="100"
-            Minimum="0"
-            Progress="{Binding AverageEfficiency}"
-            ProgressThickness="30"
-            StartAngle="130"
-            TrackThickness="3"
-            VerticalOptions="CenterAndExpand">
-            <progressBar:SfCircularProgressBar.GradientStops>
-                <progressBar:ProgressGradientStop Color="Red" Value="0" />
-                <progressBar:ProgressGradientStop Color="OrangeRed" Value="25" />
-                <progressBar:ProgressGradientStop Color="Yellow" Value="50" />
-                <progressBar:ProgressGradientStop Color="GreenYellow" Value="75" />
-                <progressBar:ProgressGradientStop Color="LimeGreen" Value="100" />
-            </progressBar:SfCircularProgressBar.GradientStops>
+                <Label
+                    Grid.Row="1"
+                    HorizontalTextAlignment="Center"
+                    Text="A precisão dos resultados pode ser afetada" />
+            </Grid>
 
-            <progressBar:SfCircularProgressBar.Content>
-                <Grid
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="200">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+            <!--  Overheating Warning  -->
+            <Grid
+                Margin="0,12"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding IsOverheating}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <Label
-                        Grid.Row="0"
-                        FontSize="Medium"
-                        HorizontalTextAlignment="Center"
-                        Text="Eficiência" />
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    HorizontalTextAlignment="Center"
+                    Text="Motor acima da temperatura de funcionamento"
+                    TextColor="Red"
+                    TextTransform="Uppercase" />
 
-                    <Label
-                        Grid.Row="1"
-                        FontAttributes="Bold"
-                        FontSize="40"
-                        HorizontalOptions="FillAndExpand"
-                        HorizontalTextAlignment="Center">
+                <Label
+                    Grid.Row="1"
+                    HorizontalTextAlignment="Center"
+                    Text="Temperaturas elevadas podem ocasionar danos ao motor" />
+            </Grid>
+
+            <!--  CalibrationProgress  -->
+            <VerticalStackLayout
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding IsCalibrating}"
+                Spacing="12"
+                VerticalOptions="CenterAndExpand">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="{Binding CalibrationProgress, StringFormat='{0:F0}'}" />
+                            <Span FontAttributes="Bold" Text="%" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <ProgressBar
+                    Margin="24,0"
+                    HorizontalOptions="FillAndExpand"
+                    Progress="{Binding CalibrationProgress, Converter={StaticResource MathExpressionConverter}, ConverterParameter='x/100'}" />
+
+                <Label
+                    FontSize="Body"
+                    HorizontalTextAlignment="Center"
+                    Text="Realizando Calibração" />
+            </VerticalStackLayout>
+
+            <!--  EfficiencyGauge  -->
+            <progressBar:SfCircularProgressBar
+                BackgroundColor="Transparent"
+                EndAngle="410"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsCalibrating, Converter={StaticResource InvertedBoolConverter}}"
+                Maximum="100"
+                Minimum="0"
+                Progress="{Binding AverageEfficiency}"
+                ProgressThickness="30"
+                StartAngle="130"
+                TrackThickness="3"
+                VerticalOptions="CenterAndExpand">
+                <progressBar:SfCircularProgressBar.GradientStops>
+                    <progressBar:ProgressGradientStop Color="Red" Value="0" />
+                    <progressBar:ProgressGradientStop Color="OrangeRed" Value="25" />
+                    <progressBar:ProgressGradientStop Color="Yellow" Value="50" />
+                    <progressBar:ProgressGradientStop Color="GreenYellow" Value="75" />
+                    <progressBar:ProgressGradientStop Color="LimeGreen" Value="100" />
+                </progressBar:SfCircularProgressBar.GradientStops>
+
+                <progressBar:SfCircularProgressBar.Content>
+                    <Grid
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="200">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            FontSize="Medium"
+                            HorizontalTextAlignment="Center"
+                            Text="Eficiência" />
+
+                        <Label
+                            Grid.Row="1"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="{Binding AverageEfficiency}" />
+                                    <Span FontAttributes="Bold" Text="%" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </progressBar:SfCircularProgressBar.Content>
+            </progressBar:SfCircularProgressBar>
+
+            <!--  Footer  -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0">
+                    <Label>Velocidade</Label>
+                    <Label FontAttributes="Bold" FontSize="Large">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span FontAttributes="Bold" Text="{Binding AverageEfficiency}" />
-                                <Span FontAttributes="Bold" Text="%" />
+                                <Span FontAttributes="Bold" Text="{Binding Speed}" />
+                                <Span FontAttributes="Bold" Text="km/h" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                </Grid>
-            </progressBar:SfCircularProgressBar.Content>
-        </progressBar:SfCircularProgressBar>
+                </StackLayout>
 
-        <!--  Footer  -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="1">
+                    <Label HorizontalTextAlignment="End">Consumo Médio</Label>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="End">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontAttributes="Bold" Text="{Binding AverageComsumption, StringFormat='{0:F2}'}" />
+                                <Span FontAttributes="Bold" Text="km/L" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
 
-            <StackLayout Grid.Column="0">
-                <Label>Velocidade</Label>
-                <Label FontAttributes="Bold" FontSize="Large">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span FontAttributes="Bold" Text="{Binding Speed}" />
-                            <Span FontAttributes="Bold" Text="km/h" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </StackLayout>
+        <!--  Actions  -->
+        <Grid BackgroundColor="White" IsVisible="{Binding ShowAction}">
 
-            <StackLayout Grid.Column="1">
-                <Label HorizontalTextAlignment="End">Consumo Médio</Label>
+            <!--  HighThrottle  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.HighThrottle}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/throttle.png" />
+
                 <Label
+                    Grid.Row="1"
                     FontAttributes="Bold"
-                    FontSize="Large"
-                    HorizontalTextAlignment="End">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span FontAttributes="Bold" Text="{Binding AverageComsumption, StringFormat='{0:F2}'}" />
-                            <Span FontAttributes="Bold" Text="km/L" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </StackLayout>
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Diminuir Acelerador"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
+
+            <!--  HighGear  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.HighGear}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/gear.png" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Descer Marcha"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
+
+            <!--  LowGear  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.LowGear}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/gear.png" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Subir Marcha"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
+
+            <!--  HighSpeed  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.HighSpeed}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/speed.png" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Diminuir Velocidade"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
+
+            <!--  HighRpm  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.HighRpm}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/speed.png" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Diminuir RPM"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
+
+            <!--  HighVariation  -->
+            <Grid IsVisible="{Binding Feedback, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static feedback:CurrentFeedback.HighVariation}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="/Images/variation.png" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="64"
+                    HorizontalTextAlignment="Center"
+                    Text="Evitar Aceleração/Frenagem Prolongada"
+                    TextColor="Black"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Start" />
+            </Grid>
         </Grid>
-    </StackLayout>
+    </Grid>
 </ContentPage>

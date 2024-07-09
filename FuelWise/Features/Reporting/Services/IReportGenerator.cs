@@ -198,6 +198,8 @@ internal class DefaultReportGenerator : IReportGenerator
             timer.Tick -= OnTick;
             timer = null;
         }
+
+        reports.Clear();
     }
 
     private async void OnTick(object? sender, EventArgs e)

@@ -1,8 +1,6 @@
 ﻿using FuelWise.IA;
 using FuelWise.Reporting;
 using FuelWise.VehicleInformations;
-using Java.Time.Temporal;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace FuelWise.WiseCalculations;
 

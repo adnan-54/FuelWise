@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FuelWise.DriverFeedback;
 using FuelWise.Reporting;
 using FuelWise.VehicleInformations;
 
@@ -33,14 +34,23 @@ public partial class MainViewViewModel : ObservableObject
     [ObservableProperty]
     private bool isOverheating;
 
-    public MainViewViewModel(IReportGenerator reportGenerator, IVehicleProvider vehicleProvider)
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowAction))]
+    private CurrentFeedback feedback = CurrentFeedback.None;
+
+    public MainViewViewModel(IReportGenerator reportGenerator,
+        IVehicleProvider vehicleProvider,
+        IDriverFeedback driverFeedback)
     {
         this.reportGenerator = reportGenerator;
         this.vehicleProvider = vehicleProvider;
 
         vehicleProvider.VehicleChanged += OnVehicleChanged;
         reportGenerator.ReportGenerated += OnReportGenerated;
+        driverFeedback.FeedbackReceived += OnFeedbackReceived;
     }
+
+    public bool ShowAction => Feedback != CurrentFeedback.None;
 
     private void OnVehicleChanged(object sender, VehicleChangedArgs e)
     {
@@ -71,5 +81,10 @@ public partial class MainViewViewModel : ObservableObject
 
         if (IsCalibrating)
             CalibrationProgress = reportGenerator.Reports.Count;
+    }
+
+    private void OnFeedbackReceived(object sender, FeedbackReceivedEventArgs e)
+    {
+        Feedback = e.Feedback;
     }
 }
